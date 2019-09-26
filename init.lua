@@ -1,15 +1,38 @@
 
 minetest.register_node("epic:function", {
-	description = "Function start block",
+	description = "Epic function block",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
     "epic_node_bg.png",
     "epic_node_bg.png",
     "epic_node_bg.png",
-    "epic_node_bg.png^epic_function.png",
+    "epic_node_bg.png^epic_function.png^epic_blue_right.png",
 	},
   paramtype2 = "facedir",
-  groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, mesecon = 2},
+  groups = { oddly_breakable_by_hand=1 },
+  legacy_facedir_simple = true
+})
+
+minetest.register_node("epic:epic", {
+	description = "Epic",
+  groups = { oddly_breakable_by_hand=1 },
+  tiles = {
+    "epic_node_bg.png^epic_epic.png"
+	}
+})
+
+minetest.register_node("epic:mob", {
+	description = "Epic mob block",
+  groups = { oddly_breakable_by_hand=1 },
+	tiles = {
+		"epic_node_bg.png",
+		"epic_node_bg.png",
+    "epic_node_bg.png",
+    "epic_node_bg.png",
+    "epic_node_bg.png",
+    "epic_node_bg.png^epic_mob.png^epic_blue_right.png",
+	},
+  paramtype2 = "facedir",
   legacy_facedir_simple = true
 })
