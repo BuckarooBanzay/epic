@@ -1,4 +1,30 @@
 
+--[[
+
+minetest.register_node("example:node", {
+  epic = {
+    on_enter = function(pos, meta, data, ctx) end,
+    check_interval = 0.5,
+    on_check = function(pos, meta, data, ctx) end,
+    on_exit = function(pos, meta, data, ctx) end
+  }
+})
+
+-- context object
+ctx = {
+  -- epic success
+  success = function(msg) end,
+  -- epic failure
+  failure = function(msg) end,
+  -- next block
+  next = function() end,
+}
+
+-- per-epic data (persistet across blocks,functions and restarts)
+data = {}
+
+--]]
+
 epic.register_opcode = function(name, options)
 
   local default_tile = "epic_node_bg.png"
@@ -38,7 +64,8 @@ epic.register_opcode = function(name, options)
   	},
     paramtype2 = "facedir",
   	groups = {cracky=3,oddly_breakable_by_hand=3},
-  	on_rotate = screwdriver.rotate_simple
+  	on_rotate = screwdriver.rotate_simple,
+    epic = epic
   })
 
 end
@@ -72,6 +99,11 @@ epic.register_opcode("epic:nop", {
   overlay = "epic_nop.png",
   directions = {
     right = true
+  },
+  epic = {
+    on_enter = function(pos, meta, data, ctx)
+      ctx.next()
+    end
   }
 })
 
@@ -80,6 +112,14 @@ epic.register_opcode("epic:waypoint", {
   overlay = "epic_waypoint.png",
   directions = {
     right = true
+  },
+  epic = {
+    on_enter = function(pos, meta, data, ctx)
+    end,
+    on_check = function(pos, meta, data, ctx)
+    end,
+    on_exit = function(pos, meta, data, ctx)
+    end
   }
 })
 
@@ -88,6 +128,12 @@ epic.register_opcode("epic:message", {
   overlay = "epic_msg.png",
   directions = {
     right = true
+  },
+  epic = {
+    on_enter = function(pos, meta, data, ctx)
+    end,
+    on_check = function(pos, meta, data, ctx)
+    end
   }
 })
 
