@@ -6,6 +6,7 @@ local MP = minetest.get_modpath("epic")
 dofile(MP.."/blocks/epic.lua")
 dofile(MP.."/common.lua")
 dofile(MP.."/register.lua")
+dofile(MP.."/executor.lua")
 
 minetest.register_node("epic:epic", {
 	description = "Epic",

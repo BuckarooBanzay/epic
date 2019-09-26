@@ -6,7 +6,8 @@ minetest.register_node("example:node", {
     on_enter = function(pos, meta, data, ctx) end,
     check_interval = 0.5,
     on_check = function(pos, meta, data, ctx) end,
-    on_exit = function(pos, meta, data, ctx) end
+    on_exit = function(pos, meta, data, ctx) end,
+    conditional = false
   }
 })
 
@@ -39,6 +40,10 @@ epic.register_opcode = function(name, options)
       front_tile = front_tile .. "^epic_green_right.png"
     end
 
+    if options.directions.straight then
+      front_tile = front_tile .. "^epic_green_straight.png"
+    end
+
     if options.directions.start then
       front_tile = front_tile .. "^epic_green_right_start.png"
     end
@@ -47,8 +52,8 @@ epic.register_opcode = function(name, options)
       front_tile = front_tile .. "^epic_green_right_end.png"
     end
 
-    if options.directions.down then
-      front_tile = front_tile .. "^epic_red_down.png"
+    if options.directions.rightconditional then
+      front_tile = front_tile .. "^epic_yellow_right.png"
     end
   end
 
@@ -98,7 +103,7 @@ epic.register_opcode("epic:nop", {
 	description = "Epic nop block",
   overlay = "epic_nop.png",
   directions = {
-    right = true
+    straight = true
   },
   epic = {
     on_enter = function(pos, meta, data, ctx)
@@ -141,8 +146,10 @@ epic.register_opcode("epic:if", {
 	description = "Epic if block",
   overlay = "epic_if.png",
   directions = {
-    right = true,
-    down = true
+    rightconditional = true
+  },
+  epic = {
+    conditional = true
   }
 })
 
