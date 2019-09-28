@@ -9,8 +9,7 @@ epic.register_opcode("epic:message", {
   epic = {
     on_enter = function(pos, meta, data, player, ctx)
       minetest.chat_send_player(player:get_player_name(), "Success!!")
-    end,
-    on_check = function(pos, meta, data, player, ctx)
+      ctx.next()
     end
   }
 })

@@ -7,7 +7,13 @@ epic.execute_block = function(pos, node, player)
   local nodedef = minetest.registered_nodes[node.name]
   local epicdef = nodedef.epic
   local meta = minetest.get_meta(pos)
-  local ctx = {}
+  local ctx = {
+    next = function()
+    end,
+    exit = function()
+    end
+  }
+
   local data = {}
 
   if epicdef.on_enter then

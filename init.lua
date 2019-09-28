@@ -9,6 +9,7 @@ dofile(MP.."/register.lua")
 dofile(MP.."/blocks/epic.lua")
 dofile(MP.."/blocks/function.lua")
 dofile(MP.."/blocks/message.lua")
+dofile(MP.."/blocks/waypoint.lua")
 
 dofile(MP.."/execute/execute_block.lua")
 dofile(MP.."/execute/execute_function.lua")
