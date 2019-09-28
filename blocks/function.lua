@@ -10,6 +10,13 @@ epic.register_opcode("epic:function", {
   directions = {
     start = true
   },
+
+	epic = {
+    on_enter = function(pos, meta, data, player, ctx)
+      ctx.next()
+    end
+  },
+
   on_construct = function(pos)
     local meta = minetest.get_meta(pos)
     update_formspec(meta, pos)

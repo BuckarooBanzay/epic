@@ -10,7 +10,7 @@ epic.register_opcode("epic:waypoint", {
     end,
     on_check = function(pos, meta, data, player, ctx)
     end,
-    on_exit = function(pos, meta, data, player, ctx)
+    on_exit = function(pos, meta, data, player)
     end
   }
 })

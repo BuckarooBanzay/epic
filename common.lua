@@ -34,3 +34,14 @@ epic.is_epic = function(node)
   local nodedef = minetest.registered_nodes[node.name]
   return nodedef.epic ~= nil
 end
+
+-- executes a single function
+epic.execute_function = function(pos, player)
+  minetest.log("action", "[epic] player " .. player:get_player_name() ..
+    " executes function at " .. minetest.pos_to_string(pos))
+
+  epic.state[player:get_player_name()] = {
+    ip = pos,
+    initialized = false
+  }
+end
