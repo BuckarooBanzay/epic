@@ -70,18 +70,13 @@ epic.register_opcode = function(name, options)
     paramtype2 = "facedir",
   	groups = {cracky=3,oddly_breakable_by_hand=3},
   	on_rotate = screwdriver.rotate_simple,
-    epic = epic
+    epic = options.epic,
+    on_receive_fields = options.on_receive_fields,
+    on_construct = options.on_construct
   })
 
 end
 
-epic.register_opcode("epic:function", {
-	description = "Epic function block",
-  overlay = "epic_function.png",
-  directions = {
-    start = true
-  }
-})
 
 epic.register_opcode("epic:mob", {
 	description = "Epic mob block",
@@ -128,19 +123,6 @@ epic.register_opcode("epic:waypoint", {
   }
 })
 
-epic.register_opcode("epic:message", {
-	description = "Epic message block",
-  overlay = "epic_msg.png",
-  directions = {
-    right = true
-  },
-  epic = {
-    on_enter = function(pos, meta, data, ctx)
-    end,
-    on_check = function(pos, meta, data, ctx)
-    end
-  }
-})
 
 epic.register_opcode("epic:if", {
 	description = "Epic if block",
