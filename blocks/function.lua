@@ -1,7 +1,7 @@
 
 local update_formspec = function(meta, pos)
-	meta:set_string("formspec", "size[8,10;]" ..
-		"button_exit[0,2;2,1;execute;Execute]")
+	meta:set_string("formspec", "size[8,1;]" ..
+		"button_exit[0.1,0.2;8,1;execute;Execute]")
 end
 
 minetest.register_node("epic:function", {
