@@ -42,6 +42,7 @@ epic.execute_function = function(pos, player)
 
   epic.state[player:get_player_name()] = {
     ip = pos,
-    initialized = false
+    initialized = false,
+    data = {}
   }
 end

@@ -6,19 +6,16 @@ minetest.register_node("example:node", {
     on_enter = function(pos, meta, data, ctx) end,
     check_interval = 0.5,
     on_check = function(pos, meta, data, ctx) end,
-    on_exit = function(pos, meta, data, ctx) end,
-    conditional = false
+    on_exit = function(pos, meta, data, ctx) end
   }
 })
 
 -- context object
 ctx = {
-  -- epic success
-  success = function(msg) end,
-  -- epic failure
-  failure = function(msg) end,
   -- next block
   next = function() end,
+  -- abort epic execution
+  exit = function(msg) end
 }
 
 -- per-epic data (persistet across blocks,functions and restarts)

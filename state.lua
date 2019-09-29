@@ -2,7 +2,8 @@
 --[[
 player_state = {
   ip = <pos>,
-  initialized = false
+  initialized = false,
+  data = {}
 }
 --]]
 

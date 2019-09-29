@@ -23,7 +23,7 @@ execute_player_state = function(playername, state)
     end
   }
 
-  local data = {}
+  local data = state.data
 
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
     " executes block at " .. minetest.pos_to_string(pos))
