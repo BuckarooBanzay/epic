@@ -17,6 +17,7 @@ WIP
 * [ ] No-Op
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter
+* [ ] Command
 
 # Licenses
 
