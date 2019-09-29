@@ -7,14 +7,20 @@ WIP
 
 ## Blocks
 
+### MVP
+
+* [ ] Chat-message
+* [ ] Delay
+* [ ] No-Op
+* [ ] Waypoint
+
+### TODO
+
 * [ ] Set skybox
 * [ ] Collision box
 * [ ] Branch-multiple
 * [ ] Teleport
-* [ ] Chat-message
 * [ ] Formspec message
-* [ ] Delay
-* [ ] No-Op
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter
 * [ ] Command
