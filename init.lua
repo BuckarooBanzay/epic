@@ -12,6 +12,7 @@ dofile(MP.."/blocks/nop.lua")
 dofile(MP.."/blocks/function.lua")
 dofile(MP.."/blocks/message.lua")
 dofile(MP.."/blocks/waypoint.lua")
+dofile(MP.."/blocks/teleport.lua")
 dofile(MP.."/blocks/delay.lua")
 
 -- debug stuff XXX

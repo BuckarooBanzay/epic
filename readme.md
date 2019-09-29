@@ -13,6 +13,7 @@ WIP
 * [x] Delay
 * [x] No-Op
 * [x] Waypoint
+* [x] Teleport
 * [ ] Mob
 
 ### TODO
@@ -20,7 +21,6 @@ WIP
 * [ ] Set skybox
 * [ ] Collision box
 * [ ] Branch-multiple
-* [ ] Teleport
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter
