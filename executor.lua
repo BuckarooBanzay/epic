@@ -12,11 +12,13 @@ execute_player_state = function(playername, state)
   end
 
   local result_next = false
+  local result_next_pos = nil
   local result_exit = false
 
   local ctx = {
-    next = function()
+    next = function(pos)
       result_next = true
+      result_next_pos = pos
     end,
     exit = function()
       result_exit = true
@@ -56,7 +58,7 @@ execute_player_state = function(playername, state)
   end
 
   if result_next then
-    local next_pos = epic.get_next_pos(pos)
+    local next_pos = result_next_pos or epic.get_next_pos(pos)
     state.ip = next_pos
     state.initialized = false
     state.step_data = {}

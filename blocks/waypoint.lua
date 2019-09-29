@@ -4,20 +4,24 @@ local punch_handler = {}
 
 local update_formspec = function(meta, pos)
 	local pos = meta:get_string("pos")
+	local name = meta:get_string("name")
 	local radius = meta:get_int("radius")
 
 	meta:set_string("infotext", "Waypoint block: pos=" .. pos ..
 		", radius=" .. radius)
 
-	meta:set_string("formspec", "size[8,3;]" ..
+	meta:set_string("formspec", "size[8,4;]" ..
 		-- col 1
 		"field[0.2,0.5;8,1;radius;Radius;" .. radius .. "]" ..
 
-		-- col 2
-		"button_exit[0.1,1.5;8,1;setpos;Set position]" ..
+		-- col 1
+		"field[0.2,1.5;8,1;name;Name;" .. name .. "]" ..
 
 		-- col 2
-		"button_exit[0.1,2.5;8,1;save;Save]" ..
+		"button_exit[0.1,2.5;8,1;setpos;Set position]" ..
+
+		-- col 2
+		"button_exit[0.1,3.5;8,1;save;Save]" ..
 		"")
 end
 
@@ -37,6 +41,7 @@ minetest.register_node("epic:waypoint", {
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
+		meta:set_string("name", "Waypoint")
 		meta:set_string("pos", minetest.pos_to_string(pos))
 		meta:set_int("radius", 3)
     update_formspec(meta, pos)
@@ -57,6 +62,7 @@ minetest.register_node("epic:waypoint", {
 			end
 
 			meta:set_int("radius", radius)
+			meta:set_string("name", fields.name or "")
 			update_formspec(meta, pos)
     end
 
@@ -75,7 +81,7 @@ minetest.register_node("epic:waypoint", {
 
 			ctx.step_data.waypoint_hud_id = player:hud_add({
 				hud_elem_type = "waypoint",
-				name = "Waypoint XY",
+				name = meta:get_string("name"),
 				text = "m",
 				number = 0xFF0000,
 				world_pos = target_pos

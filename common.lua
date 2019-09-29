@@ -1,6 +1,6 @@
 
--- converts the direction
-local param2_to_code_direction = function(param2)
+-- converts the direction from a param2
+epic.get_direction = function(param2)
   local direction = minetest.facedir_to_dir(param2)
   if direction.x == -1 and direction.z == 0 then
     return { x=0, y=0, z=1 }
@@ -18,7 +18,7 @@ end
 -- returns the position of the next epic block
 epic.get_next_pos = function(pos)
   local node = minetest.get_node(pos)
-  local direction = param2_to_code_direction(node.param2)
+  local direction = epic.get_direction(node.param2)
 
   if direction == nil then
     return
