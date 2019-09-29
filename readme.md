@@ -5,6 +5,19 @@ epic -- Enhanced Programmer for Ingame Control
 
 WIP
 
+## Blocks
+
+* [ ] Set skybox
+* [ ] Collision box
+* [ ] Branch-multiple
+* [ ] Teleport
+* [ ] Chat-message
+* [ ] Formspec message
+* [ ] Delay
+* [ ] No-Op
+* [ ] Set counter (dig, place, kill)
+* [ ] Check counter
+
 # Licenses
 
 * default_steel_block.png / epic_node_bg.png
