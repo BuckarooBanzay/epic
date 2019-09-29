@@ -14,7 +14,7 @@ WIP
 * [x] No-Op
 * [x] Waypoint
 * [x] Teleport
-* [ ] Mob
+* [x] Mob
 
 ### TODO
 

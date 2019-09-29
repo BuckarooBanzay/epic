@@ -15,9 +15,6 @@ dofile(MP.."/blocks/waypoint.lua")
 dofile(MP.."/blocks/teleport.lua")
 dofile(MP.."/blocks/delay.lua")
 
--- debug stuff XXX
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
-	minetest.log("action", "[epic] player: " .. puncher:get_player_name() .. " punches " .. node.name .. " at " .. minetest.pos_to_string(pos))
-	local olddir = minetest.pos_to_string(minetest.facedir_to_dir(node.param2))
-	minetest.log("action", "[epic] dir: " .. olddir)
-end)
+if minetest.get_modpath("mobs") then
+	dofile(MP.."/blocks/spawn_mob.lua")
+end
