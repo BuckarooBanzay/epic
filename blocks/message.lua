@@ -15,7 +15,7 @@ minetest.register_node("epic:message", {
 	on_rotate = screwdriver.rotate_simple,
 
 	epic = {
-    on_enter = function(pos, meta, data, player, ctx)
+    on_enter = function(pos, meta, player, ctx)
       minetest.chat_send_player(player:get_player_name(), "Success!!")
       ctx.next()
     end

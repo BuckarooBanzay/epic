@@ -14,20 +14,17 @@ minetest.register_node("epic:delay", {
 	on_rotate = screwdriver.rotate_simple,
 
   epic = {
-    on_enter = function(pos, meta, data, player, ctx)
-			data.delay_start = minetest.get_us_time()
+    on_enter = function(pos, meta, player, ctx)
+			ctx.data.delay_start = minetest.get_us_time()
     end,
-    on_check = function(pos, meta, data, player, ctx)
+    on_check = function(pos, meta, player, ctx)
       local now = minetest.get_us_time()
-      local start = data.delay_start
+      local start = ctx.data.delay_start
 
       local diff = now - start
       if diff > 5*1000*1000 then
         ctx.next()
       end
-    end,
-    on_exit = function(pos, meta, data, player)
-			data.delay_start = nil
     end
   }
 })

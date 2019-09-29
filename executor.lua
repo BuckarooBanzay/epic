@@ -20,10 +20,10 @@ execute_player_state = function(playername, state)
     end,
     exit = function()
       result_exit = true
-    end
+    end,
+    data = state.data,
+    step_data = state.step_data
   }
-
-  local data = state.data
 
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
     " executes block at " .. minetest.pos_to_string(pos))
@@ -36,18 +36,18 @@ execute_player_state = function(playername, state)
     state.initialized = true
 
     if epicdef.on_enter then
-      epicdef.on_enter(pos, meta, data, player, ctx)
+      epicdef.on_enter(pos, meta, player, ctx)
     end
 
   else
     if epicdef.on_check then
-      epicdef.on_check(pos, meta, data, player, ctx)
+      epicdef.on_check(pos, meta, player, ctx)
     end
   end
 
   if result_exit or result_next then
     if epicdef.on_exit then
-      epicdef.on_exit(pos, meta, data, player)
+      epicdef.on_exit(pos, meta, player, ctx)
     end
   end
 
@@ -59,6 +59,7 @@ execute_player_state = function(playername, state)
     local next_pos = epic.get_next_pos(pos)
     state.ip = next_pos
     state.initialized = false
+    state.step_data = {}
     execute_player_state(playername, state)
   end
 
