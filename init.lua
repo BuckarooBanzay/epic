@@ -4,11 +4,11 @@ epic = {}
 local MP = minetest.get_modpath("epic")
 
 dofile(MP.."/common.lua")
-dofile(MP.."/register.lua")
 dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
 
 dofile(MP.."/blocks/epic.lua")
+dofile(MP.."/blocks/nop.lua")
 dofile(MP.."/blocks/function.lua")
 dofile(MP.."/blocks/message.lua")
 dofile(MP.."/blocks/waypoint.lua")

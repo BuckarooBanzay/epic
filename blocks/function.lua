@@ -4,12 +4,19 @@ local update_formspec = function(meta, pos)
 		"button_exit[0,2;2,1;execute;Execute]")
 end
 
-epic.register_opcode("epic:function", {
+minetest.register_node("epic:function", {
 	description = "Epic function block",
-  overlay = "epic_function.png",
-  directions = {
-    start = true
-  },
+	tiles = {
+		"epic_node_bg.png",
+		"epic_node_bg.png",
+		"epic_node_bg.png",
+		"epic_node_bg.png",
+		"epic_node_bg.png",
+		"epic_node_bg.png^epic_play.png",
+	},
+	paramtype2 = "facedir",
+	groups = {cracky=3,oddly_breakable_by_hand=3},
+	on_rotate = screwdriver.rotate_simple,
 
 	epic = {
     on_enter = function(pos, meta, data, player, ctx)
@@ -39,4 +46,5 @@ epic.register_opcode("epic:function", {
     end
 
   end
+
 })
