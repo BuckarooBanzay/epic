@@ -107,8 +107,6 @@ epic.register_opcode("epic:nop", {
   }
 })
 
-
-
 epic.register_opcode("epic:if", {
 	description = "Epic if block",
   overlay = "epic_if.png",
@@ -117,21 +115,5 @@ epic.register_opcode("epic:if", {
   },
   epic = {
     conditional = true
-  }
-})
-
-epic.register_opcode("epic:end", {
-	description = "Epic end block",
-  overlay = "epic_end.png",
-  directions = {
-    final = true
-  }
-})
-
-epic.register_opcode("epic:ret", {
-	description = "Epic ret block",
-  overlay = "epic_ret.png",
-  directions = {
-    final = true
   }
 })
