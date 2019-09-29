@@ -13,6 +13,7 @@ dofile(MP.."/blocks/function.lua")
 dofile(MP.."/blocks/message.lua")
 dofile(MP.."/blocks/waypoint.lua")
 dofile(MP.."/blocks/teleport.lua")
+dofile(MP.."/blocks/command.lua")
 dofile(MP.."/blocks/delay.lua")
 
 if minetest.get_modpath("mobs") then

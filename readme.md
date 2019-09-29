@@ -15,6 +15,7 @@ WIP
 * [x] Waypoint
 * [x] Teleport
 * [x] Mob
+* [x] Command
 
 ### TODO
 
@@ -24,7 +25,6 @@ WIP
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter
-* [ ] Command
 
 # Licenses
 
