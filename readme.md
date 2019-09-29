@@ -9,10 +9,11 @@ WIP
 
 ### MVP
 
-* [ ] Chat-message
-* [ ] Delay
-* [ ] No-Op
-* [ ] Waypoint
+* [x] Chat-message
+* [x] Delay
+* [x] No-Op
+* [x] Waypoint
+* [ ] Mob
 
 ### TODO
 
