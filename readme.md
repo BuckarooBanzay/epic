@@ -16,12 +16,12 @@ WIP
 * [x] Teleport
 * [x] Mob
 * [x] Command
+* [x] Branch-multiple
 
 ### TODO
 
 * [ ] Set skybox
 * [ ] Collision box
-* [ ] Branch-multiple
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter
