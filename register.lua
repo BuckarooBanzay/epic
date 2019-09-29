@@ -1,27 +1,4 @@
 
---[[
-
-minetest.register_node("example:node", {
-  epic = {
-    on_enter = function(pos, meta, data, ctx) end,
-    check_interval = 0.5,
-    on_check = function(pos, meta, data, ctx) end,
-    on_exit = function(pos, meta, data, ctx) end
-  }
-})
-
--- context object
-ctx = {
-  -- next block
-  next = function() end,
-  -- abort epic execution
-  exit = function(msg) end
-}
-
--- per-epic data (persistet across blocks,functions and restarts)
-data = {}
-
---]]
 
 epic.register_opcode = function(name, options)
 

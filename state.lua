@@ -1,12 +1,4 @@
 
---[[
-player_state = {
-  ip = <pos>,
-  initialized = false,
-  data = {}
-}
---]]
-
 -- playername => player_state
 epic.state = {}
 
