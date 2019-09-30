@@ -35,8 +35,10 @@ WIP
 * [ ] Unstash inventory
 * [ ] HUD vignette
 * [ ] Check priv (conditional)
-* [ ] Set skybox
-* [ ] Collision box
+* [ ] Set day/night ratio
+* [ ] Set sky
+* [ ] Set clouds
+* [ ] Set collision box
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter (conditional)
