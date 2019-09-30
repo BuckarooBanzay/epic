@@ -14,7 +14,7 @@ local update_formspec = function(meta, pos)
 end
 
 
-minetest.register_node("epic:command", {
+minetest.register_node("epic:set_gravity", {
 	description = "Epic command block",
 	tiles = {
 		"epic_node_bg.png",
