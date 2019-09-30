@@ -24,5 +24,5 @@ if minetest.get_modpath("mobs") then
 end
 
 if minetest.get_modpath("mesecons") then
-	dofile(MP.."/blocks/mesecons_emit.lua")
+	dofile(MP.."/blocks/mesecon_emit.lua")
 end
