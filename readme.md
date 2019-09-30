@@ -10,19 +10,21 @@ WIP
 ### MVP
 
 * [x] Chat-message
-* [x] Delay
+* [x] Delay (conditional)
 * [x] No-Op
-* [x] Waypoint
+* [x] Waypoint (conditional)
 * [x] Teleport
 * [x] Mob
 * [x] Command
 * [x] Branch-multiple
-* [ ] Call function
+* [x] Call function
+* [x] Mesecon emitter
 * [ ] Epic: main-function
 * [ ] Epic: timeout-function
 
 ### TODO
 
+* [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
 * [ ] Add item
@@ -31,13 +33,13 @@ WIP
 * [ ] Stash inventory
 * [ ] Unstash inventory
 * [ ] HUD vignette
-* [ ] Check priv
+* [ ] Check priv (conditional)
 * [ ] Set gravity
 * [ ] Set skybox
 * [ ] Collision box
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
-* [ ] Check counter
+* [ ] Check counter (conditional)
 
 # Licenses
 

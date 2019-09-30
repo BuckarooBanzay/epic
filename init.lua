@@ -21,3 +21,7 @@ dofile(MP.."/blocks/branch.lua")
 if minetest.get_modpath("mobs") then
 	dofile(MP.."/blocks/spawn_mob.lua")
 end
+
+if minetest.get_modpath("mesecons") then
+	dofile(MP.."/blocks/mesecons_emit.lua")
+end

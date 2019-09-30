@@ -14,6 +14,7 @@ read_globals = {
 	"dump", "VoxelArea",
 
 	-- deps
-	"screwdriver"
+	"screwdriver",
+	"mesecon"
 
 }
