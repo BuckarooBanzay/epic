@@ -17,9 +17,22 @@ WIP
 * [x] Mob
 * [x] Command
 * [x] Branch-multiple
+* [ ] Call function
+* [ ] Epic: main-function
+* [ ] Epic: timeout-function
 
 ### TODO
 
+* [ ] Place node
+* [ ] Remove node
+* [ ] Add item
+* [ ] Remove items
+* [ ] Remove mobs
+* [ ] Stash inventory
+* [ ] Unstash inventory
+* [ ] HUD vignette
+* [ ] Check priv
+* [ ] Set gravity
 * [ ] Set skybox
 * [ ] Collision box
 * [ ] Formspec message
