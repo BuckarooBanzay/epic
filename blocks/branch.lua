@@ -90,7 +90,6 @@ minetest.register_node("epic:branch", {
 					next = function()
 						ctx.next(target_pos)
 					end,
-					exit = ctx.exit,
 					call = ctx.call,
 					step_data = target_step_data,
 					data = ctx.data
@@ -110,7 +109,6 @@ minetest.register_node("epic:branch", {
 					next = function()
 						ctx.next(target_pos)
 					end,
-					exit = ctx.exit,
 					step_data = target_step_data,
 					data = ctx.data
 				}
@@ -127,7 +125,6 @@ minetest.register_node("epic:branch", {
 				local target_step_data = ctx.step_data.target_step_data[minetest.hash_node_position(target_pos)]
 				local sub_ctx = {
 					next = function() end,
-					exit = function() end,
 					step_data = target_step_data,
 					data = ctx.data
 				}

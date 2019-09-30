@@ -1,4 +1,6 @@
 
+-- playername -> bool
+local abort_flag = {}
 
 local execute_player_state
 execute_player_state = function(playername, state)
@@ -25,7 +27,6 @@ execute_player_state = function(playername, state)
 
   local result_next = false
   local result_next_pos = nil
-  local result_exit = false
 
   local ctx = {
     next = function(pos)
@@ -38,9 +39,6 @@ execute_player_state = function(playername, state)
         table.insert(state.stack, next_pos)
         result_next = true
         result_next_pos = pos
-    end,
-    exit = function()
-      result_exit = true
     end,
     data = state.data,
     step_data = state.step_data
@@ -66,14 +64,17 @@ execute_player_state = function(playername, state)
     end
   end
 
-  if result_exit or result_next then
+  if abort_flag[playername] or result_next then
+    abort_flag[playername] = nil
     if epicdef.on_exit then
       epicdef.on_exit(pos, meta, player, ctx)
     end
   end
 
-  if result_exit then
+  if abort_flag[playername] then
+    abort_flag[playername] = nil
     epic.state[playername] = nil
+    return
   end
 
   if result_next then
