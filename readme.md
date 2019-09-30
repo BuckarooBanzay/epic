@@ -19,6 +19,7 @@ WIP
 * [x] Branch-multiple
 * [x] Call function
 * [x] Mesecon emitter
+* [x] Set gravity
 * [ ] Epic: main-function
 * [ ] Epic: timeout-function
 
@@ -34,7 +35,6 @@ WIP
 * [ ] Unstash inventory
 * [ ] HUD vignette
 * [ ] Check priv (conditional)
-* [ ] Set gravity
 * [ ] Set skybox
 * [ ] Collision box
 * [ ] Formspec message
