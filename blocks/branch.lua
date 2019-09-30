@@ -31,7 +31,7 @@ find_nearest = function(pos, list, visited, allowed_axes)
 		pos2.z = pos.z + 1
 	end
 
-	local nodes = minetest.find_nodes_in_area(pos1, pos2, {"epic:waypoint"})
+	local nodes = minetest.find_nodes_in_area(pos1, pos2, {"group:epic"})
 
 	for _, node_pos in ipairs(nodes) do
 		find_nearest(node_pos, list, visited, allowed_axes)
@@ -68,7 +68,7 @@ minetest.register_node("epic:branch", {
 		"epic_node_bg.png^epic_branch.png",
 	},
 	paramtype2 = "facedir",
-	groups = {cracky=3,oddly_breakable_by_hand=3},
+	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = screwdriver.rotate_simple,
 
   epic = {
