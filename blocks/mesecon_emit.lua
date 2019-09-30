@@ -66,7 +66,7 @@ minetest.register_node("epic:delay", {
       if diff > delay_micros then
         ctx.next()
       end
-    end
+    end,
     on_exit = function(pos)
       mesecon.receptor_off(pos)
     end
