@@ -11,8 +11,8 @@ local update_formspec = function(meta, pos)
 		"")
 end
 
-minetest.register_node("epic:delay", {
-	description = "Epic delay block",
+minetest.register_node("epic:mesecon_emit", {
+	description = "Epic mesecon emit block",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
@@ -22,8 +22,12 @@ minetest.register_node("epic:delay", {
 		"epic_node_bg.png",
 	},
 	paramtype2 = "facedir",
-	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1,mesecon_needs_receiver=1},
+	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = screwdriver.rotate_simple,
+	mesecons = {receptor = {
+		state = mesecon.state.off,
+		rules = mesecon.rules.pplate
+	}},
 
   on_construct = function(pos)
     local meta = minetest.get_meta(pos)
