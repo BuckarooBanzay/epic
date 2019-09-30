@@ -9,9 +9,11 @@ minetest.register_node("example:node", {
     on_enter = function(pos, meta, player, ctx)
       -- executed on block-entry once
     end,
+
     on_check = function(pos, meta, player, ctx)
       -- executed periodically until either ctx.next() or ctx.exit() called
     end,
+
     on_exit = function(pos, meta, player, ctx)
       -- executed once on block-exit (for cleanups)
     end
@@ -25,10 +27,16 @@ minetest.register_node("example:node", {
 ctx = {
   -- next block
   next = function() end,
+
+  -- call another function at pos
+  call = function(pos) end,
+
   -- abort epic execution
-  exit = function(msg) end,
+  exit = function() end,
+
   -- data for block-execution lifetime
   step_data = {},
+
   -- data for the entire epic execution
   data = {}
 }
