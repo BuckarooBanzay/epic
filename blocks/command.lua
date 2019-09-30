@@ -11,7 +11,7 @@ local update_formspec = function(meta, pos)
 		"")
 end
 
-function execute(str, playername)
+local execute = function(str, playername)
 	minetest.log("action", "[epic] executing: '" .. str .. "'")
 
 	local found, _, commandname, params = str:find("^([^%s]+)%s(.+)$")

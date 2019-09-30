@@ -37,11 +37,17 @@ end
 
 -- executes a single function
 epic.execute_function = function(pos, player)
+  if epic.state[player:get_player_name()] then
+    -- already running a function
+    return
+  end
+
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
     " executes function at " .. minetest.pos_to_string(pos))
 
   epic.state[player:get_player_name()] = {
     ip = pos,
+    stack = {},
     initialized = false,
     data = {},
     step_data = {}

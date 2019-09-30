@@ -6,6 +6,9 @@ epic.state[playername] = {
   -- instruction pointer to currently executed block
   ip = pos,
 
+  -- call stack (table of positions)
+  stack = {},
+
   -- initialization flag
   initialized = false,
 

@@ -7,7 +7,19 @@ execute_player_state = function(playername, state)
 
   local node = minetest.get_node(pos)
   if not epic.is_epic(node) then
-    epic.state[playername] = nil
+    -- no more instructions in this branch
+
+    if #state.stack > 0 then
+      -- pop stack
+      state.ip = table.remove(state.stack, #state.stack)
+      state.initialized = false
+      state.step_data = {}
+      execute_player_state(playername, state)
+    else
+      -- done
+      epic.state[playername] = nil
+    end
+
     return
   end
 
@@ -21,7 +33,11 @@ execute_player_state = function(playername, state)
       result_next_pos = pos
     end,
     call = function(pos)
-        -- TODO
+        -- push next ip
+	local next_pos = epic.get_next_pos(state.ip)
+        table.insert(state.stack, next_pos)
+        result_next = true
+        result_next_pos = pos
     end,
     exit = function()
       result_exit = true
