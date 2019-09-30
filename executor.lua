@@ -65,7 +65,6 @@ execute_player_state = function(playername, state)
   end
 
   if abort_flag[playername] or result_next then
-    abort_flag[playername] = nil
     if epicdef.on_exit then
       epicdef.on_exit(pos, meta, player, ctx)
     end
@@ -100,3 +99,12 @@ end
 
 -- initial delay
 minetest.after(1.0, executor)
+
+minetest.register_chatcommand("epic_abort", {
+	description = "Aborts the current epic",
+	func = function(name)
+		if epic.state[name] then
+			abort_flag[name] = true
+		end
+	end
+})
