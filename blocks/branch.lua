@@ -91,6 +91,7 @@ minetest.register_node("epic:branch", {
 						ctx.next(target_pos)
 					end,
 					exit = ctx.exit,
+					call = ctx.call,
 					step_data = target_step_data,
 					data = ctx.data
 				}

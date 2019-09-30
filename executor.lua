@@ -20,6 +20,9 @@ execute_player_state = function(playername, state)
       result_next = true
       result_next_pos = pos
     end,
+    call = function(pos)
+        -- TODO
+    end,
     exit = function()
       result_exit = true
     end,
