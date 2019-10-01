@@ -1,4 +1,18 @@
 
+
+--[[
+
+* Functions:
+ * main
+ * on-leave (none: should be persistet)
+ * on-timeout (none: forever)
+ * on-die (none: respawn?)
+ * on-exit (cleanup-function, always executed)
+
+* Timeout-value
+
+--]]
+
 local FORMNAME = "epic_configure"
 
 -- playername => pos
