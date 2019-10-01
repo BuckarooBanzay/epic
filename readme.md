@@ -22,8 +22,9 @@ WIP
 * [x] Call function
 * [x] Mesecon emitter
 * [x] Set gravity
-* [ ] Epic: main-function
-* [ ] Epic: cleanup-function
+* [ ] Add item
+* [x] Epic: main-function
+* [x] Epic: cleanup-function
 * [ ] Epic: exit-on flags: leave/die/timeout
 
 ### TODO
@@ -32,7 +33,6 @@ WIP
 * [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
-* [ ] Add item
 * [ ] Remove items
 * [ ] Remove mobs
 * [ ] Stash inventory
