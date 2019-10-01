@@ -4,9 +4,6 @@
 ```lua
 epic.state[playername] = {
 
-  -- if true: the state will be persisted across restarts/rejoins
-  persist = false,
-
   -- instruction pointer to currently executed block
   ip = pos,
 

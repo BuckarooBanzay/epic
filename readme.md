@@ -28,6 +28,7 @@ WIP
 
 ### TODO
 
+* [ ] Save state (savepoint)
 * [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
