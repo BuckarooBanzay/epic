@@ -1,4 +1,8 @@
 
+local SECONDS_IN_DAY = 3600*24
+local SECONDS_IN_HOUR = 3600
+local SECONDS_IN_MINUTE = 60
+
 epic.format_time = function(seconds)
 	local str = ""
 

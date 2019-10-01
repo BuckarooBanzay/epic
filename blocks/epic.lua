@@ -9,11 +9,9 @@ minetest.register_node("epic:epic", {
 		if minetest.is_protected(pos, player:get_player_name()) then
 			-- view
 			epic.form.epic_view(pos, node, player)
-
 		else
 			-- configure
 			epic.form.epic_configure(pos, node, player)
-			
 		end
 	end
 })
