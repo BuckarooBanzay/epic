@@ -2,9 +2,13 @@
 -- playername => player_state
 epic.state = {}
 
+local basedir = minetest.get_worldpath().."/epic"
+
+minetest.mkdir(basedir)
+
 local getStateFile = function(playername)
 	local saneplayername = string.gsub(playername, "[.|/]", "")
-	return minetest.get_worldpath().."/epic/" .. saneplayername .. ".json"
+	return basedir .. "/" .. saneplayername .. ".json"
 end
 
 epic.save_player_state = function(playername)
@@ -26,6 +30,10 @@ epic.load_player_state = function(playername)
 	if file then
 		local json = file:read("*a")
 		state = minetest.parse_json(json or "") or {}
+		state.initialized = false
+		state.step_data = {}
+		state.data = state.data or {}
+		state.stack = state.stack or {}
 		file:close()
 	end
 
@@ -43,4 +51,3 @@ minetest.register_on_leaveplayer(function(player)
   local playername = player:get_player_name()
   epic.state[playername] = nil
 end)
-

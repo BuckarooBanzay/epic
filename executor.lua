@@ -2,12 +2,25 @@
 -- playername -> bool
 local abort_flag = {}
 
+local clear_state = function(playername)
+  epic.state[playername] = nil
+  epic.save_player_state(playername)
+
+end
+
 local execute_player_state
 execute_player_state = function(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
 
-  local node = minetest.get_node(pos)
+  if not pos then
+    -- invalid state
+    clear_state(playername)
+    return
+  end
+
+  local node = epic.get_node(pos)
+
   if not epic.is_epic(node) then
     -- no more instructions in this branch
 
@@ -30,7 +43,8 @@ execute_player_state = function(playername, state)
 
       else
         -- all done
-        epic.state[playername] = nil
+        clear_state(playername)
+
       end
     end
 

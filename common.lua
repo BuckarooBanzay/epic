@@ -60,6 +60,16 @@ epic.get_next_pos = function(pos)
   return next_pos
 end
 
+-- returns a node and loads the area if needed
+epic.get_node = function(pos)
+	local node = minetest.get_node_or_nil(pos)
+	if node == nil then
+		minetest.get_voxel_manip(pos, pos)
+		node = minetest.get_node_or_nil(pos)
+	end
+	return node
+end
+
 -- returns true if the node has an "epic" definition
 epic.is_epic = function(node)
   local nodedef = minetest.registered_nodes[node.name]
