@@ -1,6 +1,8 @@
 
 epic -- Enhanced Programmer for Ingame Control
 
+[![Build Status](https://travis-ci.org/thomasrudin-mt/epic.svg?branch=master)](https://travis-ci.org/thomasrudin-mt/epic)
+
 # Overview
 
 WIP
