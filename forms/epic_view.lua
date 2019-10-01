@@ -6,8 +6,6 @@ epic.form.epic_view = function(pos, playername)
 	local meta = minetest.get_meta(pos)
 	local name = meta:get_string("name")
 	local time = meta:get_int("time")
-	local owner = meta:get_string("owner")
-	local description = meta:get_string("description")
 
 	local formspec = "size[8,2;]" ..
 		"label[0,0;Epic start block]" ..

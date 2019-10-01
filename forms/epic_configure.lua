@@ -21,7 +21,6 @@ epic.form.epic_configure = function(pos, playername)
 	local meta = minetest.get_meta(pos)
 	local name = meta:get_string("name")
 	local time = meta:get_int("time")
-	local owner = meta:get_string("owner")
 	local main_pos = meta:get_string("main_pos") or "<none>"
 	local exit_pos = meta:get_string("exit_pos") or "<none>"
 
