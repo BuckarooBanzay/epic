@@ -1,4 +1,4 @@
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local delay = meta:get_int("delay")
 	meta:set_string("infotext", "Delay block: " .. delay .. " seconds")
 
@@ -31,7 +31,7 @@ minetest.register_node("epic:delay", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -52,10 +52,10 @@ minetest.register_node("epic:delay", {
   end,
 
   epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, _, _, ctx)
 			ctx.data.delay_start = minetest.get_us_time()
     end,
-    on_check = function(pos, meta, player, ctx)
+    on_check = function(_, meta, _, ctx)
       local now = minetest.get_us_time()
       local start = ctx.data.delay_start
 

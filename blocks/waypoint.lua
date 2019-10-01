@@ -2,7 +2,7 @@
 -- playername => pos
 local punch_handler = {}
 
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 	local name = meta:get_string("name")
 	local radius = meta:get_int("radius")
@@ -47,7 +47,7 @@ minetest.register_node("epic:waypoint", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -74,7 +74,7 @@ minetest.register_node("epic:waypoint", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, meta, player, ctx)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			ctx.step_data.pos = target_pos
 			ctx.step_data.radius = meta:get_int("radius")
@@ -87,19 +87,19 @@ minetest.register_node("epic:waypoint", {
 				world_pos = target_pos
 			})
     end,
-    on_check = function(pos, meta, player, ctx)
+    on_check = function(_, _, player, ctx)
 			local pos = player:get_pos()
 			if vector.distance(pos, ctx.step_data.pos) < ctx.step_data.radius then
 				ctx.next()
 			end
     end,
-    on_exit = function(pos, meta, player, ctx)
+    on_exit = function(_, _, player, ctx)
 			player:hud_remove(ctx.step_data.waypoint_hud_id)
     end
   }
 })
 
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+minetest.register_on_punchnode(function(pos, _, puncher, _)
 	local playername = puncher:get_player_name()
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then

@@ -1,4 +1,4 @@
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local text = meta:get_string("text")
 	meta:set_string("infotext", "Chat block: '" .. text .. "'")
 
@@ -31,7 +31,7 @@ minetest.register_node("epic:message", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -48,7 +48,7 @@ minetest.register_node("epic:message", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, meta, player, ctx)
       minetest.chat_send_player(player:get_player_name(), meta:get_string("text"))
       ctx.next()
     end

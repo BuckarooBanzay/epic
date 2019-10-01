@@ -33,6 +33,7 @@ WIP
 * [ ] Remove mobs
 * [ ] Stash inventory
 * [ ] Unstash inventory
+* [ ] Clear inventory
 * [ ] HUD vignette
 * [ ] Check priv (conditional)
 * [ ] Set day/night ratio

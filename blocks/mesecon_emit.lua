@@ -1,4 +1,4 @@
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local delay = meta:get_int("delay")
 	meta:set_string("infotext", "Mesecons emit block: " .. delay .. " seconds")
 
@@ -35,7 +35,7 @@ minetest.register_node("epic:mesecon_emit", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -56,12 +56,12 @@ minetest.register_node("epic:mesecon_emit", {
   end,
 
   epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(pos, _, _, ctx)
       ctx.data.delay_start = minetest.get_us_time()
       mesecon.receptor_on(pos)
 
     end,
-    on_check = function(pos, meta, player, ctx)
+    on_check = function(_, meta, _, ctx)
       local now = minetest.get_us_time()
       local start = ctx.data.delay_start
       local delay_micros = meta:get_int("delay")*1000*1000

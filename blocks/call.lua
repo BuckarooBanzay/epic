@@ -2,7 +2,7 @@
 -- playername => pos
 local punch_handler = {}
 
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 
 	meta:set_string("infotext", "Call block: function=" .. pos)
@@ -33,9 +33,7 @@ minetest.register_node("epic:call", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
-    local meta = minetest.get_meta(pos);
-
+  on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -50,14 +48,14 @@ minetest.register_node("epic:call", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, meta, _, ctx)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			ctx.call(target_pos)
     end
   }
 })
 
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+minetest.register_on_punchnode(function(pos, node, puncher)
 	local playername = puncher:get_player_name()
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then

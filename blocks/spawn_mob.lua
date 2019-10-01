@@ -2,7 +2,7 @@
 local mob_names = {} -- list<name>
 
 minetest.register_on_mods_loaded(function()
-	for i,item in pairs(minetest.registered_items) do
+	for _,item in pairs(minetest.registered_items) do
 		if item.groups.spawn_egg == 1 then
 			table.insert(mob_names, item.name)
 		end
@@ -12,7 +12,7 @@ end)
 -- playername => pos
 local punch_handler = {}
 
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 	local mobname = meta:get_string("mobname")
 
@@ -62,7 +62,7 @@ minetest.register_node("epic:spawn_mob", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -89,7 +89,7 @@ minetest.register_node("epic:spawn_mob", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, meta, _, ctx)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local mobname = meta:get_string("mobname")
 
@@ -101,7 +101,7 @@ minetest.register_node("epic:spawn_mob", {
   }
 })
 
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+minetest.register_on_punchnode(function(pos, _, puncher, _)
 	local playername = puncher:get_player_name()
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then

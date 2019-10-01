@@ -1,4 +1,4 @@
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	local cmd = meta:get_string("cmd")
 	meta:set_string("infotext", "Command block: '" .. cmd .. "'")
 
@@ -47,7 +47,7 @@ minetest.register_node("epic:command", {
     update_formspec(meta, pos)
 	end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
+  on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -64,7 +64,7 @@ minetest.register_node("epic:command", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, meta, _, ctx)
       local cmd = meta:get_string("cmd")
 			local owner = meta:get_string("owner")
 			execute(cmd, owner)

@@ -72,7 +72,7 @@ minetest.register_node("epic:branch", {
 	on_rotate = screwdriver.rotate_simple,
 
   epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(pos, _, player, ctx)
 
 			local node = minetest.get_node(pos)
 			local direction = epic.get_direction(node.param2)
@@ -81,8 +81,8 @@ minetest.register_node("epic:branch", {
 			ctx.step_data.targets = pos_list
 			ctx.step_data.target_step_data = {}
 			for _, target_pos in ipairs(ctx.step_data.targets) do
-				local node = minetest.get_node(target_pos)
-				local nodedef = minetest.registered_nodes[node.name]
+				local target_node = minetest.get_node(target_pos)
+				local nodedef = minetest.registered_nodes[target_node.name]
 				local target_step_data = {}
 				ctx.step_data.target_step_data[minetest.hash_node_position(target_pos)] = target_step_data
 
@@ -100,7 +100,7 @@ minetest.register_node("epic:branch", {
 				end
 			end
     end,
-		on_check = function(pos, meta, player, ctx)
+		on_check = function(_, _, player, ctx)
 			for _, target_pos in ipairs(ctx.step_data.targets) do
 				local node = minetest.get_node(target_pos)
 				local nodedef = minetest.registered_nodes[node.name]
@@ -118,7 +118,7 @@ minetest.register_node("epic:branch", {
 				end
 			end
 		end,
-		on_exit = function(pos, meta, player, ctx)
+		on_exit = function(_, _, player, ctx)
 			for _, target_pos in ipairs(ctx.step_data.targets) do
 				local node = minetest.get_node(target_pos)
 				local nodedef = minetest.registered_nodes[node.name]

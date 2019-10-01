@@ -1,5 +1,5 @@
 
-local update_formspec = function(meta, pos)
+local update_formspec = function(meta)
 	meta:set_string("formspec", "size[8,1;]" ..
 		"button_exit[0.1,0.2;8,1;execute;Execute]")
 end
@@ -19,7 +19,7 @@ minetest.register_node("epic:function", {
 	on_rotate = screwdriver.rotate_simple,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(_, _, _, ctx)
       ctx.next()
     end
   },
@@ -29,9 +29,7 @@ minetest.register_node("epic:function", {
     update_formspec(meta, pos)
   end,
 
-  on_receive_fields = function(pos, formname, fields, sender)
-    local meta = minetest.get_meta(pos);
-
+  on_receive_fields = function(pos, _, fields, sender)
 		if not sender then
 			return
 		end
