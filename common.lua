@@ -67,19 +67,20 @@ epic.is_epic = function(node)
 end
 
 -- executes a single function
-epic.execute_function = function(pos, player)
+epic.execute_function = function(player, main_pos, exit_pos)
   if epic.state[player:get_player_name()] then
     -- already running a function
     return
   end
 
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
-    " executes function at " .. minetest.pos_to_string(pos))
+    " executes function at " .. minetest.pos_to_string(main_pos))
 
   epic.state[player:get_player_name()] = {
-    ip = pos,
+    ip = main_pos,
     stack = {},
     initialized = false,
+		exit_pos = exit_pos,
     data = {},
     step_data = {}
   }

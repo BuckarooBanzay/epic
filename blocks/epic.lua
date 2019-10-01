@@ -5,13 +5,22 @@ minetest.register_node("epic:epic", {
   tiles = {
     "epic_node_bg.png^epic_epic.png"
 	},
-	on_rightclick = function(pos, node, player)
-		if minetest.is_protected(pos, player:get_player_name()) then
+
+	after_place_node = function(pos, placer)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("owner", placer:get_player_name())
+		meta:set_string("name", "")
+		meta:set_int("time", "600")
+	end,
+
+	on_rightclick = function(pos, _, player)
+		local playername = player:get_player_name()
+		if minetest.is_protected(pos, playername) then
 			-- view
-			epic.form.epic_view(pos, node, player)
+			epic.form.epic_view(pos, playername)
 		else
 			-- configure
-			epic.form.epic_configure(pos, node, player)
+			epic.form.epic_configure(pos, playername)
 		end
 	end
 })

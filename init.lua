@@ -10,8 +10,8 @@ dofile(MP.."/executor.lua")
 
 -- forms
 epic.form = {}
-dofile(MP.."/forms/epic_view.lua")
 dofile(MP.."/forms/epic_configure.lua")
+dofile(MP.."/forms/epic_view.lua")
 
 -- blocks
 dofile(MP.."/blocks/epic.lua")

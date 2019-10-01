@@ -19,7 +19,19 @@ execute_player_state = function(playername, state)
       execute_player_state(playername, state)
     else
       -- done
-      epic.state[playername] = nil
+      if state.exit_pos then
+        -- execute exit pos
+        state.initialized = false
+        state.stack = {}
+        state.ip = state.exit_pos
+        state.step_data = {}
+        state.exit_pos = nil
+        execute_player_state(playername, state)
+
+      else
+        -- all done
+        epic.state[playername] = nil
+      end
     end
 
     return
