@@ -1,4 +1,31 @@
 
+epic.format_time = function(seconds)
+	local str = ""
+
+
+	if seconds >= SECONDS_IN_DAY then
+		local days = math.floor(seconds / SECONDS_IN_DAY)
+		str = str .. days .. " d "
+		seconds = seconds - (days * SECONDS_IN_DAY)
+	end
+
+	if seconds >= SECONDS_IN_HOUR then
+		local hours = math.floor(seconds / SECONDS_IN_HOUR)
+		str = str .. hours .. " h "
+		seconds = seconds - (hours * SECONDS_IN_HOUR)
+	end
+
+	if seconds >= SECONDS_IN_MINUTE then
+		local minutes = math.floor(seconds / SECONDS_IN_MINUTE)
+		str = str .. minutes .. " min "
+		seconds = seconds - (minutes * SECONDS_IN_MINUTE)
+	end
+
+	str = str .. seconds .. " s"
+
+	return str
+end
+
 -- converts the direction from a param2
 epic.get_direction = function(param2)
   local direction = minetest.facedir_to_dir(param2)

@@ -3,10 +3,17 @@ epic = {}
 
 local MP = minetest.get_modpath("epic")
 
+-- common stuff
 dofile(MP.."/common.lua")
 dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
 
+-- forms
+epic.form = {}
+dofile(MP.."/forms/epic_view.lua")
+dofile(MP.."/forms/epic_configure.lua")
+
+-- blocks
 dofile(MP.."/blocks/epic.lua")
 dofile(MP.."/blocks/nop.lua")
 dofile(MP.."/blocks/function.lua")
