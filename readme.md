@@ -23,7 +23,8 @@ WIP
 * [x] Mesecon emitter
 * [x] Set gravity
 * [ ] Epic: main-function
-* [ ] Epic: timeout-function
+* [ ] Epic: cleanup-function
+* [ ] Epic: exit-on flags: leave/die/timeout
 
 ### TODO
 
