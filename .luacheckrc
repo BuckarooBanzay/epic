@@ -15,6 +15,7 @@ read_globals = {
 
 	-- deps
 	"screwdriver",
-	"mesecon"
+	"mesecon",
+	"player_monoids"
 
 }
