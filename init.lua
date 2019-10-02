@@ -27,6 +27,8 @@ dofile(MP.."/blocks/branch.lua")
 dofile(MP.."/blocks/set_gravity.lua")
 dofile(MP.."/blocks/add_item.lua")
 dofile(MP.."/blocks/remove_item.lua")
+dofile(MP.."/blocks/lock.lua")
+dofile(MP.."/blocks/unlock.lua")
 dofile(MP.."/blocks/save.lua")
 
 if minetest.get_modpath("mobs") then
