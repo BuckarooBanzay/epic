@@ -22,19 +22,20 @@ WIP
 * [x] Call function
 * [x] Mesecon emitter
 * [x] Set gravity
-* [ ] Add item
+* [x] Remove items
+* [x] Remove mobs
+* [x] Add item
+* [x] lock/unlock section
+* [x] Save state (savepoint)
 * [x] Epic: main-function
 * [x] Epic: cleanup-function
 * [ ] Epic: exit-on flags: leave/die/timeout
 
 ### TODO
 
-* [ ] Save state (savepoint)
 * [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
-* [ ] Remove items
-* [ ] Remove mobs
 * [ ] Stash inventory
 * [ ] Unstash inventory
 * [ ] Clear inventory
