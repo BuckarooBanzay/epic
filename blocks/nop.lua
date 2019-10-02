@@ -7,7 +7,7 @@ minetest.register_node("epic:nop", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png",
+		"epic_node_bg.png^epic_forward.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
