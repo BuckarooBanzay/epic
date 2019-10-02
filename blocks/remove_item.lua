@@ -71,6 +71,10 @@ minetest.register_node("epic:removeitem", {
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local radius = tonumber(meta:get_string("radius")) or 5
 
+			if radius > 20 or radius < 1 then
+				radius = 1
+			end
+
 			local objects = minetest.get_objects_inside_radius(target_pos, radius)
 			for _, object in ipairs(objects) do
 				object:remove()

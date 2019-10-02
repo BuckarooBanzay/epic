@@ -28,7 +28,7 @@ minetest.register_node("epic:lock", {
 			end
     end,
 
-		on_check = function(_, meta, _, ctx)
+		on_check = function(_, meta, player, ctx)
 			if meta:get_int("lock") == 0 then
 				meta:set_int("lock", 1)
 				minetest.chat_send_player(player:get_player_name(), "[epic] advancing to the section...")
