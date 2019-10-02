@@ -9,7 +9,9 @@ local update_formspec = function(meta)
 	meta:set_string("infotext", "Remove item block: pos=" .. pos)
 
 	meta:set_string("formspec", "size[8,3;]" ..
-		"button_exit[0.1,0.1;8,1;setpos;Set position]" ..
+		"button_exit[0.1,0.1;4,1;setpos;Set position]" ..
+		"button_exit[4.1,0.1;4,1;showpos;Show]" ..
+
 		"field[0.2,1.5;8,1;radius;Radius;" .. radius .. "]" ..
 		"button_exit[0.1,2.5;8,1;save;Save]" ..
 
@@ -44,6 +46,7 @@ minetest.register_node("epic:removeitem", {
 			return
 		end
 
+		local meta = minetest.get_meta(pos)
 
 		if fields.setpos then
 			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target position")
@@ -51,10 +54,16 @@ minetest.register_node("epic:removeitem", {
 		end
 
 		if fields.save then
-			local meta = minetest.get_meta(pos)
 			meta:set_string("radius", fields.radius or "5")
 			update_formspec(meta, pos)
     end
+
+		if fields.showpos then
+			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+			if target_pos then
+				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+			end
+		end
   end,
 
 	epic = {

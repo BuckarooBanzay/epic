@@ -11,16 +11,13 @@ local update_formspec = function(meta)
 		", radius=" .. radius)
 
 	meta:set_string("formspec", "size[8,4;]" ..
-		-- col 1
 		"field[0.2,0.5;8,1;radius;Radius;" .. radius .. "]" ..
 
-		-- col 1
 		"field[0.2,1.5;8,1;name;Name;" .. name .. "]" ..
 
-		-- col 2
-		"button_exit[0.1,2.5;8,1;setpos;Set position]" ..
+		"button_exit[0.1,2.5;4,1;setpos;Set]" ..
+		"button_exit[4.1,2.5;4,1;showpos;Show]" ..
 
-		-- col 2
 		"button_exit[0.1,3.5;8,1;save;Save]" ..
 		"")
 end
@@ -48,12 +45,12 @@ minetest.register_node("epic:waypoint", {
   end,
 
   on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
-
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
+
+		local meta = minetest.get_meta(pos);
 
     if fields.save then
 			local radius = tonumber(fields.radius) or 3
@@ -71,6 +68,13 @@ minetest.register_node("epic:waypoint", {
 			punch_handler[sender:get_player_name()] = pos
 		end
 
+		if fields.showpos then
+			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+			if target_pos then
+				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+			end
+		end
+
   end,
 
 	epic = {
@@ -83,7 +87,7 @@ minetest.register_node("epic:waypoint", {
 				hud_elem_type = "waypoint",
 				name = meta:get_string("name"),
 				text = "m",
-				number = 0xFF0000,
+				number = 0x00FF00,
 				world_pos = target_pos
 			})
     end,

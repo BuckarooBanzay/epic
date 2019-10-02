@@ -36,7 +36,10 @@ local update_formspec = function(meta)
 
 	meta:set_string("formspec", "size[8,7;]" ..
 		"textlist[0,0.1;8,5;mobname;" .. list .. ";" .. selected .. "]" ..
-		"button_exit[0.1,5.5;8,1;setpos;Set position]" ..
+
+		"button_exit[0.1,5.5;4,1;setpos;Set position]" ..
+		"button_exit[4.1,5.5;4,1;showpos;Show]" ..
+
 		"button_exit[0.1,6.5;8,1;save;Save]" ..
 		"")
 end
@@ -63,13 +66,12 @@ minetest.register_node("epic:spawn_mob", {
   end,
 
   on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
-
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
+		local meta = minetest.get_meta(pos);
 
 		if fields.setpos then
 			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target position")
@@ -86,6 +88,12 @@ minetest.register_node("epic:spawn_mob", {
 			end
 		end
 
+		if fields.showpos then
+			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+			if target_pos then
+				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+			end
+		end
   end,
 
 	epic = {
