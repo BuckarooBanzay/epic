@@ -15,7 +15,7 @@ end
 
 
 minetest.register_node("epic:set_gravity", {
-	description = "Epic command block",
+	description = "Epic set gravity block",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
