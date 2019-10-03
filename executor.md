@@ -31,8 +31,8 @@ ctx = {
   -- call another function at pos
   call = function(pos) end,
 
-  -- abort epic execution
-  exit = function() end,
+  -- sets the current epic timeout
+  settimeout = function(seconds) end,
 
   -- data for block-execution lifetime
   step_data = {},

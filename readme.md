@@ -27,15 +27,17 @@ WIP
 * [x] Add item
 * [x] lock/unlock section
 * [x] Save state (savepoint)
+* [x] Set epic timeout
 * [x] Epic: main-function
 * [x] Epic: cleanup-function
 * [ ] Epic: exit-on flags: leave/die/timeout
+* [ ] Epic executor: timeout
 
 ### TODO
 
-* [ ] Set epic timeout
-* [ ] Give ItemStack with password/description
-* [ ] Check for ItemStack with password
+* [ ] Set hud (flags: timeout, epic-name)
+* [ ] Give ItemStack with key/description
+* [ ] Check for ItemStack with key
 * [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node

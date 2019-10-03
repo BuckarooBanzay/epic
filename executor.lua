@@ -66,6 +66,9 @@ execute_player_state = function(playername, state)
         result_next = true
         result_next_pos = _pos
     end,
+    settimeout = function(seconds)
+      -- TODO
+    end,
     data = state.data,
     step_data = state.step_data
   }
