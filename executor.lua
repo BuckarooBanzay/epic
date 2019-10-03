@@ -2,6 +2,9 @@
 -- playername -> bool
 local abort_flag = {}
 
+-- time in seconds between executor calls
+local executor_dtime = 0.1
+
 local clear_state = function(playername)
   epic.state[playername] = nil
   epic.save_player_state(playername)
@@ -36,6 +39,7 @@ execute_player_state = function(playername, state)
         -- execute exit pos
         state.initialized = false
         state.stack = {}
+	state.time = nil
         state.ip = state.exit_pos
         state.step_data = {}
         state.exit_pos = nil
@@ -67,7 +71,7 @@ execute_player_state = function(playername, state)
         result_next_pos = _pos
     end,
     settimeout = function(seconds)
-      -- TODO
+      state.time = seconds
     end,
     data = state.data,
     step_data = state.step_data
@@ -90,6 +94,13 @@ execute_player_state = function(playername, state)
   else
     if epicdef.on_check then
       epicdef.on_check(pos, meta, player, ctx)
+    end
+  end
+
+  if state.time then
+    state.time = state.time - executor_dtime
+    if state.time < 0 then
+      abort_flag[playername] = true
     end
   end
 
@@ -123,7 +134,7 @@ executor = function()
   end
 
   -- restart execution
-  minetest.after(0.1, executor)
+  minetest.after(executor_dtime, executor)
 end
 
 -- initial delay
