@@ -33,6 +33,7 @@ WIP
 
 ### TODO
 
+* [ ] Set epic timeout
 * [ ] Give ItemStack with password/description
 * [ ] Check for ItemStack with password
 * [ ] Mesecon receiver (conditional)
