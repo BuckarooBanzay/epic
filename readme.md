@@ -33,6 +33,8 @@ WIP
 
 ### TODO
 
+* [ ] Give ItemStack with password/description
+* [ ] Check for ItemStack with password
 * [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
