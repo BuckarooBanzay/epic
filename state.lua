@@ -29,7 +29,12 @@ epic.load_player_state = function(playername)
 	local state = nil
 	if file then
 		local json = file:read("*a")
-		state = minetest.parse_json(json or "") or {}
+		state = minetest.parse_json(json or "")
+
+		if not state then
+			return nil
+		end
+
 		state.initialized = false
 		state.step_data = {}
 		state.data = state.data or {}

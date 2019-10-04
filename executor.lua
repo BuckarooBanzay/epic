@@ -8,7 +8,7 @@ local executor_dtime = 0.1
 local clear_state = function(playername)
   epic.state[playername] = nil
   epic.save_player_state(playername)
-
+  epic.save_player_state(playername)
 end
 
 local execute_player_state
