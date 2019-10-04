@@ -32,6 +32,7 @@ WIP
 * [x] Epic: cleanup-function
 * [x] Epic: exit-on flags: leave/die/timeout
 * [x] Epic executor: timeout
+* [x] Set sky
 
 ### TODO
 
@@ -47,12 +48,12 @@ WIP
 * [ ] HUD vignette
 * [ ] Check priv (conditional)
 * [ ] Set day/night ratio
-* [ ] Set sky
 * [ ] Set clouds
 * [ ] Set collision box
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter (conditional)
+* [ ] General: permissions/checks for non-admin placement
 
 # Licenses
 

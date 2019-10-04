@@ -4,6 +4,7 @@ local skyboxes = {} -- list<skyboxdef>
 --[[
 skyboxdef = {
 	name = "",
+	color = {r=0, g=0, b=0},
 	textures = {}
 }
 --]]
@@ -91,6 +92,8 @@ minetest.register_node("epic:setskybox", {
 				if skyboxdef.name == skyboxname then
 					if skyboxdef.texture then
 						player:set_sky({r=0, g=0, b=0}, "skybox", skyboxdef.textures)
+					elseif skyboxdef.color then
+						player:set_sky(skyboxdef.color, "plain", {})
 					else
 						player:set_sky({r=0, g=0, b=0}, "regular", {})
 					end
