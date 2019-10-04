@@ -4,14 +4,27 @@ local abort_flag = {}
 
 -- time in seconds between executor calls
 local executor_dtime = 0.1
+local execute_player_state
 
 local clear_state = function(playername)
   epic.state[playername] = nil
   epic.save_player_state(playername)
-  epic.save_player_state(playername)
 end
 
-local execute_player_state
+local execute_exit_function = function(playername, state)
+	if state.exit_pos then
+		-- execute exit pos
+		state.initialized = false
+		state.stack = {}
+		state.time = nil
+		state.ip = state.exit_pos
+		state.step_data = {}
+		state.exit_pos = nil
+		execute_player_state(playername, state)
+	end
+end
+
+
 execute_player_state = function(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
@@ -36,14 +49,7 @@ execute_player_state = function(playername, state)
     else
       -- done
       if state.exit_pos then
-        -- execute exit pos
-        state.initialized = false
-        state.stack = {}
-        state.time = nil
-        state.ip = state.exit_pos
-        state.step_data = {}
-        state.exit_pos = nil
-        execute_player_state(playername, state)
+        execute_exit_function(playername, state)
 
       else
         -- all done
@@ -114,9 +120,15 @@ execute_player_state = function(playername, state)
   end
 
   if abort_flag[playername] then
-    epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag[playername] })
-    epic.state[playername] = nil
+    local reason = abort_flag[playername]
     abort_flag[playername] = nil
+
+    if state.exit_pos then
+        execute_exit_function(playername, state)
+    end
+
+    epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
+    epic.state[playername] = nil
     return
   end
 

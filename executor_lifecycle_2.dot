@@ -1,0 +1,8 @@
+digraph {
+ "Epic start" -> "Main function";
+ "Main function" -> "Exit function" [label="leave-game"];
+ "Main function" -> "Exit function" [label="leave-game (timeout)"];
+ "Main function" -> "Exit function" [label="/epic_abort"];
+ "Main function" -> "Exit function" [label="main-exit"];
+ "Main function" -> "Exit function" [label="epic timeout"];
+}
