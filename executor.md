@@ -44,7 +44,7 @@ ctx = {
 
 ## Lifecycle
 
-TODO
+<img src="./executor_lifecycle.png"/>
 
 ## Per-step data
 

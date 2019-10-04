@@ -1,5 +1,5 @@
 digraph {
-  rankdir=LR;
-  a -> b -> c;
-  b -> d;
+  on_enter -> on_check [label=initialize];
+  on_check -> on_check;
+  on_check -> on_exit [label="ctx.next()/abort/leave"];
 }
