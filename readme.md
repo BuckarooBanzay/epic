@@ -30,8 +30,8 @@ WIP
 * [x] Set epic timeout
 * [x] Epic: main-function
 * [x] Epic: cleanup-function
-* [ ] Epic: exit-on flags: leave/die/timeout
-* [ ] Epic executor: timeout
+* [x] Epic: exit-on flags: leave/die/timeout
+* [x] Epic executor: timeout
 
 ### TODO
 
