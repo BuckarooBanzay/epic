@@ -42,6 +42,10 @@ ctx = {
 }
 ```
 
+## Lifecycle
+
+TODO
+
 ## Per-step data
 
 ```lua

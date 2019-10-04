@@ -39,7 +39,7 @@ execute_player_state = function(playername, state)
         -- execute exit pos
         state.initialized = false
         state.stack = {}
-	state.time = nil
+        state.time = nil
         state.ip = state.exit_pos
         state.step_data = {}
         state.exit_pos = nil
@@ -47,6 +47,7 @@ execute_player_state = function(playername, state)
 
       else
         -- all done
+        epic.run_hook("on_epic_exit", {playername, state})
         clear_state(playername)
 
       end
@@ -88,6 +89,7 @@ execute_player_state = function(playername, state)
     state.initialized = true
 
     if epicdef.on_enter then
+      epic.run_hook("on_before_node_enter", { pos, player, ctx })
       epicdef.on_enter(pos, meta, player, ctx)
     end
 
@@ -100,19 +102,21 @@ execute_player_state = function(playername, state)
   if state.time then
     state.time = state.time - executor_dtime
     if state.time < 0 then
-      abort_flag[playername] = true
+      abort_flag[playername] = "epic_timeout"
     end
   end
 
   if abort_flag[playername] or result_next then
     if epicdef.on_exit then
+      epic.run_hook("on_before_node_exit", { pos, player, ctx })
       epicdef.on_exit(pos, meta, player, ctx)
     end
   end
 
   if abort_flag[playername] then
-    abort_flag[playername] = nil
+    epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag[playername] })
     epic.state[playername] = nil
+    abort_flag[playername] = nil
     return
   end
 
@@ -144,7 +148,20 @@ minetest.register_chatcommand("epic_abort", {
 	description = "Aborts the current epic",
 	func = function(name)
 		if epic.state[name] then
-			abort_flag[name] = true
+			abort_flag[name] = "manual"
 		end
 	end
 })
+
+-- abort epic on leave
+-- savepoints are not touched here
+minetest.register_on_leaveplayer(function(player, timed_out)
+  local playername = player:get_player_name()
+  local state = epic.state[playername]
+  if timed_out then
+    abort_flag[playername] = "leave_timed_out"
+  else
+    abort_flag[playername] = "leave"
+  end
+  execute_player_state(playername, state)
+end)

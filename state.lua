@@ -35,6 +35,8 @@ epic.load_player_state = function(playername)
 		state.data = state.data or {}
 		state.stack = state.stack or {}
 		file:close()
+
+		epic.run_hook("on_state_restored", { playername, state })
 	end
 
 	return state

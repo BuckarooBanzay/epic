@@ -7,6 +7,7 @@ local MP = minetest.get_modpath("epic")
 dofile(MP.."/common.lua")
 dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
+dofile(MP.."/executor_hooks.lua")
 
 -- forms
 epic.form = {}
