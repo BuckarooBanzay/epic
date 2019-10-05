@@ -170,10 +170,12 @@ minetest.register_chatcommand("epic_abort", {
 minetest.register_on_leaveplayer(function(player, timed_out)
   local playername = player:get_player_name()
   local state = epic.state[playername]
-  if timed_out then
-    abort_flag[playername] = "leave_timed_out"
-  else
-    abort_flag[playername] = "leave"
+  if state then
+    if timed_out then
+      abort_flag[playername] = "leave_timed_out"
+    else
+      abort_flag[playername] = "leave"
+    end
+    execute_player_state(playername, state)
   end
-  execute_player_state(playername, state)
 end)
