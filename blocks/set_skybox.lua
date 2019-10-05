@@ -9,19 +9,16 @@ skyboxdef = {
 }
 --]]
 
-epic.register_skybox = function(name, textures)
-	table.insert(skyboxes, {
-		name = name,
-		textures = textures
-	})
+epic.register_skybox = function(skyboxdef)
+	table.insert(skyboxes, skyboxdef)
 end
 
-epic.register_skybox("default")
+epic.register_skybox({ name = "default" })
 
 local update_formspec = function(meta)
-	local skyboxname = meta:get_string("name")
+	local skyboxname = meta:get_string("skyboxname")
 
-	meta:set_string("infotext", "Spawn mob block: name=" .. skyboxname)
+	meta:set_string("infotext", "Set skybox block: name=" .. skyboxname)
 
 	local selected = 1
 	local list = ""
@@ -90,7 +87,7 @@ minetest.register_node("epic:setskybox", {
 			local skyboxname = meta:get_string("skyboxname")
 			for _, skyboxdef in ipairs(skyboxes) do
 				if skyboxdef.name == skyboxname then
-					if skyboxdef.texture then
+					if skyboxdef.textures then
 						player:set_sky({r=0, g=0, b=0}, "skybox", skyboxdef.textures)
 					elseif skyboxdef.color then
 						player:set_sky(skyboxdef.color, "plain", {})
