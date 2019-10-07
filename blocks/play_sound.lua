@@ -62,7 +62,7 @@ minetest.register_node("epic:play_sound", {
 		local meta = minetest.get_meta(pos);
 
 		if fields.soundname then
-			local parts = fields.mobname:split(":")
+			local parts = fields.soundname:split(":")
 			if parts[1] == "CHG" then
 				local selected_sound = tonumber(parts[2])
 				meta:set_string("soundname", selected_sound)
