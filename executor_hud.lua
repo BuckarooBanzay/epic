@@ -6,7 +6,7 @@ local HUD_ALIGNMENT = {x = 1, y = 0}
 
 
 local function setup(playername, name)
-  local player = minetest.get_player_name(playername)
+  local player = minetest.get_player_by_name(playername)
   local data = {}
 
   data.name = player:hud_add({
@@ -43,7 +43,7 @@ epic.register_hook({
 
   on_epic_exit = function(playername)
     local data = hud[playername]
-    local player = minetest.get_player_name(playername)
+    local player = minetest.get_player_by_name(playername)
 
     if not data or not player then
       return
@@ -65,7 +65,7 @@ local update
 update = function()
   for playername, state in pairs(epic.state) do
     local data = hud[playername]
-    local player = minetest.get_player_name(playername)
+    local player = minetest.get_player_by_name(playername)
 
     if player and data and data.time then
       local time_str = ""
