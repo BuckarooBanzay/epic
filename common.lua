@@ -50,7 +50,7 @@ epic.format_time = function(seconds)
 		seconds = seconds - (minutes * SECONDS_IN_MINUTE)
 	end
 
-	str = str .. seconds .. " s"
+	str = str .. math.floor(seconds) .. " s"
 
 	return str
 end

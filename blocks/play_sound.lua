@@ -65,7 +65,17 @@ minetest.register_node("epic:play_sound", {
 			local parts = fields.soundname:split(":")
 			if parts[1] == "CHG" then
 				local selected_sound = tonumber(parts[2])
-				meta:set_string("soundname", selected_sound)
+				local sound_key = ""
+
+				local i = 0
+				for _, sounddef in pairs(soundblock.sounds) do
+					i = i + 1
+
+					if i == selected_sound then
+						sound_key = sounddef.key
+					end
+				end
+				meta:set_string("soundname", sound_key)
 				update_formspec(meta, pos)
 			end
 		end
@@ -77,7 +87,7 @@ minetest.register_node("epic:play_sound", {
 			local soundname = meta:get_string("soundname")
 
 			for _, sounddef in pairs(soundblock.sounds) do
-				if sounddef.name == soundname then
+				if sounddef.key == soundname then
 					local filename = sounddef.filename
 
 					if sounddef.filenames then

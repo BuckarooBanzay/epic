@@ -94,14 +94,14 @@ execute_player_state = function(playername, state)
   if not state.initialized then
     state.initialized = true
 
+    epic.run_hook("on_before_node_enter", { pos, player, ctx })
     if epicdef.on_enter then
-      epic.run_hook("on_before_node_enter", { pos, player, ctx })
       epicdef.on_enter(pos, meta, player, ctx)
     end
 
   else
+    epic.run_hook("on_before_node_check", { pos, player, ctx })
     if epicdef.on_check then
-      epic.run_hook("on_before_node_check", { pos, player, ctx })
       epicdef.on_check(pos, meta, player, ctx)
     end
   end
@@ -114,8 +114,8 @@ execute_player_state = function(playername, state)
   end
 
   if abort_flag[playername] or result_next then
+    epic.run_hook("on_before_node_exit", { pos, player, ctx })
     if epicdef.on_exit then
-      epic.run_hook("on_before_node_exit", { pos, player, ctx })
       epicdef.on_exit(pos, meta, player, ctx)
     end
   end
