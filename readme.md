@@ -36,6 +36,8 @@ WIP
 
 ### TODO
 
+* [ ] Set sound (loop, once)
+* [ ] Clear sound
 * [ ] Set hud (flags: timeout, epic-name)
 * [ ] Give ItemStack with key/description
 * [ ] Check for ItemStack with key
