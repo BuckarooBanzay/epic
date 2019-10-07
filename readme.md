@@ -33,11 +33,11 @@ WIP
 * [x] Epic: exit-on flags: leave/die/timeout
 * [x] Epic executor: timeout
 * [x] Set sky
+* [x] Set sound (loop, once)
+* [x] Clear sound
 
 ### TODO
 
-* [ ] Set sound (loop, once)
-* [ ] Clear sound
 * [ ] Set hud (flags: timeout, epic-name)
 * [ ] Give ItemStack with key/description
 * [ ] Check for ItemStack with key

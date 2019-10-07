@@ -40,6 +40,7 @@ end
 
 if minetest.get_modpath("soundblock") then
 	dofile(MP.."/blocks/play_sound.lua")
+	dofile(MP.."/blocks/loop_sound.lua")
 end
 
 if minetest.get_modpath("mesecons") then
