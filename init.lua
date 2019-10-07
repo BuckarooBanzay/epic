@@ -35,6 +35,7 @@ dofile(MP.."/blocks/lock.lua")
 dofile(MP.."/blocks/unlock.lua")
 dofile(MP.."/blocks/settimeout.lua")
 dofile(MP.."/blocks/save.lua")
+dofile(MP.."/blocks/random.lua")
 
 if minetest.get_modpath("mobs") then
 	dofile(MP.."/blocks/spawn_mob.lua")
