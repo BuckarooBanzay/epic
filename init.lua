@@ -38,6 +38,10 @@ if minetest.get_modpath("mobs") then
 	dofile(MP.."/blocks/spawn_mob.lua")
 end
 
+if minetest.get_modpath("soundblock") then
+	dofile(MP.."/blocks/play_sound.lua")
+end
+
 if minetest.get_modpath("mesecons") then
 	dofile(MP.."/blocks/mesecon_emit.lua")
 end
