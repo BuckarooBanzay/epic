@@ -4,7 +4,7 @@ local update_formspec = function(meta)
 
 	meta:set_string("formspec", "size[8,2;]" ..
 		-- col 1
-		"field[0.2,0.5;8,1;delay;Timeout (seconds);" .. timeout .. "]" ..
+		"field[0.2,0.5;8,1;timeout;Timeout (seconds);" .. timeout .. "]" ..
 
 		-- col 2
 		"button_exit[0.1,1.5;8,1;save;Save]" ..
