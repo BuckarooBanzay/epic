@@ -48,9 +48,16 @@ minetest.register_node("epic:call", {
   end,
 
 	epic = {
-    on_enter = function(_, meta, _, ctx)
-			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
-			ctx.call(target_pos)
+    on_enter = function(pos, meta, _, ctx)
+			local target_pos_str = meta:get_string("pos")
+			if minetest.pos_to_string(pos) ~= target_pos_str then
+				-- call configured node
+				local target_pos = minetest.string_to_pos(target_pos_str)
+				ctx.call(target_pos)
+			else
+				-- recursion detected, proceed to next
+				ctx.next()
+			end
     end
   }
 })
