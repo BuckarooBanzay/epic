@@ -5,7 +5,13 @@ epic -- Enhanced Programmer for Ingame Control
 
 # Overview
 
-WIP
+Create missions/quests ingame with programmable blocks
+
+<img src="./screenshot.png"/>
+
+## Status
+
+WIP but usable
 
 ## Blocks
 
