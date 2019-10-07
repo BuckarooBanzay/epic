@@ -145,9 +145,15 @@ end
 
 local executor
 executor = function()
+  local t0 = minetest.get_us_time()
   for playername, state in pairs(epic.state) do
     execute_player_state(playername, state)
   end
+  local t1 = minetest.get_us_time()
+  local stats = {
+    time = t1-t0
+  }
+  epic.run_hook("globalstep_stats", { stats })
 
   -- restart execution
   minetest.after(executor_dtime, executor)

@@ -17,6 +17,7 @@ read_globals = {
 	"screwdriver",
 	"mesecon",
 	"player_monoids",
-	"soundblock"
+	"soundblock",
+	"monitoring"
 
 }

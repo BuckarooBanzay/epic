@@ -50,6 +50,10 @@ if minetest.get_modpath("mesecons") then
 	dofile(MP.."/blocks/mesecon_emit.lua")
 end
 
+if minetest.get_modpath("monitoring") then
+	dofile(MP.."/monitoring.lua")
+end
+
 if epic.log_executor then
 	dofile(MP.."/log_executor.lua")
 end
