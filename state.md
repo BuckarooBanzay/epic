@@ -7,6 +7,12 @@ epic.state[playername] = {
   -- instruction pointer to currently executed block
   ip = pos,
 
+  -- optional name
+  name = "my epic",
+
+  -- optional timeout
+  time = 300,
+
   -- call stack (table of positions)
   stack = {},
 

@@ -5,7 +5,7 @@
 epic.register_hook({
   -- called before an epic is called
   -- this is usually user-triggered (from epic or function)
-  on_execute_epic = function(player, main_pos, exit_pos) end,
+  on_execute_epic = function(player, main_pos, exit_pos, name) end,
 
   -- called on state-restore
   -- on join of a player with a saved mission
