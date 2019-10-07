@@ -34,6 +34,11 @@ minetest.register_node("epic:function", {
 			return
 		end
 
+		if not minetest.check_player_privs(sender, "epic_debug") then
+			-- direct call not allowed
+			return
+		end
+
 		if minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return

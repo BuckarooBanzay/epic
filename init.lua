@@ -14,6 +14,7 @@ epic = {
 local MP = minetest.get_modpath("epic")
 
 -- common stuff
+dofile(MP.."/privs.lua")
 dofile(MP.."/common.lua")
 dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
