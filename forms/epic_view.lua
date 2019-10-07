@@ -5,11 +5,9 @@ epic.form.epic_view = function(pos, playername)
 
 	local meta = minetest.get_meta(pos)
 	local name = meta:get_string("name")
-	local time = meta:get_int("time")
 
 	local formspec = "size[8,2;]" ..
 		"label[0,0;Epic start block]" ..
-		"label[4,0;Time: " .. epic.format_time(time) .. "]" ..
 		"label[0,1;" .. name .. "]" ..
 		"button_exit[5.5,1;2,1;start;Start]"
 

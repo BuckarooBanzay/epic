@@ -1,15 +1,5 @@
 
 
---[[
-
-* Functions:
- * main
- * on-exit (cleanup-function, always executed)
-
-* Timeout-value
-
---]]
-
 local FORMNAME = "epic_configure"
 
 -- playername => pos
@@ -20,28 +10,26 @@ epic.form.epic_configure = function(pos, playername)
 
 	local meta = minetest.get_meta(pos)
 	local name = meta:get_string("name")
-	local time = meta:get_int("time")
 	local main_pos = meta:get_string("main_pos") or "<none>"
 	local exit_pos = meta:get_string("exit_pos") or "<none>"
 
-	local formspec = "size[8,8;]" ..
+	local formspec = "size[8,7;]" ..
 		"label[0,0;Epic start block]" ..
 
 		"field[0.2,1.5;8,1;name;Name;" .. name .. "]" ..
-		"field[0.2,2.5;8,1;time;Time (seconds);" .. time .. "]" ..
 
-		"label[0,3.5;Main function]" ..
-		"label[2,3.5;" .. main_pos .. "]" ..
-		"button_exit[4,3.5;2,1;setmain;Set]" ..
-		"button_exit[6,3.5;2,1;clearmain;Clear]" ..
+		"label[0,2.5;Main function]" ..
+		"label[2,2.5;" .. main_pos .. "]" ..
+		"button_exit[4,2.5;2,1;setmain;Set]" ..
+		"button_exit[6,2.5;2,1;clearmain;Clear]" ..
 
-		"label[0,4.5;Exit function]" ..
-		"label[2,4.5;" .. exit_pos .. "]" ..
-		"button_exit[4,4.5;2,1;setexit;Set]" ..
-		"button_exit[6,4.5;2,1;clearexit;Clear]" ..
+		"label[0,3.5;Exit function]" ..
+		"label[2,3.5;" .. exit_pos .. "]" ..
+		"button_exit[4,3.5;2,1;setexit;Set]" ..
+		"button_exit[6,3.5;2,1;clearexit;Clear]" ..
 
-		"button[0,5.5;8,1;view;Show player view]" ..
-		"button_exit[0,6.5;8,1;save;Save]" ..
+		"button[0,4.5;8,1;view;Show player view]" ..
+		"button_exit[0,5.5;8,1;save;Save]" ..
 
 		""
 
@@ -65,7 +53,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 	if fields.save then
 		meta:set_string("name", fields.name or "")
-		meta:set_string("time", tonumber(fields.time) or 600)
 	end
 
 	if fields.setmain then
