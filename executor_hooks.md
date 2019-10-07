@@ -20,7 +20,7 @@ epic.register_hook({
   -- called before each node exit call
   on_before_node_exit = function(pos, player, ctx) end,
 
-  -- called on epic exit
+  -- called on epic exit (before the abort call)
   on_epic_exit = function(playername, state) end,
 
   -- called on epic abort
