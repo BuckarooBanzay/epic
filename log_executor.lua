@@ -32,7 +32,7 @@ epic.register_hook({
   end,
 
   on_epic_abort = function(playername, state, reason)
-    minetest.log("action", "[epic] on_epic_exit player=" ..
+    minetest.log("action", "[epic] on_epic_abort player=" ..
       playername ..
       " state=" .. dump(state) ..
       " reason=" .. reason)
