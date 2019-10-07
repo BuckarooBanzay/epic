@@ -1,7 +1,4 @@
 
--- playername => player_state
-epic.state = {}
-
 local basedir = minetest.get_worldpath().."/epic"
 
 minetest.mkdir(basedir)

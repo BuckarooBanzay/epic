@@ -111,9 +111,7 @@ epic.execute_epic = function(player, main_pos, exit_pos, name)
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
     " executes function at " .. minetest.pos_to_string(main_pos))
 
-	epic.run_hook("on_execute_epic", { player, main_pos, exit_pos, name })
-
-  epic.state[player:get_player_name()] = {
+  local state = {
     ip = main_pos,
 		name = name,
     stack = {},
@@ -122,4 +120,8 @@ epic.execute_epic = function(player, main_pos, exit_pos, name)
     data = {},
     step_data = {}
   }
+
+	epic.state[player:get_player_name()] = state
+	epic.run_hook("on_execute_epic", { player, main_pos, exit_pos, state })
+
 end

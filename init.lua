@@ -1,6 +1,14 @@
 
 epic = {
-	log_executor = minetest.settings:get_bool("epic.log_executor")
+	log_executor = minetest.settings:get_bool("epic.log_executor"),
+
+	-- playername => player_state
+	state = {},
+
+	hud = {
+		posx = tonumber(minetest.settings:get("epic.hud.offsetx") or 0.5),
+		posy = tonumber(minetest.settings:get("epic.hud.offsety") or 0.2)
+	}
 }
 
 local MP = minetest.get_modpath("epic")
@@ -10,6 +18,7 @@ dofile(MP.."/common.lua")
 dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
 dofile(MP.."/executor_hooks.lua")
+dofile(MP.."/executor_hud.lua")
 
 -- forms
 epic.form = {}
