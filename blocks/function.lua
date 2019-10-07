@@ -40,7 +40,7 @@ minetest.register_node("epic:function", {
 		end
 
     if fields.execute then
-      epic.execute_function(sender, pos, nil)
+      epic.execute_epic(sender, pos, nil)
     end
 
   end

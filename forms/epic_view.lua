@@ -35,7 +35,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 	if fields.start then
-		epic.execute_function(player, main_pos, exit_pos)
+		epic.execute_epic(player, main_pos, exit_pos)
 	end
 
 end)

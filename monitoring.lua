@@ -13,7 +13,7 @@ local exited_normally = monitoring.counter("epic_exited", "count of normally exi
 local exited_abort = monitoring.counter("epic_aborted", "count of aborted epics")
 
 epic.register_hook({
-  on_execute_function = function()
+  on_execute_epic = function()
     epic_starts.inc()
     current_epics = current_epics + 1
     current_epics_metric.set(current_epics)

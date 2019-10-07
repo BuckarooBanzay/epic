@@ -53,9 +53,9 @@ minetest.register_node("epic:settimeout", {
 
   epic = {
     on_enter = function(_, meta, _, ctx)
-	local timeout = meta:get_int("timeout") or 300
-	ctx.settimeout(timeout)
-        ctx.next()
+			local timeout = meta:get_int("timeout") or 300
+			ctx.settimeout(timeout)
+			ctx.next()
     end
   }
 })
