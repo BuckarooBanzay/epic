@@ -59,6 +59,8 @@ WIP
 # Settings
 
 * **epic.log_executor** (bool) logs executor internals to the action log
+* **epic.hud.offsetx** (float) hud x offset
+* **epic.hud.offsety** (float) hud y offset
 
 # Licenses
 
