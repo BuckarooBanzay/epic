@@ -82,14 +82,17 @@ minetest.register_node("epic:waypoint", {
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			ctx.step_data.pos = target_pos
 			ctx.step_data.radius = meta:get_int("radius")
+			local waypoint_name = meta:get_string("name")
 
-			ctx.step_data.waypoint_hud_id = player:hud_add({
-				hud_elem_type = "waypoint",
-				name = meta:get_string("name"),
-				text = "m",
-				number = 0x00FF00,
-				world_pos = target_pos
-			})
+			if waypoint_name ~= "" then
+				ctx.step_data.waypoint_hud_id = player:hud_add({
+					hud_elem_type = "waypoint",
+					name = waypoint_name,
+					text = "m",
+					number = 0x00FF00,
+					world_pos = target_pos
+				})
+			end
     end,
     on_check = function(_, _, player, ctx)
 			local pos = player:get_pos()
@@ -98,7 +101,9 @@ minetest.register_node("epic:waypoint", {
 			end
     end,
     on_exit = function(_, _, player, ctx)
-			player:hud_remove(ctx.step_data.waypoint_hud_id)
+			if ctx.step_data.waypoint_hud_id then
+				player:hud_remove(ctx.step_data.waypoint_hud_id)
+			end
     end
   }
 })
