@@ -57,6 +57,10 @@ WIP
 * [ ] Check counter (conditional)
 * [ ] General: permissions/checks for non-admin placement
 
+# Settings
+
+* **epic.log_executor** (bool) logs executor internals to the action log
+
 # Licenses
 
 * default_steel_block.png / epic_node_bg.png / epic_mese_crystal.png

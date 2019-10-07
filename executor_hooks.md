@@ -9,7 +9,7 @@ epic.register_hook({
 
   -- called on state-restore
   -- on join of a player with a saved mission
-  on_state_restored = function(playername, state)
+  on_state_restored = function(playername, state) end,
 
   -- called before each node enter call
   on_before_node_enter = function(pos, player, ctx) end,

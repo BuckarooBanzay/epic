@@ -1,5 +1,7 @@
 
-epic = {}
+epic = {
+	log_executor = minetest.settings:get_bool("epic.log_executor")
+}
 
 local MP = minetest.get_modpath("epic")
 
@@ -45,4 +47,8 @@ end
 
 if minetest.get_modpath("mesecons") then
 	dofile(MP.."/blocks/mesecon_emit.lua")
+end
+
+if epic.log_executor then
+	dofile(MP.."/log_executor.lua")
 end
