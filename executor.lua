@@ -101,6 +101,7 @@ execute_player_state = function(playername, state)
 
   else
     if epicdef.on_check then
+      epic.run_hook("on_before_node_check", { pos, player, ctx })
       epicdef.on_check(pos, meta, player, ctx)
     end
   end

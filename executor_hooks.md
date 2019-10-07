@@ -14,6 +14,9 @@ epic.register_hook({
   -- called before each node enter call
   on_before_node_enter = function(pos, player, ctx) end,
 
+  -- called before each node check call
+  on_before_node_check = function(pos, player, ctx) end,
+
   -- called before each node exit call
   on_before_node_exit = function(pos, player, ctx) end,
 
