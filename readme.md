@@ -38,7 +38,6 @@ WIP
 
 ### TODO
 
-* [ ] Set hud (flags: timeout, epic-name)
 * [ ] Give ItemStack with key/description
 * [ ] Check for ItemStack with key
 * [ ] Mesecon receiver (conditional)
