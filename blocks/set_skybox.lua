@@ -15,6 +15,26 @@ end
 
 epic.register_skybox({ name = "default" })
 
+epic.register_skybox("Plain Black", {
+	color = {r=0, g=0, b=0}
+})
+
+epic.register_skybox("Plain Red", {
+	color = {r=255, g=0, b=0}
+})
+
+epic.register_skybox("Plain Green", {
+	color = {r=0, g=255, b=0}
+})
+
+epic.register_skybox("Plain Blue", {
+	color = {r=0, g=0, b=255}
+})
+
+epic.register_skybox("Plain White", {
+	color = {r=255, g=255, b=255}
+})
+
 local update_formspec = function(meta)
 	local skyboxname = meta:get_string("skyboxname")
 

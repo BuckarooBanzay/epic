@@ -2,9 +2,11 @@
 local update_formspec = function(meta)
 	meta:set_string("infotext", "Set clouds block")
 
-	meta:set_string("formspec", "size[8,2;]" ..
+	meta:set_string("formspec", "size[8,4;]" ..
 		"field[0.2,0.5;8,1;thickness;Thickness;${thickness}]" ..
-		"button_exit[0.1,1.5;8,1;save;Save]" ..
+		"field[0.2,1.5;8,1;density;Density;${density}]" ..
+		"field[0.2,2.5;8,1;height;Height;${height}]" ..
+		"button_exit[0.1,3.5;8,1;save;Save]" ..
 		"")
 end
 
@@ -25,6 +27,8 @@ minetest.register_node("epic:setclouds", {
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
 		meta:set_int("thickness", 16)
+		meta:set_int("height", 120)
+		meta:set_string("density", "0.4")
     update_formspec(meta, pos)
   end,
 
@@ -37,7 +41,9 @@ minetest.register_node("epic:setclouds", {
 		end
 
     if fields.save then
-			meta:set_string("thickness", tonumber(fields.thickness) or 16)
+			meta:set_int("thickness", tonumber(fields.thickness) or 16)
+			meta:set_int("height", tonumber(fields.height) or 120)
+			meta:set_string("density", tonumber(fields.density) or 0.4)
 			update_formspec(meta, pos)
     end
 
@@ -59,8 +65,8 @@ minetest.register_node("epic:setclouds", {
 					b=0,
 					a=255
 				},
-				density=0.4,
-				height=200,
+				density = tonumber(meta:get_string("density")),
+				height= meta:get_int("height"),
 				speed={
 					y=-2,
 					x=-1
