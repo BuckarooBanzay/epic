@@ -72,6 +72,7 @@ execute_player_state = function(playername, state)
     end,
     call = function(_pos)
         -- push next ip
+	-- TODO: tail call optimization
         local next_pos = epic.get_next_pos(state.ip)
         table.insert(state.stack, next_pos)
         result_next = true
