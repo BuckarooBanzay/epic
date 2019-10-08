@@ -45,8 +45,6 @@ WIP but usable
 
 ### TODO
 
-* [ ] Give ItemStack with key/description
-* [ ] Check for ItemStack with key
 * [ ] Place node
 * [ ] Remove node
 * [ ] Stash inventory
@@ -55,12 +53,12 @@ WIP but usable
 * [ ] HUD vignette
 * [ ] Check priv (conditional)
 * [ ] Set day/night ratio
-* [ ] Set clouds
 * [ ] Set collision box
 * [ ] Formspec message
 * [ ] Set counter (dig, place, kill)
 * [ ] Check counter (conditional)
 * [ ] General: permissions/checks for non-admin placement
+* [ ] Epic: Autostart block (with range)
 
 # Settings
 
