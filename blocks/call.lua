@@ -9,7 +9,8 @@ local update_formspec = function(meta)
 
 	meta:set_string("formspec", "size[8,1;]" ..
 		-- col 2
-		"button_exit[0.1,0.5;8,1;setfn;Set function]" ..
+		"button_exit[0.1,0.5;4,1;setfn;Set function]" ..
+                "button_exit[4.1,0.5;4,1;showpos;Show]" ..
 		"")
 end
 
@@ -39,12 +40,18 @@ minetest.register_node("epic:call", {
 			return
 		end
 
-
 		if fields.setfn then
 			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target function")
 			punch_handler[sender:get_player_name()] = pos
 		end
 
+                if fields.showpos then
+			local meta = minetest.get_meta(pos)
+                        local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+                        if target_pos then
+                                epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+                        end
+                end
   end,
 
 	epic = {
