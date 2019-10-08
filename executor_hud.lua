@@ -4,6 +4,9 @@ local hud = {} -- playername -> data
 local HUD_POSITION = {x = epic.hud.posx, y = epic.hud.posy}
 local HUD_ALIGNMENT = {x = 1, y = 0}
 
+local get_color = function(r,g,b)
+	return b + (g * 256) + (r * 256 * 256)
+end
 
 local function setup(playername, name)
   local player = minetest.get_player_by_name(playername)
@@ -68,11 +71,21 @@ update = function()
     local player = minetest.get_player_by_name(playername)
 
     if player and data and data.time then
+      local color = get_color(0,255,0)
       local time_str = ""
+
       if state.time and state.time > 0 then
         time_str = epic.format_time(state.time)
+
+        if state.time < 300 then
+          color = get_color(255,255,0)
+        elseif state.time < 60 then
+          color = get_color(255,0,0)
+        end
       end
+
       player:hud_change(data.time, "text", time_str)
+      player:hud_change(data.time, "number", color)
     end
 
   end
