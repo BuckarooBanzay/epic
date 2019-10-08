@@ -10,16 +10,16 @@ local update_formspec = function(meta)
 	meta:set_string("infotext", "Teleport relative block: source=" .. source ..
 		" target=" .. target)
 
-	meta:set_string("formspec", "size[8,1;]" ..
+	meta:set_string("formspec", "size[8,2;]" ..
 		"label[0,0.5;Source]" ..
 		"label[2,0.5;" .. source .. "]" ..
 		"button_exit[4,0.5;2,1;setsource;Set]" ..
 		"button_exit[6,0.5;2,1;showsource;Show]" ..
 
-		"label[0,0.5;Target]" ..
-		"label[2,0.5;" .. target .. "]" ..
-		"button_exit[4,0.5;2,1;settarget;Set]" ..
-		"button_exit[6,0.5;2,1;showtarget;Show]" ..
+		"label[0,1.5;Target]" ..
+		"label[2,1.5;" .. target .. "]" ..
+		"button_exit[4,1.5;2,1;settarget;Set]" ..
+		"button_exit[6,1.5;2,1;showtarget;Show]" ..
 
 		"")
 end
@@ -104,6 +104,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 		local meta = minetest.get_meta(cfg_pos)
 		local pos_str = minetest.pos_to_string(vector.add(pos, {x=0, y=0.5, z=0}))
 		meta:set_string("source", pos_str)
+		update_formspec(meta, cfg_pos)
 		minetest.chat_send_player(playername, "[epic] source position successfully set to " .. pos_str)
 		punch_handler_source[playername] = nil
 	end
@@ -113,6 +114,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 		local meta = minetest.get_meta(cfg_pos)
 		local pos_str = minetest.pos_to_string(vector.add(pos, {x=0, y=0.5, z=0}))
 		meta:set_string("target", pos_str)
+		update_formspec(meta, cfg_pos)
 		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
 		punch_handler_target[playername] = nil
 	end
