@@ -41,12 +41,12 @@ WIP but usable
 * [x] Set sky
 * [x] Set sound (loop, once)
 * [x] Clear sound
+* [x] Mesecon receiver (conditional)
 
 ### TODO
 
 * [ ] Give ItemStack with key/description
 * [ ] Check for ItemStack with key
-* [ ] Mesecon receiver (conditional)
 * [ ] Place node
 * [ ] Remove node
 * [ ] Stash inventory
