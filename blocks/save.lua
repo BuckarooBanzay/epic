@@ -16,6 +16,7 @@ minetest.register_node("epic:save", {
   epic = {
     on_enter = function(_, _, player, ctx)
 			local playername = player:get_player_name()
+			minetest.chat_send_player(playername, "[epic] Game state saved!")
 			epic.save_player_state(playername)
 			ctx.next()
     end
