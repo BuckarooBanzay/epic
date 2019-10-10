@@ -8,8 +8,12 @@ local getStateFile = function(playername)
 	return basedir .. "/" .. saneplayername .. ".json"
 end
 
+epic.get_state = function(playername)
+	return epic.state[playername]
+end
+
 epic.save_player_state = function(playername)
-  local state = epic.state[playername]
+  local state = epic.get_state(playername)
 
   local file = io.open(getStateFile(playername),"w")
 	local json = minetest.write_json(state)
