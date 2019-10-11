@@ -74,7 +74,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 			local meta = minetest.get_meta(cfg_pos)
 			local pos_str = minetest.pos_to_string(pos)
 			meta:set_string("pos", pos_str)
-			minetest.chat_send_player(playername, "[epic] target function successfully set to " .. pos_str)
+			minetest.chat_send_player(playername, "[epic] target successfully set to " .. pos_str)
 		else
 			minetest.chat_send_player(playername, "[epic] target is not a meseblock! aborting selection.")
 		end
