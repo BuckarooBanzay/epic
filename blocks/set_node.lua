@@ -88,7 +88,7 @@ minetest.register_node("epic:setnode", {
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local inv = meta:get_inventory()
 			local stack = inv:get_stack("main", 1)
-			minetest.set_node(target_pos, { name = stack:get_name() })
+			minetest.set_node(target_pos, { name = stack:get_name() or "air" })
 			ctx.next()
     end
   }
