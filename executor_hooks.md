@@ -24,7 +24,7 @@ epic.register_hook({
   on_epic_exit = function(playername, state) end,
 
   -- called on epic abort
-  -- reason: "epic_timeout", "manual", "leave", "leave_timed_out"
+  -- reason: "epic_timeout", "manual", "leave", "leave_timed_out", "died"
   on_epic_abort = function(playername, state, reason) end,
 
   -- called on each globalstep

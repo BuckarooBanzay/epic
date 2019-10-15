@@ -53,9 +53,3 @@ minetest.register_on_joinplayer(function(player)
   local playername = player:get_player_name()
   epic.state[playername] = epic.load_player_state(playername)
 end)
-
-minetest.register_on_leaveplayer(function(player)
-  -- clear on leave/timeout
-  local playername = player:get_player_name()
-  epic.state[playername] = nil
-end)

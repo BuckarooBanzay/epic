@@ -85,7 +85,7 @@ execute_player_state = function(playername, state)
     step_data = state.step_data
   }
 
-  minetest.log("action", "[epic] player " .. player:get_player_name() ..
+  minetest.log("action", "[epic] player " .. playername ..
     " executes block at " .. minetest.pos_to_string(pos))
 
   local nodedef = minetest.registered_nodes[node.name]
@@ -184,6 +184,21 @@ minetest.register_on_leaveplayer(function(player, timed_out)
     else
       abort_flag[playername] = "leave"
     end
+    if epic.log_executor then
+      minetest.log("action", "[epic] player left the game: " .. playername)
+    end
+    execute_player_state(playername, state)
+  end
+end)
+
+minetest.register_on_dieplayer(function(player)
+  local playername = player:get_player_name()
+  local state = epic.state[playername]
+  if state then
+    if epic.log_executor then
+      minetest.log("action", "[epic] player died: " .. playername)
+    end
+    abort_flag[playername] = "died"
     execute_player_state(playername, state)
   end
 end)
