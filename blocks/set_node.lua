@@ -34,17 +34,18 @@ minetest.register_node("epic:setnode", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = screwdriver.rotate_simple,
 
-	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	after_place_node = function(pos, placer)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("owner", placer:get_player_name())
 		meta:set_string("pos", minetest.pos_to_string(pos))
 
 		local inv = meta:get_inventory()
 		inv:set_size("main", 1)
 
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -63,7 +64,7 @@ minetest.register_node("epic:setnode", {
 				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
 			end
 		end
-  end,
+	end,
 
 	allow_metadata_inventory_put = function(pos, _, _, stack, player)
 
@@ -86,6 +87,11 @@ minetest.register_node("epic:setnode", {
 	epic = {
     on_enter = function(_, meta, _, ctx)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+			local owner = meta:get_string("owner")
+			if minetest.is_protected(target_pos, owner) then
+				return
+			end
+
 			local inv = meta:get_inventory()
 			local stack = inv:get_stack("main", 1)
 			minetest.set_node(target_pos, { name = stack:get_name() or "air" })
