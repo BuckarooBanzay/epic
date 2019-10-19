@@ -94,7 +94,11 @@ minetest.register_node("epic:setnode", {
 
 			local inv = meta:get_inventory()
 			local stack = inv:get_stack("main", 1)
-			minetest.set_node(target_pos, { name = stack:get_name() or "air" })
+			local node_name = stack:get_name()
+			if node_name == "ignore" or node_name == "" then
+				node_name = "air"
+			end
+			minetest.set_node(target_pos, { name = node_name })
 			ctx.next()
     end
   }
