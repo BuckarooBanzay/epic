@@ -30,7 +30,7 @@ minetest.register_node("epic:call", {
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
-		meta:set_string("pos", minetest.pos_to_string(pos))
+		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
     update_formspec(meta, pos)
   end,
 
@@ -45,21 +45,27 @@ minetest.register_node("epic:call", {
 			punch_handler[sender:get_player_name()] = pos
 		end
 
-                if fields.showpos then
+		if fields.showpos then
 			local meta = minetest.get_meta(pos)
-                        local target_pos = minetest.string_to_pos(meta:get_string("pos"))
-                        if target_pos then
-                                epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
-                        end
-                end
+			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+			if target_pos then
+			        epic.show_waypoint(
+								sender:get_player_name(),
+								epic.to_absolute_pos(pos, target_pos),
+								"Target position",
+								2
+							)
+			end
+		end
   end,
 
 	epic = {
     on_enter = function(pos, meta, _, ctx)
 			local target_pos_str = meta:get_string("pos")
-			if minetest.pos_to_string(pos) ~= target_pos_str then
+			local here_pos_str = minetest.pos_to_string({x=0, y=0, z=0})
+			if here_pos_str ~= target_pos_str then
 				-- call configured node
-				local target_pos = minetest.string_to_pos(target_pos_str)
+				local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 				ctx.call(target_pos)
 			else
 				-- recursion detected, proceed to next
@@ -75,9 +81,10 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 	if cfg_pos then
 		if node.name == "epic:function" then
 			local meta = minetest.get_meta(cfg_pos)
-			local pos_str = minetest.pos_to_string(pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 			meta:set_string("pos", pos_str)
 			minetest.chat_send_player(playername, "[epic] target function successfully set to " .. pos_str)
+			update_formspec(meta)
 		else
 			minetest.chat_send_player(playername, "[epic] target is not a function! aborting selection.")
 		end

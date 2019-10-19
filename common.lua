@@ -1,4 +1,16 @@
 
+-- converts a pos to a relative one in respect to the node_pos
+epic.to_relative_pos = function(node_pos, remote_abs_pos)
+	return vector.subtract(remote_abs_pos, node_pos)
+end
+
+-- converts the relative pos to an absolute one
+epic.to_absolute_pos = function(node_pos, remote_rel_pos)
+	return vector.add(node_pos, remote_rel_pos)
+end
+
+
+-- shows a waypoint for given seconds
 epic.show_waypoint = function(playername, pos, name, seconds)
 	local player = minetest.get_player_by_name(playername)
 	if not player then

@@ -36,7 +36,7 @@ minetest.register_node("epic:additem", {
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
-		meta:set_string("pos", minetest.pos_to_string(pos))
+		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
 
 		local inv = meta:get_inventory()
 		inv:set_size("main", 1)
@@ -60,7 +60,7 @@ minetest.register_node("epic:additem", {
 		if fields.showpos then
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
 			end
 		end
   end,
@@ -84,11 +84,11 @@ minetest.register_node("epic:additem", {
 	end,
 
 	epic = {
-    on_enter = function(_, meta, _, ctx)
+    on_enter = function(pos, meta, _, ctx)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local inv = meta:get_inventory()
 			local stack = inv:get_stack("main", 1)
-			minetest.add_item(target_pos, stack)
+			minetest.add_item(epic.to_absolute_pos(pos, target_pos), stack)
 			ctx.next()
     end
   }
@@ -99,9 +99,10 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then
 		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(vector.add(pos, {x=0, y=0.5, z=0}))
+		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
 		meta:set_string("pos", pos_str)
 		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+		update_formspec(meta)
 		punch_handler[playername] = nil
 	end
 end)

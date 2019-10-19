@@ -30,7 +30,7 @@ minetest.register_node("epic:mesecon_check", {
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
-		meta:set_string("pos", minetest.pos_to_string(pos))
+		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
     update_formspec(meta, pos)
   end,
 
@@ -40,7 +40,7 @@ minetest.register_node("epic:mesecon_check", {
 			return
 		end
 
-		if fields.setfn then
+		if fields.setpos then
 			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the target mese block")
 			punch_handler[sender:get_player_name()] = pos
 		end
@@ -49,15 +49,15 @@ minetest.register_node("epic:mesecon_check", {
 			local meta = minetest.get_meta(pos)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
 			end
 		end
   end,
 
 	epic = {
-    on_check = function(_, meta, _, ctx)
+    on_check = function(pos, meta, _, ctx)
 			local target_pos_str = meta:get_string("pos")
-			local target_pos = minetest.string_to_pos(target_pos_str)
+			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 			local node = epic.get_node(target_pos)
 			if node.name == "mesecons_extrawires:mese_powered" then
 				ctx.next()
@@ -72,9 +72,10 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 	if cfg_pos then
 		if node.name == "default:mese" or node.name == "mesecons_extrawires:mese_powered" then
 			local meta = minetest.get_meta(cfg_pos)
-			local pos_str = minetest.pos_to_string(pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 			meta:set_string("pos", pos_str)
 			minetest.chat_send_player(playername, "[epic] target successfully set to " .. pos_str)
+			update_formspec(meta)
 		else
 			minetest.chat_send_player(playername, "[epic] target is not a meseblock! aborting selection.")
 		end

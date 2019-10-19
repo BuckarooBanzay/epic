@@ -40,8 +40,8 @@ minetest.register_node("epic:teleport_relative", {
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
-		meta:set_string("source", "")
-		meta:set_string("target", "")
+		meta:set_string("source", minetest.pos_to_string({x=0, y=0, z=0}))
+		meta:set_string("target", minetest.pos_to_string({x=0, y=0, z=0}))
     update_formspec(meta, pos)
   end,
 
@@ -66,23 +66,23 @@ minetest.register_node("epic:teleport_relative", {
 		if fields.showsource then
 			local show_pos = minetest.string_to_pos(meta:get_string("source"))
 			if show_pos then
-				epic.show_waypoint(sender:get_player_name(), show_pos, "Source position", 2)
+				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, show_pos), "Source position", 2)
 			end
 		end
 
 		if fields.showtarget then
 			local show_pos = minetest.string_to_pos(meta:get_string("target"))
 			if show_pos then
-				epic.show_waypoint(sender:get_player_name(), show_pos, "Target position", 2)
+				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, show_pos), "Target position", 2)
 			end
 		end
 
   end,
 
 	epic = {
-    on_enter = function(_, meta, player, ctx)
-			local source_pos = minetest.string_to_pos(meta:get_string("source"))
-			local target_pos = minetest.string_to_pos(meta:get_string("target"))
+    on_enter = function(pos, meta, player, ctx)
+			local source_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("source")))
+			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("target")))
 			local player_pos = player:get_pos()
 
 			if source_pos and target_pos then
@@ -102,9 +102,9 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 	local cfg_pos = punch_handler_source[playername]
 	if cfg_pos then
 		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(vector.add(pos, {x=0, y=0.5, z=0}))
+		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
 		meta:set_string("source", pos_str)
-		update_formspec(meta, cfg_pos)
+		update_formspec(meta)
 		minetest.chat_send_player(playername, "[epic] source position successfully set to " .. pos_str)
 		punch_handler_source[playername] = nil
 	end
@@ -112,9 +112,9 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 	cfg_pos = punch_handler_target[playername]
 	if cfg_pos then
 		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(vector.add(pos, {x=0, y=0.5, z=0}))
+		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
 		meta:set_string("target", pos_str)
-		update_formspec(meta, cfg_pos)
+		update_formspec(meta)
 		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
 		punch_handler_target[playername] = nil
 	end
