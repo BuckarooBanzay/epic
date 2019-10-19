@@ -1,11 +1,17 @@
 
 -- converts a pos to a relative one in respect to the node_pos
 epic.to_relative_pos = function(node_pos, remote_abs_pos)
+	if not node_pos or not remote_abs_pos then
+		return
+	end
 	return vector.subtract(remote_abs_pos, node_pos)
 end
 
 -- converts the relative pos to an absolute one
 epic.to_absolute_pos = function(node_pos, remote_rel_pos)
+	if not node_pos or not remote_rel_pos then
+		return
+	end
 	return vector.add(node_pos, remote_rel_pos)
 end
 

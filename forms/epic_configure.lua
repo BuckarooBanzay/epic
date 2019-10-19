@@ -86,7 +86,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 	local cfg_pos = punch_handler_main[playername]
 	if cfg_pos then
 		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(pos)
+		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 		meta:set_string("main_pos", pos_str)
 		minetest.chat_send_player(playername, "[epic] main function set to " .. pos_str)
 		punch_handler_main[playername] = nil
@@ -95,7 +95,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 	cfg_pos = punch_handler_exit[playername]
 	if cfg_pos then
 		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(pos)
+		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 		meta:set_string("exit_pos", pos_str)
 		minetest.chat_send_player(playername, "[epic] exit function set to " .. pos_str)
 		punch_handler_exit[playername] = nil
