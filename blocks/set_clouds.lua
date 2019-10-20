@@ -18,7 +18,7 @@ minetest.register_node("epic:setclouds", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png",
+		"epic_node_bg.png^epic_sky.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},

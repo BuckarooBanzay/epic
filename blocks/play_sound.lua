@@ -41,7 +41,7 @@ minetest.register_node("epic:play_sound", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png",
+		"epic_node_bg.png^epic_sound.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
