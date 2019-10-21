@@ -45,18 +45,10 @@ WIP but usable
 
 ### TODO
 
-* [ ] Place node
-* [ ] Remove node
-* [ ] Stash inventory
-* [ ] Unstash inventory
-* [ ] Clear inventory
-* [ ] HUD vignette
+* [ ] Inventory whitelist
 * [ ] Check priv (conditional)
 * [ ] Set day/night ratio
-* [ ] Set collision box
 * [ ] Formspec message
-* [ ] Set counter (dig, place, kill)
-* [ ] Check counter (conditional)
 * [ ] General: permissions/checks for non-admin placement
 * [ ] Epic: Autostart block (with range)
 
