@@ -66,18 +66,25 @@ execute_player_state = function(playername, state)
   local result_next_pos = nil
 
   local ctx = {
+    -- next step
     next = function(_pos)
       result_next = true
       result_next_pos = _pos
     end,
+    -- abort epic with given reason
+    abort = function(reason)
+      abort_flag[playername] = reason or "ctx.abort"
+    end,
+    -- call another epic block
     call = function(_pos)
         -- push next ip
-	-- TODO: tail call optimization
+        -- TODO: tail call optimization
         local next_pos = epic.get_next_pos(state.ip)
         table.insert(state.stack, next_pos)
         result_next = true
         result_next_pos = _pos
     end,
+    -- set the new timeout
     settimeout = function(seconds)
       state.time = seconds
     end,
