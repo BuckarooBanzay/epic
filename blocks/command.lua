@@ -50,7 +50,7 @@ minetest.register_node("epic:command", {
   on_receive_fields = function(pos, _, fields, sender)
     local meta = minetest.get_meta(pos);
 
-		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
+		if not sender or sender:get_player_name() ~= meta:get_string("owner") then
 			-- not allowed
 			return
 		end
