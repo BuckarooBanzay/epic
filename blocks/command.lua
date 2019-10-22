@@ -4,7 +4,7 @@ local update_formspec = function(meta)
 
 	meta:set_string("formspec", "size[8,2;]" ..
 		-- col 1
-		"field[0.2,0.5;8,1;cmd;Command;" .. cmd .. "]" ..
+		"field[0.2,0.5;8,1;cmd;Command (use @player and @owner);" .. cmd .. "]" ..
 
 		-- col 2
 		"button_exit[0.1,1.5;8,1;save;Save]" ..
@@ -64,9 +64,11 @@ minetest.register_node("epic:command", {
   end,
 
 	epic = {
-    on_enter = function(_, meta, _, ctx)
+    on_enter = function(player, meta, _, ctx)
       local cmd = meta:get_string("cmd")
 			local owner = meta:get_string("owner")
+			cmd = cmd:gsub("@player", player:get_player_name())
+			cmd = cmd:gsub("@owner", owner)
 			execute(cmd, owner)
       ctx.next()
     end
