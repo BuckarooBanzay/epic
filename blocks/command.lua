@@ -64,7 +64,7 @@ minetest.register_node("epic:command", {
   end,
 
 	epic = {
-    on_enter = function(player, meta, _, ctx)
+    on_enter = function(_, meta, player, ctx)
       local cmd = meta:get_string("cmd")
 			local owner = meta:get_string("owner")
 			cmd = cmd:gsub("@player", player:get_player_name())

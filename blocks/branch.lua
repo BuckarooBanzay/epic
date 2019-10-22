@@ -77,6 +77,7 @@ minetest.register_node("epic:branch", {
 			local node = minetest.get_node(pos)
 			local direction = epic.get_direction(node.param2)
 			local pos_list = find_epic_blocks_in_plane(pos, direction)
+			local next_called = false
 
 			ctx.step_data.targets = pos_list
 			ctx.step_data.target_step_data = {}
@@ -88,7 +89,10 @@ minetest.register_node("epic:branch", {
 
 				local sub_ctx = {
 					next = function()
-						ctx.next(target_pos)
+						if not next_called then
+							ctx.next(target_pos)
+						end
+						next_called = true
 					end,
 					call = ctx.call,
 					step_data = target_step_data,
@@ -102,12 +106,16 @@ minetest.register_node("epic:branch", {
     end,
 		on_check = function(_, _, player, ctx)
 			for _, target_pos in ipairs(ctx.step_data.targets) do
+				local next_called = false
 				local node = minetest.get_node(target_pos)
 				local nodedef = minetest.registered_nodes[node.name]
 				local target_step_data = ctx.step_data.target_step_data[minetest.hash_node_position(target_pos)]
 				local sub_ctx = {
 					next = function()
-						ctx.next(target_pos)
+						if not next_called then
+							ctx.next(target_pos)
+						end
+						next_called = true
 					end,
 					step_data = target_step_data,
 					data = ctx.data
