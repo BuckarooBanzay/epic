@@ -8,7 +8,7 @@ local update_formspec = function(meta)
 	local list = ""
 	local i = 1
 	for _, sounddef in pairs(soundblock.sounds) do
-		if sounddef.name == soundname then
+		if sounddef.key == soundname then
 			selected = i
 		end
 
