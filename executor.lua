@@ -79,7 +79,8 @@ execute_player_state = function(playername, state)
     call = function(_pos)
         -- push next ip
         local next_pos = epic.get_next_pos(pos)
-        if epic.is_epic(next_pos) then
+        local next_node = epic.get_node(next_pos)
+        if epic.is_epic(next_node) then
           -- this branch has more instructions, push the next onto the stack
           table.insert(state.stack, next_pos)
         end
