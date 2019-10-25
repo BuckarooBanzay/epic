@@ -9,6 +9,10 @@ local get_color = function(r,g,b)
 end
 
 local function setup(playername, name)
+	if hud[playername] then
+		return
+	end
+
   local player = minetest.get_player_by_name(playername)
   local data = {}
 
