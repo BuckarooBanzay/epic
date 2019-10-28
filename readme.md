@@ -12,6 +12,8 @@ Create and program missions or quests by placing and configuring blocks.
 
 <img src="./screenshot.png"/>
 
+Successor of the [missions](https://github.com/thomasrudin-mt/missions) mod.
+
 # Links
 
 * Github: https://github.com/damocles-minetest/epic
