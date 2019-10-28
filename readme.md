@@ -1,62 +1,61 @@
 
 epic -- Enhanced Programmer for Ingame Control
+-----------------
 
-[![Build Status](https://travis-ci.org/thomasrudin-mt/epic.svg?branch=master)](https://travis-ci.org/thomasrudin-mt/epic)
+A mod for [minetest](http://www.minetest.net)
+
+[![Build Status](https://travis-ci.org/damocles-minetest/epic.svg?branch=master)](https://travis-ci.org/thomasrudin-mt/epic)
 
 # Overview
 
-Create missions/quests ingame with programmable blocks
+Create and program missions or quests by placing and configuring blocks.
 
 <img src="./screenshot.png"/>
 
-## Status
+# Links
 
-WIP but usable
+* Github: https://github.com/damocles-minetest/epic
+* Issues: https://github.com/damocles-minetest/epic/issues
+* ContentDB: TODO
+* Forums: TODO
 
-## Blocks
+# Manual
 
-### MVP
+* Available [blocks](doc/blocks.md)
+* Simple Quest [example](doc/example.md)
+* [Exit-Functions](doc/exit-functions.md)
+* [Best practices](doc/best-practices.md)
 
-* [x] Chat-message
-* [x] Delay (conditional)
-* [x] No-Op
-* [x] Waypoint (conditional)
-* [x] Teleport
-* [x] Mob
-* [x] Command
-* [x] Branch-multiple
-* [x] Call function
-* [x] Mesecon emitter
-* [x] Set gravity
-* [x] Remove items
-* [x] Remove mobs
-* [x] Add item
-* [x] lock/unlock section
-* [x] Save state (savepoint)
-* [x] Set epic timeout
-* [x] Epic: main-function
-* [x] Epic: cleanup-function
-* [x] Epic: exit-on flags: leave/die/timeout
-* [x] Epic executor: timeout
-* [x] Set sky
-* [x] Set sound (loop, once)
-* [x] Clear sound
-* [x] Mesecon receiver (conditional)
+# Dependencies
 
-### TODO
+Mandatory:
+* default
+* screwdriver
 
-* [ ] Inventory whitelist
-* [ ] Check priv (conditional)
-* [ ] Set day/night ratio
-* [ ] Formspec message
-* [ ] General: permissions/checks for non-admin placement
-* [ ] Epic: Autostart block (with range)
+Optional:
+* mobs
+* mesecons
+* player_monoids
+* soundblock
+* monitoring
+* signs
 
 # Settings
 
 * **epic.log_executor** (bool) logs executor internals to the action log
 * **epic.hud.offsetx** (float) hud x offset
 * **epic.hud.offsety** (float) hud y offset
+
+# Portability notes
+
+All coordinates are stored relative in the blocks.
+This makes it possible to copy your creations in the same or across worlds with WorldEdit or a similar tool.
+
+# Technical docs
+
+* [Executor hooks](doc/executor_hooks.md)
+* [Executor](doc/executor.md)
+* [State](doc/state.md)
 
 # Licenses
 
