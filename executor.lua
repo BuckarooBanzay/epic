@@ -39,12 +39,16 @@ execute_player_state = function(playername, state)
 
   if not epic.is_epic(node) then
     -- no more instructions in this branch
+    epic.debug("[executor] no more instructions in this branch @ " ..
+      minetest.pos_to_string(pos) .. " node: " .. node.name)
 
     if #state.stack > 0 then
       -- pop stack
       state.ip = table.remove(state.stack, #state.stack)
       state.initialized = false
       state.step_data = {}
+      epic.debug("[executor] pop stack result: " .. minetest.pos_to_string(state.ip))
+
       execute_player_state(playername, state)
     else
       -- done

@@ -1,4 +1,10 @@
 
+epic.debug = function(msg)
+	if epic.log_executor then
+		minetest.log("action", "[epic] " .. msg)
+	end
+end
+
 -- converts a pos to a relative one in respect to the node_pos
 epic.to_relative_pos = function(node_pos, remote_abs_pos)
 	if not node_pos or not remote_abs_pos then
