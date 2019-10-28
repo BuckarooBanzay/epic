@@ -63,6 +63,11 @@ Optional:
 * monitoring
 * signs
 
+# Plugins
+
+* More skyboxes: https://github.com/damocles-minetest/epic_skybox
+* Weather control: https://github.com/damocles-minetest/epic_weather
+
 # Settings
 
 * **epic.log_executor** (bool) logs executor internals to the action log
