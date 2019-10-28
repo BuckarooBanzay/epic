@@ -18,8 +18,8 @@ Successor of the [missions](https://github.com/thomasrudin-mt/missions) mod.
 
 * Github: https://github.com/damocles-minetest/epic
 * Issues: https://github.com/damocles-minetest/epic/issues
-* ContentDB: TODO
-* Forums: TODO
+* ContentDB: https://content.minetest.net/packages/BuckarooBanzay/epic/
+* Forums: https://forum.minetest.net/viewtopic.php?f=9&t=23558
 
 # Features
 
