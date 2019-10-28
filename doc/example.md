@@ -6,8 +6,8 @@ An example quest with 2 outcomes, depending which waypoint was triggered.
 
 The setup:
 
+ **Note:** The wool is purely decorative!
 <img src="./pics/simple_mission.png"/>
-**Note:** The wool is purely decorative!
 
 * Left: The starter/configuration block (the player can start here)
 * Connected with white wool:
