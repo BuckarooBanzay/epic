@@ -4,7 +4,7 @@ epic -- Enhanced Programmer for Ingame Control
 
 A mod for [minetest](http://www.minetest.net)
 
-[![Build Status](https://travis-ci.org/damocles-minetest/epic.svg?branch=master)](https://travis-ci.org/thomasrudin-mt/epic)
+[![Build Status](https://travis-ci.org/damocles-minetest/epic.svg?branch=master)](https://travis-ci.org/damocles-minetest/epic)
 
 # Overview
 
