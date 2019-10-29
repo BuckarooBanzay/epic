@@ -53,6 +53,7 @@ dofile(MP.."/blocks/save.lua")
 dofile(MP.."/blocks/random.lua")
 dofile(MP.."/blocks/stash_inventory.lua")
 dofile(MP.."/blocks/unstash_inventory.lua")
+dofile(MP.."/blocks/deduct_inventory.lua")
 
 if minetest.get_modpath("mobs") then
 	dofile(MP.."/blocks/spawn_mob.lua")
