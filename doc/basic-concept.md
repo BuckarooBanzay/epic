@@ -8,7 +8,7 @@ A function is basically a bunch of blocks that get executed **from left to right
 
 A function starts with a [function](./blocks/function.md) block and ends implicitly on the end of the blocks.
 
-Functions can be called with a "call" block, the position of the called function is not relevant.
+Functions can be called with a [call](./call/function.md) block, the position of the called function is not relevant.
 It can be on the other side of the world if needed...
 Functions can also call each other or themselfes (but be cautios with that!)
 

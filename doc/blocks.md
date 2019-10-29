@@ -5,8 +5,8 @@
 
 * [Epic starter](./blocks/epic.md)
 * [Function](./blocks/function.md)
+* [Call](./blocks/call.md)
 * Branch
-* Call function
 
 ## Player interaction/information
 
