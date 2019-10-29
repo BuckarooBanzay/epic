@@ -59,21 +59,36 @@ minetest.register_on_leaveplayer(function(player)
 	trace_enabled[player:get_player_name()] = nil
 end)
 
+minetest.register_on_joinplayer(function(player)
+	local meta = player:get_meta()
+	local name = player:get_player_name()
+
+	if meta:get_int("epic_trace") == 1 then
+		trace_enabled[name] = true
+		enable_hud(player)
+	end
+end)
+
 -- chat command
 
 minetest.register_chatcommand("epic_trace", {
 	description = "Enables or disables epic tracing",
   privs = { epic_debug = true },
 	func = function(name, params)
+		local player = minetest.get_player_by_name(name)
+		local meta = player:get_meta()
+
 		if params == "on" then
 			if not trace_enabled[name] then
 				trace_enabled[name] = true
-				enable_hud(minetest.get_player_by_name(name))
+				meta:set_int("epic_trace", 1)
+				enable_hud(player)
 			end
 		elseif params == "off" then
 			if trace_enabled[name] then
 				trace_enabled[name] = nil
-				disable_hud(minetest.get_player_by_name(name))
+				meta:set_int("epic_trace", 0)
+				disable_hud(player)
 			end
 		else
 			return true, "Usage: /epic_trace on|off"

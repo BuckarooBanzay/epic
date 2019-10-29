@@ -20,6 +20,7 @@ dofile(MP.."/state.lua")
 dofile(MP.."/executor.lua")
 dofile(MP.."/executor_hooks.lua")
 dofile(MP.."/executor_hud.lua")
+dofile(MP.."/trace.lua")
 
 -- forms
 epic.form = {}
