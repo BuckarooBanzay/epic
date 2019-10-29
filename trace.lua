@@ -12,7 +12,7 @@ end
 
 local function update_hud(player)
 	local hud_data = hud[player:get_player_name()]
-	for _, other_player in minetest.get_connected_players() do
+	for _, other_player in ipairs(minetest.get_connected_players()) do
 		local name = other_player:get_player_name()
 		local state = epic.get_state(name)
 
@@ -45,7 +45,7 @@ end
 local trace_enabled = {}
 
 local function update_huds()
-	for _, player in minetest.get_connected_players() do
+	for _, player in ipairs(minetest.get_connected_players()) do
 		if trace_enabled[player:get_player_name()] then
 			update_hud(player)
 		end
