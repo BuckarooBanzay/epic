@@ -15,7 +15,7 @@ minetest.register_node("epic:random", {
 
   epic = {
     on_check = function(_, _, _, ctx)
-	if math.random(2) == 1 then
+	if math.random(10) == 1 then
 		ctx.next()
 	end
     end
