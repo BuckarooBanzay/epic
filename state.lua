@@ -8,6 +8,7 @@ local getStateFile = function(playername)
 	return basedir .. "/" .. saneplayername .. ".json"
 end
 
+-- returns the current state or nil
 epic.get_state = function(playername)
 	return epic.state[playername]
 end
