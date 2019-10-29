@@ -50,6 +50,7 @@ For a demo visit the [Damocles](https://damocles.minetest.land) server.
 * Available [blocks](doc/blocks.md)
 * Simple Quest [example](doc/example.md)
 * [Exit-Functions](doc/exit-functions.md)
+* [Privilieges](doc/privs.md)
 * [Best practices](doc/best-practices.md)
 
 # Dependencies
