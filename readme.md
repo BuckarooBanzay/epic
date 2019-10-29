@@ -51,6 +51,7 @@ For a demo visit the [Damocles](https://damocles.minetest.land) server.
 * Simple Quest [example](doc/example.md)
 * [Exit-Functions](doc/exit-functions.md)
 * [Privilieges](doc/privs.md)
+* [Chat commands](doc/chatcommands.md)
 * [Best practices](doc/best-practices.md)
 
 # Dependencies
