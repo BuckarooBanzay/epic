@@ -8,7 +8,7 @@ A function is basically a bunch of blocks that get executed **from left to right
 
 A function starts with a [function](./blocks/function.md) block and ends implicitly on the end of the blocks.
 
-Functions can be called with a [call](./call/function.md) block, the position of the called function is not relevant.
+Functions can be called with a [call](./blocks/call.md) or an [epic](./blocks/epic.md) block, the position of the called function is not relevant.
 It can be on the other side of the world if needed...
 Functions can also call each other or themselfes (but be cautios with that!)
 
@@ -22,3 +22,7 @@ This function gets called on the start of the epic.
 
 This function gets called if the player dies or disconnects (for whatever reason).
 Cleanup stuff should be done in here (remove nodes, teleport out of the arena, etc)
+
+# Function composition
+
+Function can be (and should) be grouped to logical units, see [best practices](./best-practices.md).
