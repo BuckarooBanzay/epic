@@ -73,6 +73,10 @@ if minetest.get_modpath("mesecons") then
 	dofile(MP.."/blocks/mesecon_check.lua")
 end
 
+if minetest.get_modpath("lightning") then
+	dofile(MP.."/blocks/lightning.lua")
+end
+
 if minetest.get_modpath("monitoring") then
 	dofile(MP.."/monitoring.lua")
 end

@@ -1,7 +1,8 @@
 
 globals = {
 	"epic",
-	"minetest"
+	"minetest",
+	"lightning"
 }
 
 read_globals = {
@@ -19,5 +20,4 @@ read_globals = {
 	"player_monoids",
 	"soundblock",
 	"monitoring"
-
 }
