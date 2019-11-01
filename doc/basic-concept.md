@@ -10,7 +10,7 @@ A function starts with a [function](./blocks/function.md) block and ends implici
 
 Functions can be called with a [call](./blocks/call.md) or an [epic](./blocks/epic.md) block, the position of the called function is not relevant.
 It can be on the other side of the world if needed...
-Functions can also call each other or themselfes (but be cautios with that!)
+Functions can also call each other or themselfes (but be cautious with that!)
 
 The [epic](./blocks/epic.md) block acts as a starting point for players and executes a "main" and an optional "exit" function.
 
