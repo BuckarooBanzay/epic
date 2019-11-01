@@ -79,11 +79,18 @@ minetest.register_on_punchnode(function(pos, _, puncher)
 	local playername = puncher:get_player_name()
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then
-		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
-		meta:set_string("pos", pos_str)
-		minetest.chat_send_player(playername, "[epic] target for lightning successfully set to " .. pos_str)
-		update_formspec(meta)
+		if minetest.is_protected(pos, playername) and
+			not minetest.check_player_privs(playername, {epic_admin=true}) then
+			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+
+		else
+			local meta = minetest.get_meta(cfg_pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
+			meta:set_string("pos", pos_str)
+			minetest.chat_send_player(playername, "[epic] target for lightning successfully set to " .. pos_str)
+			update_formspec(meta)
+
+		end
 		punch_handler[playername] = nil
 	end
 end)

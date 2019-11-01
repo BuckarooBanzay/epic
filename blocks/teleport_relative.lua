@@ -101,21 +101,35 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 
 	local cfg_pos = punch_handler_source[playername]
 	if cfg_pos then
-		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
-		meta:set_string("source", pos_str)
-		update_formspec(meta)
-		minetest.chat_send_player(playername, "[epic] source position successfully set to " .. pos_str)
+		if minetest.is_protected(pos, playername) and
+			not minetest.check_player_privs(playername, {epic_admin=true}) then
+			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+
+		else
+			local meta = minetest.get_meta(cfg_pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
+			meta:set_string("source", pos_str)
+			update_formspec(meta)
+			minetest.chat_send_player(playername, "[epic] source position successfully set to " .. pos_str)
+
+		end
 		punch_handler_source[playername] = nil
 	end
 
 	cfg_pos = punch_handler_target[playername]
 	if cfg_pos then
-		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
-		meta:set_string("target", pos_str)
-		update_formspec(meta)
-		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+		if minetest.is_protected(pos, playername) and
+			not minetest.check_player_privs(playername, {epic_admin=true}) then
+			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+
+		else
+			local meta = minetest.get_meta(cfg_pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
+			meta:set_string("target", pos_str)
+			update_formspec(meta)
+			minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+
+		end
 		punch_handler_target[playername] = nil
 	end
 end)
