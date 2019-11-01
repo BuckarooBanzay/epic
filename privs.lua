@@ -4,6 +4,11 @@ minetest.register_privilege("epic_debug", {
   give_to_singleplayer = true
 })
 
+minetest.register_privilege("epic_builder", {
+  description = "can place epic blocks",
+  give_to_singleplayer = true
+})
+
 minetest.register_privilege("epic_admin", {
   description = "can administer any epic function",
   give_to_singleplayer = true
