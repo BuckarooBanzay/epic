@@ -1,4 +1,5 @@
 
+-- debug log
 epic.debug = function(msg)
 	if epic.log_executor then
 		minetest.log("action", "[epic] " .. msg)
