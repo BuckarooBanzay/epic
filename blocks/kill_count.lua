@@ -66,7 +66,7 @@ minetest.register_node("epic:kill_count", {
       ctx.step_data.hud_kills = player:hud_add({
         hud_elem_type = "text",
         position = HUD_POSITION,
-        offset = {x = 0,   y = 20},
+        offset = {x = 0,   y = 40},
         text = "",
         alignment = HUD_ALIGNMENT,
         scale = {x = 100, y = 100},
