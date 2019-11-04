@@ -118,8 +118,9 @@ minetest.register_on_mods_loaded(function()
 				   tool_capabilities.damage_groups.fleshy ~= nil and
 				   self.health ~= nil then
 					local rest = tool_capabilities.damage_groups.fleshy
+					local damage = rest * 2
 
-					if hitter:is_player() and rest >= self.health then
+					if hitter:is_player() and damage >= self.health then
 						local name = hitter:get_player_name()
 						if kill_counter[name] then
 							kill_counter[name] = kill_counter[name] + 1
