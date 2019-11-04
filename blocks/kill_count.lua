@@ -1,4 +1,7 @@
 
+local HUD_POSITION = {x = epic.hud.posx, y = epic.hud.posy}
+local HUD_ALIGNMENT = {x = 1, y = 0}
+
 -- player -> kills
 local kill_counter = {}
 
@@ -59,11 +62,29 @@ minetest.register_node("epic:kill_count", {
     on_enter = function(_, meta, player, ctx)
       kill_counter[player:get_player_name()] = 0
       ctx.step_data.kills = meta:get_int("kills")
+
+      ctx.step_data.hud_kills = player:hud_add({
+        hud_elem_type = "text",
+        position = HUD_POSITION,
+        offset = {x = 0,   y = 20},
+        text = "",
+        alignment = HUD_ALIGNMENT,
+        scale = {x = 100, y = 100},
+        number = 0x0000FF
+      })
+
     end,
     on_check = function(_, _, player, ctx)
-      if kill_counter[player:get_player_name()] >= ctx.step_data.kills then
+      local count = kill_counter[player:get_player_name()]
+      local txt = "Kills: " .. ctx.step_data.kills .. "/" .. count
+
+      player:hud_change(ctx.step_data.hud_kills, "text", txt)
+      if count >= ctx.step_data.kills then
         ctx.next()
       end
+    end,
+    on_exit = function(_, _, player, ctx)
+      player:hud_remove(ctx.step_data.hud_kills)
     end
   }
 })
