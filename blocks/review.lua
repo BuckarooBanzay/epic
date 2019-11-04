@@ -3,7 +3,7 @@ local FORMNAME = "epic_review"
 
 -- rate formspec for quest player
 local function show_formspec(pos, playername)
-	local formspec = "size[8,5;]" ..
+	local formspec = "size[8,6;]" ..
 		"label[0,0;Rate this quest]" ..
 
 		"image[0,1;1,1;epic_star.png]" ..
@@ -11,25 +11,25 @@ local function show_formspec(pos, playername)
 
 		"image[0,2;1,1;epic_star.png]" ..
 		"image[1,2;1,1;epic_star.png]" ..
-		"button_exit[5.5,2;2,1;two;2 Star]" ..
+		"button_exit[5.5,2;2,1;two;2 Stars]" ..
 
 		"image[0,3;1,1;epic_star.png]" ..
 		"image[1,3;1,1;epic_star.png]" ..
 		"image[2,3;1,1;epic_star.png]" ..
-		"button_exit[5.5,3;2,1;three;3 Star]" ..
+		"button_exit[5.5,3;2,1;three;3 Stars]" ..
 
 		"image[0,4;1,1;epic_star.png]" ..
 		"image[1,4;1,1;epic_star.png]" ..
 		"image[2,4;1,1;epic_star.png]" ..
 		"image[3,4;1,1;epic_star.png]" ..
-		"button_exit[5.5,4;2,1;four;4 Star]" ..
+		"button_exit[5.5,4;2,1;four;4 Stars]" ..
 
 		"image[0,5;1,1;epic_star.png]" ..
 		"image[1,5;1,1;epic_star.png]" ..
 		"image[2,5;1,1;epic_star.png]" ..
 		"image[3,5;1,1;epic_star.png]" ..
 		"image[4,5;1,1;epic_star.png]" ..
-		"button_exit[5.5,5;2,1;five;5 Star]"
+		"button_exit[5.5,5;2,1;five;5 Stars]"
 
 	minetest.show_formspec(playername,
 		FORMNAME .. ";" .. minetest.pos_to_string(pos),
@@ -45,13 +45,22 @@ local update_formspec = function(meta)
 	meta:set_string("infotext", "Visits: " .. counter ..
 		" Last player: ''" .. lastplayer .. "'")
 
+	local one = meta:get_int("one-star")
+	local two = meta:get_int("two-star")
+	local three = meta:get_int("three-star")
+	local four = meta:get_int("four-star")
+	local five = meta:get_int("five-star")
+
+	local rating = (one + (2*two) + (3*three) + (4*four) + (5*five)) / counter
+	rating = math.floor(rating * 100) / 100
+
 	meta:set_string("formspec", "size[8,8;]" ..
-		"label[0,0.5;Visits:${counter}]" ..
-		"label[0,1.5;1-Star:${one-star}]" ..
-		"label[0,2.5;2-Star:${two-star}]" ..
-		"label[0,3.5;3-Star:${three-star}]" ..
-		"label[0,4.5;4-Star:${four-star}]" ..
-		"label[0,5.5;5-Star:${five-star}]" ..
+		"label[0,0.5;Visits:  " .. counter .. ", Rating: " .. rating .. "]" ..
+		"label[0,1.5;1-Star:  " .. one .. "]" ..
+		"label[0,2.5;2-Star:  " .. two .. "]" ..
+		"label[0,3.5;3-Star:  " .. three .. "]" ..
+		"label[0,4.5;4-Star:  " .. four .. "]" ..
+		"label[0,5.5;5-Star:  " .. five .. "]" ..
 		"button_exit[0.1,6.5;8,1;reset;Reset]" ..
 		"")
 end
@@ -111,7 +120,6 @@ minetest.register_node("epic:review", {
   epic = {
     on_enter = function(pos, meta, player, ctx)
 			local name = player:get_player_name()
-			meta:set_int("counter", meta:get_int("counter") + 1)
 			meta:set_string("lastplayer", name)
 			show_formspec(pos, name)
 			ctx.next()
@@ -141,6 +149,8 @@ minetest.register_on_player_receive_fields(function(_, formname, fields)
 	elseif fields.five then
 		meta:set_int("five-star", meta:get_int("five-star") + 1)
 	end
+
+	meta:set_int("counter", meta:get_int("counter") + 1)
 
 	update_formspec(meta)
 
