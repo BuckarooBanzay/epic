@@ -76,7 +76,7 @@ minetest.register_node("epic:kill_count", {
     end,
     on_check = function(_, _, player, ctx)
       local count = kill_counter[player:get_player_name()]
-      local txt = "Kills: " .. ctx.step_data.kills .. "/" .. count
+      local txt = "Kills: " .. count .. "/" .. ctx.step_data.kills
 
       player:hud_change(ctx.step_data.hud_kills, "text", txt)
       if count >= ctx.step_data.kills then
@@ -89,24 +89,23 @@ minetest.register_node("epic:kill_count", {
   }
 })
 
-local function check_kill(target, hitter, time_from_last_punch, tool_capabilities)
-  if not hitter or not hitter:is_player() then
+-- players
+minetest.register_on_punchplayer(function(player, hitter, _, _, _, damage)
+  -- player got hit by another player
+
+	if not hitter or not hitter:is_player() then
     return
   end
 
-  local hit = minetest.get_hit_params(target:get_armor_groups(), tool_capabilities, time_from_last_punch)
-  local damage = hit.hp
+	local name = hitter:get_player_name()
 
-  if damage >= target:get_hp() then
-    local name = hitter:get_player_name()
+	if not kill_counter[name] then
+		return
+	end
+
+  if damage >= player:get_hp() and player:get_hp() > 0 then
     kill_counter[name] = kill_counter[name] + 1
   end
-end
-
--- players
-minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, tool_capabilities)
-  -- player got hit by another player
-  check_kill(player, hitter, time_from_last_punch, tool_capabilities)
 end)
 
 -- mobs
@@ -115,7 +114,19 @@ minetest.register_on_mods_loaded(function()
     if entity.on_punch ~= nil and entity.hp_min ~= nil and entity.hp_min > 0 then
       local originalPunch = entity.on_punch
       entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction)
-        check_kill(self, hitter, time_from_last_punch, tool_capabilities)
+				if tool_capabilities.damage_groups ~= nil and
+				   tool_capabilities.damage_groups.fleshy ~= nil and
+				   self.health ~= nil then
+					local rest = tool_capabilities.damage_groups.fleshy
+
+					if hitter:is_player() and rest >= self.health then
+						local name = hitter:get_player_name()
+						if kill_counter[name] then
+							kill_counter[name] = kill_counter[name] + 1
+						end
+					end
+				end
+
         return originalPunch(self, hitter, time_from_last_punch, tool_capabilities, direction)
       end
     end
