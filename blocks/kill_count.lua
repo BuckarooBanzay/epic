@@ -89,29 +89,33 @@ minetest.register_node("epic:kill_count", {
   }
 })
 
-local function get_damage(tool_capabilities)
-  return (tool_capabilities.damage_groups and tool_capabilities.damage_groups.fleshy) or 0
-end
+local function check_kill(target, hitter, time_from_last_punch, tool_capabilities)
+  if not hitter or not hitter:is_player() then
+    return
+  end
 
-local function check_kill(target, hitter, tool_capabilities)
-  local damage = get_damage(tool_capabilities)
-  if hitter:is_player() and target:get_hp() <= damage then
+  local hit = minetest.get_hit_params(target:get_armor_groups(), tool_capabilities, time_from_last_punch)
+  local damage = hit.hp
+
+  if damage >= target:get_hp() then
     local name = hitter:get_player_name()
     kill_counter[name] = kill_counter[name] + 1
   end
 end
 
-minetest.register_on_punchplayer(function(player, hitter, _, tool_capabilities)
+-- players
+minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, tool_capabilities)
   -- player got hit by another player
-  check_kill(player, hitter, tool_capabilities)
+  check_kill(player, hitter, time_from_last_punch, tool_capabilities)
 end)
 
+-- mobs
 minetest.register_on_mods_loaded(function()
   for _,entity in pairs(minetest.registered_entities) do
     if entity.on_punch ~= nil and entity.hp_min ~= nil and entity.hp_min > 0 then
       local originalPunch = entity.on_punch
-      entity.on_punch = function(self, hitter,time_from_last_punch, tool_capabilities, direction)
-        check_kill(self, hitter, tool_capabilities)
+      entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction)
+        check_kill(self, hitter, time_from_last_punch, tool_capabilities)
         return originalPunch(self, hitter, time_from_last_punch, tool_capabilities, direction)
       end
     end
