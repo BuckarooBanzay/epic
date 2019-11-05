@@ -60,6 +60,8 @@ local update_formspec = function(meta)
 	local rating = (one + (2*two) + (3*three) + (4*four) + (5*five)) / counter
 	rating = math.floor(rating * 100) / 100
 
+	meta:set_string("rating", tostring(rating))
+
 	meta:set_string("formspec", "size[8,8;]" ..
 		"label[0,0.5;Visits:  " .. counter .. ", Rating: " .. rating .. "]" ..
 		"label[0,1.5;1-Star:  " .. one .. "]" ..
@@ -163,8 +165,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 	meta:set_int("counter", meta:get_int("counter") + 1)
-	epic.on_review(pos, player, stars)
 
 	update_formspec(meta)
-
+	epic.on_review(pos, player, stars)
 end)
