@@ -44,6 +44,15 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_spawn(pos, meta)
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
+	local mobname = meta:get_string("mobname")
+
+	if mobname and mobname ~= "" then
+		minetest.add_entity(target_pos, mobname)
+	end
+end
+
 minetest.register_node("epic:spawn_mob", {
 	description = "Epic Spawn mob block",
 	tiles = {
@@ -96,14 +105,19 @@ minetest.register_node("epic:spawn_mob", {
 		end
   end,
 
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_spawn(pos, meta)
+			end
+	  }
+	},
+
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
-			local mobname = meta:get_string("mobname")
-
-			if mobname and mobname ~= "" then
-				minetest.add_entity(target_pos, mobname)
-			end
+			do_spawn(pos, meta)
 			ctx.next()
     end
   }

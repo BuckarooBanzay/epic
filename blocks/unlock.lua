@@ -14,6 +14,12 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_unlock(pos, meta)
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
+	local target_meta = minetest.get_meta(target_pos)
+	target_meta:set_int("lock", 0)
+end
+
 minetest.register_node("epic:unlock", {
 	description = "Epic unlock block",
 	tiles = {
@@ -56,11 +62,19 @@ minetest.register_node("epic:unlock", {
 
   end,
 
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+			action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_unlock(pos, meta)
+			end
+		}
+	},
+
   epic = {
-    on_enter = function(_, meta, _, ctx)
-			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
-			local target_meta = minetest.get_meta(target_pos)
-			target_meta:set_int("lock", 0)
+    on_enter = function(pos, meta, _, ctx)
+			do_unlock(pos, meta)
 			ctx.next()
     end
   }
@@ -73,7 +87,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 	if cfg_pos then
 		if node.name == "epic:lock" then
 			local meta = minetest.get_meta(cfg_pos)
-			local pos_str = minetest.pos_to_string(pos)
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 			meta:set_string("pos", pos_str)
 			minetest.chat_send_player(playername, "[epic] target function successfully set to " .. pos_str)
 		else

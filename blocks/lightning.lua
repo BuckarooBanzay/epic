@@ -20,6 +20,12 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_strike(pos, meta)
+	local target_pos_str = meta:get_string("pos")
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
+	lightning.strike(target_pos)
+end
+
 minetest.register_node("epic:lightning", {
 	description = "Epic Lightning block",
 	tiles = {
@@ -65,11 +71,19 @@ minetest.register_node("epic:lightning", {
 		end
   end,
 
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_strike(pos, meta)
+			end
+	  }
+	},
+
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos_str = meta:get_string("pos")
-			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
-      lightning.strike(target_pos)
+			do_strike(pos, meta)
 			ctx.next()
     end
   }

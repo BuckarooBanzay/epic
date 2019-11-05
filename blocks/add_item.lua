@@ -20,6 +20,13 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_add_item(pos, meta)
+	local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+	local inv = meta:get_inventory()
+	local stack = inv:get_stack("main", 1)
+	minetest.add_item(epic.to_absolute_pos(pos, target_pos), stack)
+end
+
 minetest.register_node("epic:additem", {
 	description = "Epic add item block",
 	tiles = {
@@ -83,12 +90,19 @@ minetest.register_node("epic:additem", {
 		return stack:get_count()
 	end,
 
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_add_item(pos, meta)
+			end
+	  }
+	},
+
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
-			local inv = meta:get_inventory()
-			local stack = inv:get_stack("main", 1)
-			minetest.add_item(epic.to_absolute_pos(pos, target_pos), stack)
+			do_add_item(pos, meta)
 			ctx.next()
     end
   }
