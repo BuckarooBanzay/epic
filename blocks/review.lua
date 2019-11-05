@@ -1,5 +1,11 @@
 local FORMNAME = "epic_review"
 
+-- review hook to override
+-- parameters:
+--  pos = position of review block
+--  player = player object
+--  stars = star rating: 1-5, 0 if aborted
+epic.on_review = function() end
 
 -- rate formspec for quest player
 local function show_formspec(pos, playername)
@@ -128,7 +134,7 @@ minetest.register_node("epic:review", {
 })
 
 -- callback from rate-form
-minetest.register_on_player_receive_fields(function(_, formname, fields)
+minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local parts = formname:split(";")
 	local name = parts[1]
 	if name ~= FORMNAME then
@@ -137,20 +143,27 @@ minetest.register_on_player_receive_fields(function(_, formname, fields)
 
 	local pos = minetest.string_to_pos(parts[2])
 	local meta = minetest.get_meta(pos)
+	local stars = 0
 
 	if fields.one then
 		meta:set_int("one-star", meta:get_int("one-star") + 1)
+		stars = 1
 	elseif fields.two then
 		meta:set_int("two-star", meta:get_int("two-star") + 1)
+		stars = 2
 	elseif fields.three then
 		meta:set_int("three-star", meta:get_int("three-star") + 1)
+		stars = 3
 	elseif fields.four then
 		meta:set_int("four-star", meta:get_int("four-star") + 1)
+		stars = 4
 	elseif fields.five then
 		meta:set_int("five-star", meta:get_int("five-star") + 1)
+		stars = 5
 	end
 
 	meta:set_int("counter", meta:get_int("counter") + 1)
+	epic.on_review(pos, player, stars)
 
 	update_formspec(meta)
 
