@@ -53,11 +53,11 @@ minetest.register_node("epic:delay", {
 
   epic = {
     on_enter = function(_, _, _, ctx)
-			ctx.data.delay_start = minetest.get_us_time()
+			ctx.step_data.delay_start = minetest.get_us_time()
     end,
     on_check = function(_, meta, _, ctx)
       local now = minetest.get_us_time()
-      local start = ctx.data.delay_start
+      local start = ctx.step_data.delay_start
 
 			local delay_micros = meta:get_int("delay")*1000*1000
 
