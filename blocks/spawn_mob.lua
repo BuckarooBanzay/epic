@@ -48,6 +48,17 @@ local function do_spawn(pos, meta)
 	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
 	local mobname = meta:get_string("mobname")
 
+	local objs = minetest.get_objects_inside_radius(target_pos, 9)
+	local count = 0
+	for _ in ipairs(objs) do
+		count = count + 1
+	end
+
+	if count > 16 then
+		-- too many objects
+		return
+	end
+
 	if mobname and mobname ~= "" then
 		minetest.add_entity(target_pos, mobname)
 	end

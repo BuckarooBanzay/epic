@@ -22,6 +22,18 @@ end
 
 local function do_add_item(pos, meta)
 	local target_pos = minetest.string_to_pos(meta:get_string("pos"))
+
+	local objs = minetest.get_objects_inside_radius(target_pos, 2)
+	local count = 0
+	for _ in ipairs(objs) do
+		count = count + 1
+	end
+
+	if count > 5 then
+		-- too many objects
+		return
+	end
+
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("main", 1)
 	minetest.add_item(epic.to_absolute_pos(pos, target_pos), stack)
