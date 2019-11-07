@@ -1,16 +1,20 @@
 #!/bin/sh
 # simple integration test
 
-cat <<EOF > /tmp/minetest.conf
+CFG=/tmp/minetest.conf
+MTDIR=/tmp/mt
+WORLDDIR=${MTDIR}/worlds/world
+
+cat <<EOF > ${CFG}
  enable_epic_integration_test = true
 EOF
 
-mkdir -p /tmp/mt/worlds/world
-chmod 777 /tmp/mt -Rv
+mkdir -p ${WORLDDIR}
+chmod 777 ${MTDIR} -R
 docker run --rm -it \
-	-v /tmp/minetest.conf:/etc/minetest/minetest.conf:ro \
-	-v /tmp/mt:/var/lib/minetest/.minetest \
+	-v ${CFG}:/etc/minetest/minetest.conf:ro \
+	-v ${MTDIR}:/var/lib/minetest/.minetest \
 	-v $(pwd):/var/lib/minetest/.minetest/worlds/world/worldmods/epic \
 	registry.gitlab.com/minetest/minetest/server:5.0.1
 
-test -f /tmp/mt/worlds/world/integration_test.json && exit 0 || exit 1
+test -f ${WORLDDIR}/integration_test.json && exit 0 || exit 1
