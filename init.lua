@@ -90,3 +90,7 @@ dofile(MP.."/build_restriction.lua")
 if epic.log_executor then
 	dofile(MP.."/log_executor.lua")
 end
+
+if minetest.settings:get_bool("enable_integration_test") then
+        dofile(MP.."/integration_test.lua")
+end
