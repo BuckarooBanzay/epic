@@ -1,4 +1,11 @@
 
+-- abort epic if running
+epic.abort = function(playername)
+	if epic.state[playername] then
+		epic.abort_flag[playername] = "manual"
+	end
+end
+
 -- debug log
 epic.debug = function(msg)
 	if epic.log_executor then

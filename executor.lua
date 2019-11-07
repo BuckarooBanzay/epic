@@ -1,7 +1,4 @@
 
--- playername -> bool
-local abort_flag = {}
-
 -- time in seconds between executor calls
 local executor_dtime = 0.1
 local execute_player_state
@@ -77,7 +74,7 @@ execute_player_state = function(playername, state)
     end,
     -- abort epic with given reason
     abort = function(reason)
-      abort_flag[playername] = reason or "ctx.abort"
+      epic.abort_flag[playername] = reason or "ctx.abort"
     end,
     -- call another epic block
     call = function(_pos)
@@ -124,20 +121,20 @@ execute_player_state = function(playername, state)
   if state.time then
     state.time = state.time - executor_dtime
     if state.time < 0 then
-      abort_flag[playername] = "epic_timeout"
+      epic.abort_flag[playername] = "epic_timeout"
     end
   end
 
-  if abort_flag[playername] or result_next then
+  if epic.abort_flag[playername] or result_next then
     epic.run_hook("on_before_node_exit", { pos, player, ctx })
     if epicdef.on_exit then
       epicdef.on_exit(pos, meta, player, ctx)
     end
   end
 
-  if abort_flag[playername] then
-    local reason = abort_flag[playername]
-    abort_flag[playername] = nil
+  if epic.abort_flag[playername] then
+    local reason = epic.abort_flag[playername]
+    epic.abort_flag[playername] = nil
 
     if state.exit_pos then
         execute_exit_function(playername, state)
@@ -178,14 +175,6 @@ end
 -- initial delay
 minetest.after(1.0, executor)
 
-minetest.register_chatcommand("epic_abort", {
-	description = "Aborts the current epic",
-	func = function(name)
-		if epic.state[name] then
-			abort_flag[name] = "manual"
-		end
-	end
-})
 
 -- abort epic on leave
 -- savepoints are not touched here
@@ -194,9 +183,9 @@ minetest.register_on_leaveplayer(function(player, timed_out)
   local state = epic.state[playername]
   if state then
     if timed_out then
-      abort_flag[playername] = "leave_timed_out"
+      epic.abort_flag[playername] = "leave_timed_out"
     else
-      abort_flag[playername] = "leave"
+      epic.abort_flag[playername] = "leave"
     end
     if epic.log_executor then
       minetest.log("action", "[epic] player left the game: " .. playername)
@@ -212,7 +201,7 @@ minetest.register_on_dieplayer(function(player)
     if epic.log_executor then
       minetest.log("action", "[epic] player died: " .. playername)
     end
-    abort_flag[playername] = "died"
+    epic.abort_flag[playername] = "died"
     execute_player_state(playername, state)
   end
 end)
