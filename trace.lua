@@ -95,15 +95,3 @@ minetest.register_chatcommand("epic_trace", {
     end
 	end
 })
-
-minetest.register_chatcommand("epic_dump", {
-	description = "Dumps the current state, optionally from a given user",
-  privs = { epic_debug = true },
-	func = function(_, params)
-		if params then
-			return true, dump(epic.state[params])
-		else
-			return true, dump(epic.state)
-		end
-	end
-})
