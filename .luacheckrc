@@ -19,5 +19,6 @@ read_globals = {
 	"mesecon",
 	"player_monoids",
 	"soundblock",
-	"monitoring"
+	"monitoring",
+	"mobs"
 }
