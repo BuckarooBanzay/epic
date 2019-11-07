@@ -2,6 +2,15 @@
 -- playername => pos
 local punch_handler = {}
 
+local chest_names = {}
+chest_names["default:chest"] = true
+chest_names["more_chests:cobble"] = true
+
+local function is_chest_on_pos(pos)
+	local node = epic.get_node(pos)
+	return chest_names[node.name]
+end
+
 local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 
@@ -88,8 +97,7 @@ minetest.register_node("epic:fill_chest", {
 			local target_pos_str = meta:get_string("pos")
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 
-			local node = epic.get_node(target_pos)
-			if node.name ~= "default:chest" then
+			if not is_chest_on_pos(target_pos) then
 				-- not a chest
 				return
 			end
@@ -106,11 +114,11 @@ minetest.register_node("epic:fill_chest", {
   }
 })
 
-minetest.register_on_punchnode(function(pos, node, puncher)
+minetest.register_on_punchnode(function(pos, _, puncher)
 	local playername = puncher:get_player_name()
 	local cfg_pos = punch_handler[playername]
 	if cfg_pos then
-		if node.name == "default:chest" then
+		if is_chest_on_pos(pos) then
 			local meta = minetest.get_meta(cfg_pos)
 			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 			meta:set_string("pos", pos_str)
