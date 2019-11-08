@@ -60,12 +60,7 @@ minetest.register_node("epic:teleport", {
     on_enter = function(pos, meta, player, ctx)
 			local rel_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local target_pos = epic.to_absolute_pos(pos, rel_pos)
-			if minetest.get_modpath("mobs") then
-				-- teleports the player in the next serverstep
-				mobs.detach(player, rel_pos)
-			else
-				player:set_pos(target_pos)
-			end
+			player:set_pos(target_pos)
 			ctx.next()
     end
   }
