@@ -2,11 +2,20 @@
 local update_formspec = function(meta)
 	meta:set_string("infotext", "Set clouds block")
 
-	meta:set_string("formspec", "size[8,4;]" ..
+	meta:set_string("formspec", "size[8,6;]" ..
 		"field[0.2,0.5;8,1;thickness;Thickness;${thickness}]" ..
 		"field[0.2,1.5;8,1;density;Density;${density}]" ..
 		"field[0.2,2.5;8,1;height;Height;${height}]" ..
-		"button_exit[0.1,3.5;8,1;save;Save]" ..
+
+		"field[0.2,3.5;2,1;red;Red;${red}]" ..
+		"field[2.2,3.5;2,1;green;Green;${green}]" ..
+		"field[4.2,3.5;2,1;blue;Blue;${blue}]" ..
+		"field[6.2,3.5;2,1;alpha;Alpha;${alpha}]" ..
+
+		"field[0.2,4.5;4,1;speedx;X-Speed;${speedx}]" ..
+		"field[4.2,4.5;4,1;speedx;Y-Speed;${speedy}]" ..
+
+		"button_exit[0.1,5.5;8,1;save;Save]" ..
 		"")
 end
 
@@ -29,6 +38,12 @@ minetest.register_node("epic:setclouds", {
 		meta:set_int("thickness", 16)
 		meta:set_int("height", 120)
 		meta:set_string("density", "0.4")
+		meta:set_int("red", 243)
+		meta:set_int("green", 214)
+		meta:set_int("blue", 255)
+		meta:set_int("alpha", 229)
+		meta:set_int("speedx", 1)
+		meta:set_int("speedy", 2)
     update_formspec(meta, pos)
   end,
 
@@ -44,6 +59,12 @@ minetest.register_node("epic:setclouds", {
 			meta:set_int("thickness", tonumber(fields.thickness) or 16)
 			meta:set_int("height", tonumber(fields.height) or 120)
 			meta:set_string("density", tonumber(fields.density) or 0.4)
+			meta:set_int("red", tonumber(fields.red) or 243)
+			meta:set_int("green", tonumber(fields.green) or 214)
+			meta:set_int("blue", tonumber(fields.blue) or 255)
+			meta:set_int("alpha", tonumber(fields.alpha) or 229)
+			meta:set_int("speedx", tonumber(fields.speedx) or 1)
+			meta:set_int("speedy", tonumber(fields.speedy) or 2)
 			update_formspec(meta, pos)
     end
 
@@ -54,10 +75,10 @@ minetest.register_node("epic:setclouds", {
 			player:set_clouds({
 				thickness = meta:get_int("thickness"),
 				color = {
-					r=243,
-					g=214,
-					b=255,
-					a=229
+					r=meta:get_int("red"),
+					g=meta:get_int("green"),
+					b=meta:get_int("blue"),
+					a=meta:get_int("alpha")
 				},
 				ambient = {
 					r=0,
@@ -68,8 +89,8 @@ minetest.register_node("epic:setclouds", {
 				density = tonumber(meta:get_string("density")),
 				height= meta:get_int("height"),
 				speed={
-					y=-2,
-					x=-1
+					y=meta:get_int("speedy"),
+					x=meta:get_int("speedx")
 				}
 			})
 			ctx.next()
