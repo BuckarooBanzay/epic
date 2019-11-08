@@ -105,8 +105,9 @@ minetest.register_node("epic:branch", {
 			end
     end,
 		on_check = function(_, _, player, ctx)
+			local next_called = false
+
 			for _, target_pos in ipairs(ctx.step_data.targets) do
-				local next_called = false
 				local node = minetest.get_node(target_pos)
 				local nodedef = minetest.registered_nodes[node.name]
 				local target_step_data = ctx.step_data.target_step_data[minetest.hash_node_position(target_pos)]
