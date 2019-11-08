@@ -69,3 +69,13 @@ minetest.register_node("epic:daynightratio", {
     end,
   }
 })
+
+
+epic.register_hook({
+  on_epic_exit = function(playername)
+		local player = minetest.get_player_by_name(playername)
+		if player then
+			player:override_day_night_ratio(nil)
+		end
+	end
+})

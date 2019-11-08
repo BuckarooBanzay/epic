@@ -89,6 +89,9 @@ local function initialize_reviews(meta)
 
 end
 
+-- playername -> bool
+local form_visited = {}
+
 -- review block
 minetest.register_node("epic:review", {
 	description = "Epic review block",
@@ -126,12 +129,22 @@ minetest.register_node("epic:review", {
 	end,
 
   epic = {
-    on_enter = function(pos, meta, player, ctx)
+    on_enter = function(pos, meta, player)
 			local name = player:get_player_name()
 			meta:set_string("lastplayer", name)
 			show_formspec(pos, name)
-			ctx.next()
-    end
+    end,
+		on_check = function(_, _, player, ctx)
+			local name = player:get_player_name()
+			if form_visited[name] then
+				form_visited[name] = nil
+				ctx.next()
+			end
+		end,
+		on_exit = function(_, _, player)
+			local name = player:get_player_name()
+			form_visited[name] = nil
+		end
   }
 })
 
@@ -167,5 +180,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	meta:set_int("counter", meta:get_int("counter") + 1)
 
 	update_formspec(meta)
+	form_visited[player:get_player_name()] = true
 	epic.on_review(pos, player, stars)
 end)

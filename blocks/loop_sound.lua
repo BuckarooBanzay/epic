@@ -115,12 +115,5 @@ epic.register_hook({
 			minetest.sound_stop(state.data.loop_sound_handle)
 			state.data.loop_sound_handle = nil
 		end
-	end,
-
-  on_epic_abort = function(_, state)
-		if state and state.data and state.data.loop_sound_handle then
-			minetest.sound_stop(state.data.loop_sound_handle)
-			state.data.loop_sound_handle = nil
-		end
 	end
 })
