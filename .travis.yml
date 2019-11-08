@@ -12,10 +12,20 @@ jobs:
     script:
      - $HOME/.luarocks/bin/luacheck --no-color .
 
+  - stage: unit test
+    language: generic
+    sudo: false
+    addons:
+     apt:
+      packages:
+       - luarocks
+    script:
+     - lua test.lua
+
+
   - stage: integration test
     language: generic
     services:
      - docker
     script:
-     - ./test.sh
-
+     - ./integration-test.sh

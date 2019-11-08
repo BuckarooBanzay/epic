@@ -2,6 +2,7 @@
 globals = {
 	"epic",
 	"minetest",
+	"screwdriver",
 	"lightning"
 }
 
@@ -15,7 +16,6 @@ read_globals = {
 	"dump", "VoxelArea",
 
 	-- deps
-	"screwdriver",
 	"mesecon",
 	"player_monoids",
 	"soundblock",
