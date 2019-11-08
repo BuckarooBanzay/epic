@@ -131,6 +131,7 @@ minetest.register_node("epic:review", {
   epic = {
     on_enter = function(pos, meta, player)
 			local name = player:get_player_name()
+			form_visited[name] = nil
 			meta:set_string("lastplayer", name)
 			show_formspec(pos, name)
     end,
