@@ -74,7 +74,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
 
-		elseif node.name ~= "default:mese" or node.name ~= "mesecons_extrawires:mese_powered" then
+		elseif node.name ~= "default:mese" and node.name ~= "mesecons_extrawires:mese_powered" then
 			minetest.chat_send_player(playername, "[epic] target is not a meseblock! aborting selection.")
 
 		else
