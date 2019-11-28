@@ -1,0 +1,17 @@
+name: unit-test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: apt
+      run: sudo apt-get install -y luarocks
+
+    - name: lua exec
+      run: lua test.lua
