@@ -11,7 +11,7 @@ EOF
 
 mkdir -p ${WORLDDIR}
 chmod 777 ${MTDIR} -R
-docker run --rm -it \
+docker run --rm -i \
 	-v ${CFG}:/etc/minetest/minetest.conf:ro \
 	-v ${MTDIR}:/var/lib/minetest/.minetest \
 	-v $(pwd):/var/lib/minetest/.minetest/worlds/world/worldmods/epic \
