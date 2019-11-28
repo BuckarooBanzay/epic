@@ -5,7 +5,6 @@ local execute_player_state
 
 local clear_state = function(playername)
   epic.state[playername] = nil
-  epic.save_player_state(playername)
 end
 
 local execute_exit_function = function(playername, state)

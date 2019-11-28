@@ -8,12 +8,6 @@ epic.register_hook({
       " state=" .. dump(state))
   end,
 
-  on_state_restored = function(playername, state)
-    minetest.log("action", "[epic] on_state_restored player=" ..
-      playername ..
-      " state=" .. dump(state))
-  end,
-
   on_before_node_enter = function(pos, player)
     minetest.log("action", "[epic] on_before_node_enter player=" ..
       player:get_player_name() ..

@@ -44,10 +44,6 @@ epic.register_hook({
     setup(player:get_player_name(), state.name)
   end,
 
-  on_state_restored = function(playername, state)
-    setup(playername, state.name)
-  end,
-
   on_epic_exit = function(playername)
     local data = hud[playername]
     local player = minetest.get_player_by_name(playername)
