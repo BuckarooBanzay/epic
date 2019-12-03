@@ -51,6 +51,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local meta = minetest.get_meta(pos)
 	local playername = player:get_player_name()
 
+	if minetest.is_protected(pos, playername) then
+		return
+	end
+
 	if fields.save then
 		meta:set_string("name", fields.name or "")
 	end
