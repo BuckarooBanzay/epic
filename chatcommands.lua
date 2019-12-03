@@ -18,3 +18,16 @@ minetest.register_chatcommand("epic_dump", { -- *chuckles*
 		end
 	end
 })
+
+minetest.register_chatcommand("epic_load", {
+	description = "Loads a savegame",
+	privs = { epic_debug = true },
+	func = function(name, param)
+		if not param or param == "" then
+			return false, "usage: /epic_load <topic>"
+		else
+			epic.form.epic_savegame_load(param, name)
+			return true
+		end
+	end
+})

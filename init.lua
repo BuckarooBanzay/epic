@@ -25,11 +25,14 @@ dofile(MP.."/executor.lua")
 dofile(MP.."/executor_hooks.lua")
 dofile(MP.."/executor_hud.lua")
 dofile(MP.."/trace.lua")
+dofile(MP.."/util/savegame.lua")
 
 -- forms
 epic.form = {}
 dofile(MP.."/forms/epic_configure.lua")
 dofile(MP.."/forms/epic_view.lua")
+dofile(MP.."/forms/epic_savegame_load.lua")
+dofile(MP.."/forms/epic_savegame_load_configure.lua")
 
 -- blocks
 dofile(MP.."/blocks/epic.lua")
@@ -57,6 +60,7 @@ dofile(MP.."/blocks/lock.lua")
 dofile(MP.."/blocks/unlock.lua")
 dofile(MP.."/blocks/settimeout.lua")
 dofile(MP.."/blocks/save.lua")
+dofile(MP.."/blocks/load.lua")
 dofile(MP.."/blocks/random.lua")
 dofile(MP.."/blocks/fill_chest.lua")
 dofile(MP.."/blocks/stash_inventory.lua")
