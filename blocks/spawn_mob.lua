@@ -103,7 +103,6 @@ minetest.register_node("epic:spawn_mob", {
 			if parts[1] == "CHG" then
 				local selected_mob = tonumber(parts[2])
 				meta:set_string("mobname", mob_names[selected_mob])
-				minetest.chat_send_all("Selected: " .. mob_names[selected_mob])
 				update_formspec(meta, pos)
 			end
 		end
