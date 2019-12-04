@@ -5,6 +5,7 @@ local FORMNAME = "epic_review"
 --  pos = position of review block
 --  player = player object
 --  stars = star rating: 1-5, 0 if aborted
+--  counter = number of reviews
 epic.on_review = function() end
 
 -- rate formspec for quest player
@@ -178,9 +179,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		stars = 5
 	end
 
-	meta:set_int("counter", meta:get_int("counter") + 1)
+	local counter = meta:get_int("counter")
+	meta:set_int("counter", counter + 1)
 
 	update_formspec(meta)
 	form_visited[player:get_player_name()] = true
-	epic.on_review(pos, player, stars)
+	epic.on_review(pos, player, stars, counter)
 end)
