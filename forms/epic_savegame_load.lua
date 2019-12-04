@@ -60,11 +60,14 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 
 		if not selected_pos then
+			-- nothing selected
 			return true
 		end
 
 		local node = epic.get_node(selected_pos)
 		if node.name ~= "epic:save" then
+			-- save node disappeared
+			-- TODO: remove level from topic
 			return true
 		end
 
@@ -72,11 +75,20 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 
 		if not target_pos then
+			-- no target position
 			return true
 		end
 
 		local destination_pos = epic.to_absolute_pos(selected_pos, target_pos)
-		player:set_pos(destination_pos)
+
+		node = epic.get_node(destination_pos)
+		if node.name == "epic:epic" then
+			-- execute epic on position
+			epic.start(playername, destination_pos)
+		else
+			-- teleport just above the position
+			player:set_pos(vector.add(destination_pos, {x=0, y=0.5, z=0}))
+		end
 	end
 
 	if fields.levelname then

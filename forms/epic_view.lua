@@ -26,17 +26,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 	local pos = minetest.string_to_pos(parts[2])
-	local meta = minetest.get_meta(pos)
-	local main_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("main_pos")))
-	local exit_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("exit_pos")))
-	local epic_name = meta:get_string("name")
-
-	if not main_pos then
-		return
-	end
 
 	if fields.start then
-		epic.execute_epic(player, main_pos, exit_pos, epic_name)
+		epic.start(player:get_player_name(), pos)
 	end
 
 end)

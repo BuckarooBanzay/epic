@@ -1,4 +1,29 @@
 
+-- starts the configured epic node at position
+epic.start = function(playername, pos)
+
+	local player = minetest.get_player_by_name(playername)
+
+	if not player then
+		-- player not online
+		return false
+	end
+
+	local meta = minetest.get_meta(pos)
+	local main_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("main_pos")))
+	local exit_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("exit_pos")))
+	local epic_name = meta:get_string("name")
+
+	if not main_pos then
+		-- no main position
+		return false
+	end
+
+	-- start epic
+	epic.execute_epic(player, main_pos, exit_pos, epic_name)
+	return true
+end
+
 -- abort epic if running
 epic.abort = function(playername)
 	if epic.state[playername] then
@@ -133,7 +158,7 @@ epic.is_epic = function(node)
   return nodedef.epic ~= nil
 end
 
--- executes an epic
+-- executes an epic with main and optional exit function
 epic.execute_epic = function(player, main_pos, exit_pos, name)
   if epic.state[player:get_player_name()] then
     -- already running a function
