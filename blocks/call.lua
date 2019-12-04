@@ -60,13 +60,25 @@ minetest.register_node("epic:call", {
   end,
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+    on_enter = function(pos, meta, player, ctx)
 			local target_pos_str = meta:get_string("pos")
 			local here_pos_str = minetest.pos_to_string({x=0, y=0, z=0})
 			if here_pos_str ~= target_pos_str then
-				-- call configured node
+				-- position of configured node
 				local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
-				ctx.call(target_pos)
+
+				local target_node = epic.get_node(target_pos)
+				if target_node == "epic:function" then
+					-- plain function call
+					ctx.call(target_pos)
+
+				elseif target_node == "epic:epic" then
+					-- next epic
+					ctx.abort("epic call")
+					epic.start(player:get_player_name(), target_pos)
+
+				end
+
 			else
 				-- recursion detected, proceed to next
 				ctx.next()
@@ -83,8 +95,8 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
 
-		elseif node.name ~= "epic:function" then
-			minetest.chat_send_player(playername, "[epic] target is not a function! aborting selection.")
+		elseif node.name ~= "epic:function" and node.name ~= "epic:epic" then
+			minetest.chat_send_player(playername, "[epic] target is not a function or an epic! aborting selection.")
 
 		else
 			local meta = minetest.get_meta(cfg_pos)
