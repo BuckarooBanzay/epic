@@ -98,7 +98,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 
 		else
 			local meta = minetest.get_meta(cfg_pos)
-			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
+			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
 			meta:set_string("pos", pos_str)
 			minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
 			update_formspec(meta)
