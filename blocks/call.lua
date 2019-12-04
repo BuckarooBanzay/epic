@@ -75,7 +75,10 @@ minetest.register_node("epic:call", {
 				elseif target_node == "epic:epic" then
 					-- next epic
 					ctx.abort("epic call")
-					epic.start(player:get_player_name(), target_pos)
+					local playername = player:get_player_name()
+					minetest.after(1, function()
+						epic.start(playername, target_pos)
+					end)
 
 				end
 
