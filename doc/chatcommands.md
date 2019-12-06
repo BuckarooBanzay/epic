@@ -10,3 +10,11 @@ Toggles the HUD-debug that shows all currently running epics with positions
 (the command-name is... "interesting", i know :D)
 
 Dumps the state of all or the given player to the console
+
+## /epic_abort
+
+Aborts the currently running epic
+
+## /epic_load [topic]
+
+Show a list of levels of the given topic for the current player

@@ -17,7 +17,7 @@ The setup:
 * Red wool: The "bad" way
 * "Alien face block" spawns a mob at the desired position
 
-The main configuration:
+The [Epic](./blocks/epic.md) configuration:
 
 <img src="./pics/simple_mission_config.png"/>
 

@@ -21,6 +21,7 @@
 
 * Add item
 * Remove items
+* Set chest items
 
 ## Various
 
@@ -28,6 +29,13 @@
 * Sleep/Delay
 * NOP
 * Random
+* Review
+* Stats
+
+## Savegame
+
+* Load
+* Save
 
 ## Mutex
 
@@ -38,3 +46,5 @@
 
 * Mesecons check
 * Mesecons emit
+* Lightning strike
+* Spawn mob
