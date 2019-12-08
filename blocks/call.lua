@@ -68,11 +68,17 @@ minetest.register_node("epic:call", {
 				local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 
 				local target_node = epic.get_node(target_pos)
-				if target_node == "epic:function" then
+				if not target_node then
+					-- invalid target, proceed
+					ctx.next()
+					return
+				end
+
+				if target_node.name == "epic:function" then
 					-- plain function call
 					ctx.call(target_pos)
 
-				elseif target_node == "epic:epic" then
+				elseif target_node.name == "epic:epic" then
 					-- next epic
 					ctx.abort("epic call")
 					local playername = player:get_player_name()
