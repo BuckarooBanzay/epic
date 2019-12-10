@@ -23,6 +23,11 @@ local execute = function(str, playername)
 		minetest.chat_send_player(playername, "Not a valid command: " .. commandname)
 		return
 	end
+
+	if command.privs and not minetest.check_player_privs(playername, command.privs) then
+		minetest.chat_send_player(playername, "Not enough privileges!")
+	end
+
 	command.func(playername, (params or ""))
 end
 
