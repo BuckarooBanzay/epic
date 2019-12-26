@@ -12,6 +12,7 @@ epic.start = function(playername, pos)
 	local meta = minetest.get_meta(pos)
 	local main_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("main_pos")))
 	local exit_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("exit_pos")))
+	local abort_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("abort_pos")))
 	local epic_name = meta:get_string("name")
 
 	if not main_pos then
@@ -20,7 +21,7 @@ epic.start = function(playername, pos)
 	end
 
 	-- start epic
-	epic.execute_epic(player, main_pos, exit_pos, epic_name)
+	epic.execute_epic(player, main_pos, exit_pos, abort_pos, epic_name)
 	return true
 end
 
@@ -159,7 +160,7 @@ epic.is_epic = function(node)
 end
 
 -- executes an epic with main and optional exit function
-epic.execute_epic = function(player, main_pos, exit_pos, name)
+epic.execute_epic = function(player, main_pos, exit_pos, abort_pos, name)
   if epic.state[player:get_player_name()] then
     -- already running a function
     return
@@ -174,11 +175,12 @@ epic.execute_epic = function(player, main_pos, exit_pos, name)
     stack = {},
     initialized = false,
 		exit_pos = exit_pos,
+		abort_pos = abort_pos,
     data = {},
     step_data = {}
   }
 
 	epic.state[player:get_player_name()] = state
-	epic.run_hook("on_execute_epic", { player, main_pos, exit_pos, state })
+	epic.run_hook("on_execute_epic", { player, main_pos, exit_pos, abort_pos, state })
 
 end

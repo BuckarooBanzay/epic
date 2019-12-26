@@ -21,6 +21,20 @@ local execute_exit_function = function(playername, state)
 end
 
 
+local execute_abort_function = function(playername, state)
+	if state.abort_pos then
+		-- execute abort pos
+		state.initialized = false
+		state.stack = {}
+		state.time = nil
+		state.ip = state.abort_pos
+		state.step_data = {}
+		state.exit_pos = state.exit_pos
+		execute_player_state(playername, state)
+	end
+end
+
+
 execute_player_state = function(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
@@ -134,12 +148,16 @@ execute_player_state = function(playername, state)
   if epic.abort_flag[playername] then
     local reason = epic.abort_flag[playername]
     epic.abort_flag[playername] = nil
+		epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
+
+		if state.abort_pos then
+				execute_abort_function(playername, state)
+		end
 
     if state.exit_pos then
         execute_exit_function(playername, state)
     end
 
-    epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
     epic.state[playername] = nil
     return
   end

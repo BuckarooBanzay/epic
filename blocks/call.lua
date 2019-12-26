@@ -41,7 +41,7 @@ minetest.register_node("epic:call", {
 		end
 
 		if fields.setfn then
-			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target function")
+			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target function or epic")
 			punch_handler[sender:get_player_name()] = pos
 		end
 
@@ -80,7 +80,6 @@ minetest.register_node("epic:call", {
 
 				elseif target_node.name == "epic:epic" then
 					-- next epic
-					ctx.abort("epic call")
 					local playername = player:get_player_name()
 					minetest.after(1, function()
 						epic.start(playername, target_pos)

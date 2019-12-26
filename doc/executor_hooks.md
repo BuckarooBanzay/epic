@@ -5,7 +5,7 @@
 epic.register_hook({
   -- called before an epic is called
   -- this is usually user-triggered (from epic or function)
-  on_execute_epic = function(player, main_pos, exit_pos, state) end,
+  on_execute_epic = function(player, main_pos, exit_pos, abort_pos, state) end,
 
   -- called before each node enter call
   on_before_node_enter = function(pos, player, ctx) end,
@@ -16,7 +16,7 @@ epic.register_hook({
   -- called before each node exit call
   on_before_node_exit = function(pos, player, ctx) end,
 
-  -- called on epic exit (before the abort call)
+  -- called on epic exit (after the abort call)
   on_epic_exit = function(playername, state) end,
 
   -- called on epic abort
