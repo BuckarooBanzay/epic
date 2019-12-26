@@ -6,7 +6,7 @@ local update_formspec = function(meta)
 
 	meta:set_string("formspec", "size[8,2;]" ..
 		-- col 1
-		"field[0.2,0.5;8,1;gravity;Gravity;" .. gravity .. "]" ..
+		"field[0.2,0.5;8,1;gravity;Gravity-multiplier;" .. gravity .. "]" ..
 
 		-- col 2
 		"button_exit[0.1,1.5;8,1;save;Save]" ..
@@ -51,7 +51,7 @@ minetest.register_node("epic:set_gravity", {
 
   epic = {
     on_enter = function(_, meta, player, ctx)
-	local gravity = tonumber(meta:get_string("gravity")) or 9.81
+	local gravity = tonumber(meta:get_string("gravity")) or 1
 	if use_player_monoids then
 		player_monoids.gravity:add_change(player, gravity, "epic:set_gravity")
 	else
@@ -69,7 +69,7 @@ epic.register_hook({
 			if use_player_monoids then
 				player_monoids.gravity:del_change(player, "epic:set_gravity")
 			else
-				player:set_physics_override({ gravity = 9.81 })
+				player:set_physics_override({ gravity = 1 })
 			end
 		end
 	end
