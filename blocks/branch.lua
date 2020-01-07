@@ -1,6 +1,5 @@
 
-local find_nearest
-find_nearest = function(pos, list, visited, allowed_axes)
+local function find_nearest(pos, list, visited, allowed_axes)
 
 	if visited[minetest.hash_node_position(pos)] then
 		return
