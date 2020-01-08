@@ -148,15 +148,18 @@ execute_player_state = function(playername, state)
   if epic.abort_flag[playername] then
     local reason = epic.abort_flag[playername]
     epic.abort_flag[playername] = nil
-		epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
 
 		if state.abort_pos then
 				execute_abort_function(playername, state)
 		end
 
+		epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
+
     if state.exit_pos then
         execute_exit_function(playername, state)
     end
+
+		epic.run_hook("on_epic_exit", {playername, state})
 
     epic.state[playername] = nil
     return
