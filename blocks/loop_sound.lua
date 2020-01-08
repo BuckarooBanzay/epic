@@ -1,6 +1,7 @@
 
 local update_formspec = function(meta)
 	local soundname = meta:get_string("soundname")
+	local gain = meta:get_string("gain") or "1.0"
 
 	meta:set_string("infotext", "Loop sound block: soundname: '" .. soundname .. "'")
 
@@ -23,10 +24,11 @@ local update_formspec = function(meta)
 		selected = i
 	end
 
-	meta:set_string("formspec", "size[8,6;]" ..
+	meta:set_string("formspec", "size[8,7;]" ..
 		"textlist[0,0.1;8,5;soundname;" .. list .. ";" .. selected .. "]" ..
 
-		"button_exit[0.1,5.5;8,1;save;Save]" ..
+		"field[0.3,5.8;8,1;gain;Gain;" .. gain .. "]" ..
+		"button_exit[0.1,6.5;8,1;save;Save]" ..
 		"")
 end
 
@@ -47,6 +49,7 @@ minetest.register_node("epic:loop_sound", {
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)
 		meta:set_string("soundname", "")
+		meta:set_string("gain", "1.0")
     update_formspec(meta, pos)
   end,
 
@@ -57,6 +60,10 @@ minetest.register_node("epic:loop_sound", {
 		end
 
 		local meta = minetest.get_meta(pos);
+
+		if fields.gain then
+			meta:set_string("gain", tonumber(fields.gain) or 1)
+		end
 
 		if fields.soundname then
 			local parts = fields.soundname:split(":")
@@ -73,9 +80,10 @@ minetest.register_node("epic:loop_sound", {
 					end
 				end
 				meta:set_string("soundname", sound_key)
-				update_formspec(meta, pos)
 			end
 		end
+
+		update_formspec(meta, pos)
 
   end,
 
@@ -88,6 +96,8 @@ minetest.register_node("epic:loop_sound", {
 			end
 
 			local soundname = meta:get_string("soundname")
+			local gain = tonumber( meta:get_string("gain") or "1.0" )
+
 			for _, sounddef in pairs(soundblock.sounds) do
 				if sounddef.key == soundname then
 					local filename = sounddef.filename
@@ -98,7 +108,7 @@ minetest.register_node("epic:loop_sound", {
 
 					ctx.data.loop_sound_handle = minetest.sound_play(filename, {
 						to_player = player:get_player_name(),
-						gain = 1.0,
+						gain = gain,
 						loop = true
 					})
 				end
