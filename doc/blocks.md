@@ -28,7 +28,7 @@
 
 * Execute command
 * Sleep/Delay
-* NOP
+* [NOP](./blocks/nop.md)
 * Random
 * Review
 * Stats
