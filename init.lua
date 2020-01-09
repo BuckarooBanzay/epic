@@ -93,7 +93,9 @@ if minetest.get_modpath("monitoring") then
 	dofile(MP.."/monitoring.lua")
 end
 
-dofile(MP.."/build_restriction.lua")
+if minetest.settings:get_bool("epic.build_restrictions") then
+	dofile(MP.."/build_restriction.lua")
+end
 
 if epic.log_executor then
 	dofile(MP.."/log_executor.lua")

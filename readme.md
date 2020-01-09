@@ -77,9 +77,10 @@ Optional:
 
 # Settings
 
-* **epic.log_executor** (bool) logs executor internals to the action log
+* **epic.log_executor** (bool, false) logs executor internals to the action log
 * **epic.hud.offsetx** (float) hud x offset
 * **epic.hud.offsety** (float) hud y offset
+* **epic.build_restrictions** (bool, false) if true you need the `epic_builder` priv to place epic blocks
 
 # Portability notes
 
