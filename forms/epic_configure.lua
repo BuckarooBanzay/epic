@@ -70,7 +70,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 	if fields.setmain then
 		punch_handler_main[playername] = pos
-		minetest.chat_send_player(playername, "[epic] please punch the function to set as main")
+		minetest.chat_send_player(playername, "[epic] please punch the function/epic to set as main")
 
 	elseif fields.setexit then
 		punch_handler_exit[playername] = pos
@@ -101,7 +101,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 
-minetest.register_on_punchnode(function(pos, _, puncher, _)
+minetest.register_on_punchnode(function(pos, node, puncher)
 	local playername = puncher:get_player_name()
 
 	-- set main
@@ -110,6 +110,9 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 		if minetest.is_protected(pos, playername) and
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+
+		elseif node.name ~= "epic:function" and node.name ~= "epic:epic" then
+			minetest.chat_send_player(playername, "[epic] target is not a function or an epic! aborting selection.")
 
 		else
 			local meta = minetest.get_meta(cfg_pos)
@@ -128,6 +131,9 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
 
+		elseif node.name ~= "epic:function" then
+			minetest.chat_send_player(playername, "[epic] target is not a function! aborting selection.")
+
 		else
 			local meta = minetest.get_meta(cfg_pos)
 			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
@@ -143,6 +149,9 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 		if minetest.is_protected(pos, playername) and
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+
+		elseif node.name ~= "epic:function" then
+			minetest.chat_send_player(playername, "[epic] target is not a function! aborting selection.")
 
 		else
 			local meta = minetest.get_meta(cfg_pos)
