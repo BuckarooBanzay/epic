@@ -6,10 +6,11 @@
 * [Epic starter](./blocks/epic.md)
 * [Function](./blocks/function.md)
 * [Call](./blocks/call.md)
-* Branch
+* [Branch](./blocks/branch.md)
 
 ## Player interaction/information
 
+* [Waypoint](./blocks/waypoint.md)
 * Chat message
 
 ## Audio/Visuals
@@ -47,4 +48,4 @@
 * Mesecons check
 * Mesecons emit
 * Lightning strike
-* Spawn mob
+* [Spawn mob](./blocks/spawn_mob.md)

@@ -7,8 +7,6 @@ Toggles the HUD-debug that shows all currently running epics with positions
 
 ## /epic_dump [player]
 
-(the command-name is... "interesting", i know :D)
-
 Dumps the state of all or the given player to the console
 
 ## /epic_abort
