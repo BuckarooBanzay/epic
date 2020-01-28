@@ -107,29 +107,34 @@ minetest.register_on_punchplayer(function(player, hitter, _, _, _, damage)
     kill_counter[name] = kill_counter[name] + 1
   end
 end)
-
 -- mobs
 minetest.register_on_mods_loaded(function()
-  for _,entity in pairs(minetest.registered_entities) do
-    if entity.on_punch ~= nil and entity.hp_min ~= nil and entity.hp_min > 0 then
-      local originalPunch = entity.on_punch
-      entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction)
-				if tool_capabilities.damage_groups ~= nil and
-				   tool_capabilities.damage_groups.fleshy ~= nil and
-				   self.health ~= nil then
-					local rest = tool_capabilities.damage_groups.fleshy
-					local damage = rest * 2
+	for _,entity in pairs(minetest.registered_entities) do
+		if entity.hp_min or entity.hp_min then -- Probably a mobs_redo mob
+			local originalPunch = entity.on_punch
+			local originalDie = entity.on_die
 
-					if hitter:is_player() and damage >= self.health then
-						local name = hitter:get_player_name()
-						if kill_counter[name] then
-							kill_counter[name] = kill_counter[name] + 1
-						end
-					end
+			entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction) -- Save the name of the attacker
+				if hitter:is_player() then
+					local name = hitter:get_player_name()
+
+					self.attacker = name
 				end
 
-        return originalPunch(self, hitter, time_from_last_punch, tool_capabilities, direction)
-      end
-    end
-  end
+				if originalPunch then
+					return originalPunch(self, hitter, time_from_last_punch, tool_capabilities, direction)
+				end
+			end
+			
+			entity.on_die = function(self, pos) -- Use the saved name to increase the killer's kill count when the mob dies
+				if self.attacker and kill_counter[self.attacker] then
+					kill_counter[self.attacker] = kill_counter[self.attacker] + 1
+				end
+				
+				if originalDie then
+					originalDie(self, pos)
+				end
+			end
+		end
+	end
 end)
