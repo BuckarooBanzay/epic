@@ -114,7 +114,8 @@ minetest.register_on_mods_loaded(function()
 			local originalPunch = entity.on_punch
 			local originalDie = entity.on_die
 
-			entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction) -- Save the name of the attacker
+			entity.on_punch = function(self, hitter, time_from_last_punch, tool_capabilities, direction)
+				-- Save the name of the attacker
 				if hitter:is_player() then
 					local name = hitter:get_player_name()
 
@@ -125,12 +126,12 @@ minetest.register_on_mods_loaded(function()
 					return originalPunch(self, hitter, time_from_last_punch, tool_capabilities, direction)
 				end
 			end
-			
+
 			entity.on_die = function(self, pos) -- Use the saved name to increase the killer's kill count when the mob dies
 				if self.attacker and kill_counter[self.attacker] then
 					kill_counter[self.attacker] = kill_counter[self.attacker] + 1
 				end
-				
+
 				if originalDie then
 					originalDie(self, pos)
 				end
