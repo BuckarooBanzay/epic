@@ -1,11 +1,9 @@
 
 epic.register_hook({
-  on_execute_epic = function(player, main_pos, exit_pos, abort_pos, state)
+  on_execute_epic = function(player, main_pos, state)
     minetest.log("action", "[epic] on_execute_epic player=" ..
       player:get_player_name() ..
       " main_pos=" .. minetest.pos_to_string(main_pos) ..
-			" exit_pos=" .. minetest.pos_to_string(exit_pos or {x=0,y=0,z=0}) ..
-			" abort_pos=" .. minetest.pos_to_string(abort_pos or {x=0,y=0,z=0}) ..
       " state=" .. dump(state))
   end,
 

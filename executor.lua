@@ -1,47 +1,14 @@
 
 -- time in seconds between executor calls
 local executor_dtime = 0.1
-local execute_player_state
 
-local clear_state = function(playername)
-  epic.state[playername] = nil
-end
-
-local execute_exit_function = function(playername, state)
-	if state.exit_pos then
-		-- execute exit pos
-		state.initialized = false
-		state.stack = {}
-		state.time = nil
-		state.ip = state.exit_pos
-		state.step_data = {}
-		state.exit_pos = nil
-		execute_player_state(playername, state)
-	end
-end
-
-
-local execute_abort_function = function(playername, state)
-	if state.abort_pos then
-		-- execute abort pos
-		state.initialized = false
-		state.stack = {}
-		state.time = nil
-		state.ip = state.abort_pos
-		state.step_data = {}
-		state.exit_pos = state.exit_pos
-		execute_player_state(playername, state)
-	end
-end
-
-
-execute_player_state = function(playername, state)
+function epic.execute_player_state(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
 
   if not pos then
     -- invalid state
-    clear_state(playername)
+    epic.state[playername] = nil
     return
   end
 
@@ -59,18 +26,11 @@ execute_player_state = function(playername, state)
       state.step_data = {}
       epic.debug("[executor] pop stack result: " .. minetest.pos_to_string(state.ip))
 
-      execute_player_state(playername, state)
+      epic.execute_player_state(playername, state)
     else
       -- done
-      if state.exit_pos then
-        execute_exit_function(playername, state)
-
-      else
-        -- all done
-        epic.run_hook("on_epic_exit", {playername, state})
-        clear_state(playername)
-
-      end
+      epic.run_hook("on_epic_exit", {playername, state})
+      epic.state[playername] = nil
     end
 
     return
@@ -78,6 +38,7 @@ execute_player_state = function(playername, state)
 
   local result_next = false
   local result_next_pos = nil
+  local abort_flag
 
   local ctx = {
     -- next step
@@ -87,7 +48,7 @@ execute_player_state = function(playername, state)
     end,
     -- abort epic with given reason
     abort = function(reason)
-      epic.abort_flag[playername] = reason or "ctx.abort"
+      abort_flag = reason or "ctx.abort"
     end,
     -- call another epic block
     call = function(_pos)
@@ -134,33 +95,19 @@ execute_player_state = function(playername, state)
   if state.time then
     state.time = state.time - executor_dtime
     if state.time < 0 then
-      epic.abort_flag[playername] = "epic_timeout"
+      abort_flag = "epic_timeout"
     end
   end
 
-  if epic.abort_flag[playername] or result_next then
+  if abort_flag or result_next then
     epic.run_hook("on_before_node_exit", { pos, player, ctx })
     if epicdef.on_exit then
       epicdef.on_exit(pos, meta, player, ctx)
     end
   end
 
-  if epic.abort_flag[playername] then
-    local reason = epic.abort_flag[playername]
-    epic.abort_flag[playername] = nil
-
-		if state.abort_pos then
-				execute_abort_function(playername, state)
-		end
-
-		epic.run_hook("on_epic_abort", { playername, epic.state[playername], reason })
-
-    if state.exit_pos then
-        execute_exit_function(playername, state)
-    end
-
-		epic.run_hook("on_epic_exit", {playername, state})
-
+  if abort_flag then
+	  epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag })
     epic.state[playername] = nil
     return
   end
@@ -170,7 +117,7 @@ execute_player_state = function(playername, state)
     state.ip = next_pos
     state.initialized = false
     state.step_data = {}
-    execute_player_state(playername, state)
+    epic.execute_player_state(playername, state)
   end
 
 end
@@ -180,7 +127,7 @@ local executor
 executor = function()
   local t0 = minetest.get_us_time()
   for playername, state in pairs(epic.state) do
-    execute_player_state(playername, state)
+    epic.execute_player_state(playername, state)
   end
   local t1 = minetest.get_us_time()
   local stats = {
@@ -202,15 +149,16 @@ minetest.register_on_leaveplayer(function(player, timed_out)
   local playername = player:get_player_name()
   local state = epic.state[playername]
   if state then
+    local reason
     if timed_out then
-      epic.abort_flag[playername] = "leave_timed_out"
+      reason = "leave_timed_out"
     else
-      epic.abort_flag[playername] = "leave"
+      reason = "leave"
     end
     if epic.log_executor then
       minetest.log("action", "[epic] player left the game: " .. playername)
     end
-    execute_player_state(playername, state)
+    epic.run_hook("on_epic_abort", { playername, state, reason })
   end
 end)
 
@@ -221,7 +169,6 @@ minetest.register_on_dieplayer(function(player)
     if epic.log_executor then
       minetest.log("action", "[epic] player died: " .. playername)
     end
-    epic.abort_flag[playername] = "died"
-    execute_player_state(playername, state)
+    epic.run_hook("on_epic_abort", { playername, state, "died" })
   end
 end)

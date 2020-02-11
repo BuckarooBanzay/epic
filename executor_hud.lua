@@ -40,7 +40,7 @@ local function setup(playername, name)
 end
 
 epic.register_hook({
-  on_execute_epic = function(player, _, _, _, state)
+  on_execute_epic = function(player, _, state)
     setup(player:get_player_name(), state.name)
   end,
 
