@@ -29,8 +29,8 @@ function epic.execute_player_state(playername, state)
       epic.execute_player_state(playername, state)
     else
       -- done
+			epic.state[playername] = nil
       epic.run_hook("on_epic_exit", {playername, state})
-      epic.state[playername] = nil
     end
 
     return
@@ -38,7 +38,7 @@ function epic.execute_player_state(playername, state)
 
   local result_next = false
   local result_next_pos = nil
-  local abort_flag
+  local abort_flag = state.abort
 
   local ctx = {
     -- next step
@@ -69,9 +69,6 @@ function epic.execute_player_state(playername, state)
     data = state.data,
     step_data = state.step_data
   }
-
-  minetest.log("action", "[epic] player " .. playername ..
-    " executes block at " .. minetest.pos_to_string(pos))
 
   local nodedef = minetest.registered_nodes[node.name]
   local epicdef = nodedef.epic
@@ -108,7 +105,6 @@ function epic.execute_player_state(playername, state)
 
   if abort_flag then
 	  epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag })
-    epic.state[playername] = nil
     return
   end
 
@@ -159,6 +155,7 @@ minetest.register_on_leaveplayer(function(player, timed_out)
       minetest.log("action", "[epic] player left the game: " .. playername)
     end
     epic.run_hook("on_epic_abort", { playername, state, reason })
+		epic.state[playername] = nil
   end
 end)
 
@@ -170,5 +167,6 @@ minetest.register_on_dieplayer(function(player)
       minetest.log("action", "[epic] player died: " .. playername)
     end
     epic.run_hook("on_epic_abort", { playername, state, "died" })
+		epic.state[playername] = nil
   end
 end)

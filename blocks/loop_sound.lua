@@ -118,12 +118,14 @@ minetest.register_node("epic:loop_sound", {
   }
 })
 
+local function cleanup(_, state)
+	if state and state.data and state.data.loop_sound_handle then
+		minetest.sound_stop(state.data.loop_sound_handle)
+		state.data.loop_sound_handle = nil
+	end
+end
 
 epic.register_hook({
-  on_epic_exit = function(_, state)
-		if state and state.data and state.data.loop_sound_handle then
-			minetest.sound_stop(state.data.loop_sound_handle)
-			state.data.loop_sound_handle = nil
-		end
-	end
+  on_epic_exit = cleanup,
+	on_epic_abort = cleanup
 })

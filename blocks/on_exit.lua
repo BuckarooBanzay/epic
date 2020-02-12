@@ -22,7 +22,7 @@ minetest.register_node("epic:on_exit", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png^epic_call.png",
+		"epic_node_bg.png^epic_call.png^[colorize:#FF0000:100",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
@@ -115,7 +115,9 @@ epic.register_hook({
 			if node.name == "epic:function" then
 				-- modify instruction pointer on state, flush stack
 				state.ip = state.data.exit_callback_pos
+				state.data.exit_callback_pos = nil
 				state.stack = {}
+				epic.state[playername] = nil
 				epic.execute_player_state(playername, state)
 			end
 		end

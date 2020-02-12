@@ -22,7 +22,7 @@ minetest.register_node("epic:on_abort", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png^epic_call.png",
+		"epic_node_bg.png^epic_call.png^[colorize:#FF0000:100",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
@@ -110,12 +110,15 @@ end)
 epic.register_hook({
   -- called on epic abort
   on_epic_abort = function(playername, state)
-		if state.data.exit_callback_pos then
+		if state.data.abort_callback_pos then
 			local node = epic.get_node(state.data.abort_callback_pos)
 			if node.name == "epic:function" then
 				-- modify instruction pointer on state, flush stack
 				state.ip = state.data.abort_callback_pos
+				state.abort = nil
+				state.data.abort_callback_pos = nil
 				state.stack = {}
+				epic.state[playername] = nil
 				epic.execute_player_state(playername, state)
 			end
 		end

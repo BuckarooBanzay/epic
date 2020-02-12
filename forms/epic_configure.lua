@@ -11,7 +11,7 @@ epic.form.epic_configure = function(pos, playername)
 	local name = meta:get_string("name")
 	local main_pos = meta:get_string("main_pos") or "<none>"
 
-	local formspec = "size[8,8;]" ..
+	local formspec = "size[8,6;]" ..
 		"label[0,0;Epic start block]" ..
 
 		"field[0.2,1.5;8,1;name;Name;" .. name .. "]" ..

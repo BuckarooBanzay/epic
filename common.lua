@@ -37,9 +37,9 @@ epic.abort = function(playername)
 	local state = epic.state[playername]
 	if state then
 		if epic.log_executor then
-			minetest.log("action", "[epic] player died: " .. playername)
+			minetest.log("action", "[epic] player aborted manually: " .. playername)
 		end
-		epic.run_hook("on_epic_abort", { playername, state, "manual" })
+		state.abort = "manual"
 	end
 end
 

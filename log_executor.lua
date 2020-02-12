@@ -7,7 +7,14 @@ epic.register_hook({
       " state=" .. dump(state))
   end,
 
-  on_before_node_enter = function(pos, player)
+	on_before_node_check = function(pos, player)
+    minetest.log("action", "[epic] on_before_node_check player=" ..
+      player:get_player_name() ..
+      " pos=" .. minetest.pos_to_string(pos) ..
+      " node=" .. minetest.get_node(pos).name)
+  end,
+
+	on_before_node_enter = function(pos, player)
     minetest.log("action", "[epic] on_before_node_enter player=" ..
       player:get_player_name() ..
       " pos=" .. minetest.pos_to_string(pos) ..
