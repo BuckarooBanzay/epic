@@ -1,4 +1,14 @@
 
+-- creates an empty state, ready for execution
+epic.new_state = function()
+	return {
+		stack = {},
+		data = {},
+		step_data = {},
+		initialized = false
+	}
+end
+
 -- starts the configured epic node at position
 epic.start = function(playername, pos)
 
@@ -180,14 +190,10 @@ epic.execute_epic = function(player, main_pos, name)
   minetest.log("action", "[epic] player " .. player:get_player_name() ..
     " executes function at " .. minetest.pos_to_string(main_pos))
 
-  local state = {
-    ip = main_pos,
-		name = name,
-    stack = {},
-    initialized = false,
-    data = {},
-    step_data = {}
-  }
+	local state = epic.new_state()
+
+	state.ip = main_pos
+	state.name = name
 
 	epic.state[player:get_player_name()] = state
 	epic.run_hook("on_execute_epic", { player, main_pos, state })

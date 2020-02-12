@@ -114,12 +114,10 @@ epic.register_hook({
 			local node = epic.get_node(state.data.abort_callback_pos)
 			if node.name == "epic:function" then
 				-- modify instruction pointer on state, flush stack
-				state.ip = state.data.abort_callback_pos
-				state.abort = nil
-				state.data.abort_callback_pos = nil
-				state.stack = {}
+				local new_state = epic.new_state()
+				new_state.ip = state.data.abort_callback_pos
 				epic.state[playername] = nil
-				epic.execute_player_state(playername, state)
+				epic.execute_player_state(playername, new_state)
 			end
 		end
 	end,
