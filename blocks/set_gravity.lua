@@ -62,15 +62,18 @@ minetest.register_node("epic:set_gravity", {
   }
 })
 
-epic.register_hook({
-  on_epic_exit = function(playername)
-		local player = minetest.get_player_by_name(playername)
-		if player then
-			if use_player_monoids then
-				player_monoids.gravity:del_change(player, "epic:set_gravity")
-			else
-				player:set_physics_override({ gravity = 1 })
-			end
+local function cleanup(playername)
+	local player = minetest.get_player_by_name(playername)
+	if player then
+		if use_player_monoids then
+			player_monoids.gravity:del_change(player, "epic:set_gravity")
+		else
+			player:set_physics_override({ gravity = 1 })
 		end
 	end
+end
+
+epic.register_hook({
+  on_epic_exit = cleanup,
+	on_epic_abort = cleanup
 })

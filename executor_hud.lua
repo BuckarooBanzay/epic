@@ -39,29 +39,32 @@ local function setup(playername, name)
   hud[playername] = data
 end
 
+local function exit_cleanup(playername)
+	local data = hud[playername]
+	local player = minetest.get_player_by_name(playername)
+
+	if not data or not player then
+		return
+	end
+
+	if data.name then
+		player:hud_remove(data.name)
+	end
+
+	if data.time then
+		player:hud_remove(data.time)
+	end
+
+	hud[playername] = nil
+end
+
 epic.register_hook({
-  on_execute_epic = function(player, _, _, _, state)
+  on_execute_epic = function(player, _, state)
     setup(player:get_player_name(), state.name)
   end,
 
-  on_epic_exit = function(playername)
-    local data = hud[playername]
-    local player = minetest.get_player_by_name(playername)
-
-    if not data or not player then
-      return
-    end
-
-    if data.name then
-      player:hud_remove(data.name)
-    end
-
-    if data.time then
-      player:hud_remove(data.time)
-    end
-
-    hud[playername] = nil
-  end,
+  on_epic_exit = exit_cleanup,
+	on_epic_abort = exit_cleanup
 })
 
 local update

@@ -5,9 +5,6 @@ epic = {
 	-- playername => player_state
 	state = {},
 
-	-- playername => reason
-	abort_flag = {},
-
 	hud = {
 		posx = tonumber(minetest.settings:get("epic.hud.offsetx") or 0.5),
 		posy = tonumber(minetest.settings:get("epic.hud.offsety") or 0.2)
@@ -37,6 +34,8 @@ dofile(MP.."/forms/epic_savegame_load_configure.lua")
 -- blocks
 dofile(MP.."/blocks/epic.lua")
 dofile(MP.."/blocks/nop.lua")
+dofile(MP.."/blocks/on_exit.lua")
+dofile(MP.."/blocks/on_abort.lua")
 dofile(MP.."/blocks/function.lua")
 dofile(MP.."/blocks/message.lua")
 dofile(MP.."/blocks/waypoint.lua")

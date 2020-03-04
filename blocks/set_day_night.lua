@@ -70,12 +70,14 @@ minetest.register_node("epic:daynightratio", {
   }
 })
 
+local function cleanup(playername)
+	local player = minetest.get_player_by_name(playername)
+	if player then
+		player:override_day_night_ratio(nil)
+	end
+end
 
 epic.register_hook({
-  on_epic_exit = function(playername)
-		local player = minetest.get_player_by_name(playername)
-		if player then
-			player:override_day_night_ratio(nil)
-		end
-	end
+  on_epic_exit = cleanup,
+	on_epic_abort = cleanup
 })

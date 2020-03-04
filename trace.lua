@@ -11,22 +11,23 @@ local function enable_hud(player)
 end
 
 local function update_hud(player)
+	local trace_player_name = player:get_player_name()
 	local hud_data = hud[player:get_player_name()]
 	for _, other_player in ipairs(minetest.get_connected_players()) do
 		local name = other_player:get_player_name()
 		local state = epic.get_state(name)
 
-		if hud_data[name] and state then
+		if hud_data[trace_player_name] and state then
 			-- update existing entry
-			player:hud_change(hud_data[name], "world_pos", state.ip)
+			player:hud_change(hud_data[trace_player_name], "world_pos", state.ip)
 
-		elseif hud_data[name] and not state then
+		elseif hud_data[trace_player_name] and not state then
 			-- remove entry
-			player:hud_remove(hud_data[name])
+			player:hud_remove(hud_data[trace_player_name])
 
-		elseif not hud_data[name] and state then
+		elseif not hud_data[trace_player_name] and state then
 			-- add existing entry
-			hud_data[name] = player:hud_add({
+			hud_data[trace_player_name] = player:hud_add({
 				hud_elem_type = "waypoint",
 				name = "EPIC:" .. name,
 				text = "m",

@@ -22,5 +22,22 @@ minetest.register_node("epic:epic", {
 			-- configure
 			epic.form.epic_configure(pos, playername)
 		end
-	end
+	end,
+
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				for _, player in ipairs(minetest.get_connected_players()) do
+					local ppos = player:get_pos()
+
+					if vector.distance(pos, ppos) < 16 then
+						-- player is within 16 nodes range, start epic
+						epic.start(player:get_player_name(), pos)
+					end
+				end
+			end
+	  }
+	},
+
 })

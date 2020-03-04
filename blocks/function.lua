@@ -46,7 +46,7 @@ minetest.register_node("epic:function", {
 
     if fields.execute then
 			local name = "function@" .. minetest.pos_to_string(pos)
-      epic.execute_epic(sender, pos, nil, nil, name)
+      epic.execute_epic(sender, pos, name)
     end
 
   end
