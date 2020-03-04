@@ -22,7 +22,7 @@ minetest.register_node("epic:on_abort", {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
 		"epic_node_bg.png",
-		"epic_node_bg.png^epic_call.png^[colorize:#FF0000:100",
+		"epic_node_bg.png^epic_exit.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
