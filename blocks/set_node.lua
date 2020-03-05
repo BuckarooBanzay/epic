@@ -20,6 +20,22 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_set(pos, meta)
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
+	local owner = meta:get_string("owner")
+	if minetest.is_protected(target_pos, owner) then
+		return
+	end
+
+	local inv = meta:get_inventory()
+	local stack = inv:get_stack("main", 1)
+	local node_name = stack:get_name()
+	if node_name == "ignore" or node_name == "" then
+		node_name = "air"
+	end
+	minetest.set_node(target_pos, { name = node_name })
+end
+
 minetest.register_node("epic:setnode", {
 	description = "Epic set node block",
 	tiles = {
@@ -86,22 +102,20 @@ minetest.register_node("epic:setnode", {
 
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
-			local owner = meta:get_string("owner")
-			if minetest.is_protected(target_pos, owner) then
-				return
-			end
-
-			local inv = meta:get_inventory()
-			local stack = inv:get_stack("main", 1)
-			local node_name = stack:get_name()
-			if node_name == "ignore" or node_name == "" then
-				node_name = "air"
-			end
-			minetest.set_node(target_pos, { name = node_name })
+			do_set(pos, meta)
 			ctx.next()
     end
-  }
+  },
+
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_set(pos, meta)
+			end
+	  }
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)
