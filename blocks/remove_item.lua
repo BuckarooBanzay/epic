@@ -18,6 +18,21 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_remove(pos, meta)
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
+	local radius = tonumber(meta:get_string("radius")) or 5
+
+	if radius > 20 or radius < 1 then
+		radius = 1
+	end
+
+	local objects = minetest.get_objects_inside_radius(target_pos, radius)
+	for _, object in ipairs(objects) do
+		object:remove()
+	end
+
+end
+
 minetest.register_node("epic:removeitem", {
 	description = "Epic remove item block",
 	tiles = {
@@ -68,21 +83,20 @@ minetest.register_node("epic:removeitem", {
 
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
-			local radius = tonumber(meta:get_string("radius")) or 5
-
-			if radius > 20 or radius < 1 then
-				radius = 1
-			end
-
-			local objects = minetest.get_objects_inside_radius(target_pos, radius)
-			for _, object in ipairs(objects) do
-				object:remove()
-			end
-
+			do_remove(pos, meta)
 			ctx.next()
     end
-  }
+  },
+
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_remove(pos, meta)
+			end
+	  }
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)
