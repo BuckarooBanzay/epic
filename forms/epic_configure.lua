@@ -78,8 +78,8 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
 			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
 
-		elseif node.name ~= "epic:function" and node.name ~= "epic:epic" then
-			minetest.chat_send_player(playername, "[epic] target is not a function or an epic! aborting selection.")
+		elseif node.name ~= "epic:function" then
+			minetest.chat_send_player(playername, "[epic] target is not a function! aborting selection.")
 
 		else
 			local meta = minetest.get_meta(cfg_pos)

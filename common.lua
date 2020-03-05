@@ -28,18 +28,10 @@ epic.start = function(playername, pos)
 		return false
 	end
 
-	local main_node = epic.get_node(main_pos)
-	if main_node.name == "epic:epic" then
-		-- delegate to "real" epic block
-		-- TODO: detect recursion here
-		return epic.start(playername, main_pos)
+	-- start epic
+	epic.execute_epic(player, main_pos, epic_name)
 
-	else
-		-- start epic
-		epic.execute_epic(player, main_pos, epic_name)
-		return true
-	end
-
+	return true
 end
 
 -- abort epic if running
@@ -180,7 +172,7 @@ epic.is_epic = function(node)
   return nodedef.epic ~= nil
 end
 
--- executes an epic with main and optional exit function
+-- executes an epic function
 epic.execute_epic = function(player, main_pos, name)
   if epic.state[player:get_player_name()] then
     -- already running a function
