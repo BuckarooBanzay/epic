@@ -1,5 +1,6 @@
 digraph {
   on_enter -> on_check [label=initialize];
   on_check -> on_check;
-  on_check -> on_exit [label="ctx.next()/abort/leave"];
+  on_check -> on_exit [label="ctx.next()"];
+  on_check -> on_abort [label="abort/leave"];
 }
