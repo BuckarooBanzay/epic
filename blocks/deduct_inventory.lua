@@ -52,8 +52,6 @@ minetest.register_node("epic:deduct_inv", {
 
 	epic = {
     on_check = function(_, meta, player, ctx)
-      ctx.data.stashed_items = ctx.data.stashed_items or {}
-
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
