@@ -67,6 +67,7 @@ dofile(MP.."/blocks/unstash_inventory.lua")
 dofile(MP.."/blocks/deduct_inventory.lua")
 dofile(MP.."/blocks/filter_inventory.lua")
 dofile(MP.."/blocks/check_empty_inventory.lua")
+dofile(MP.."/blocks/check_empty_armor.lua")
 
 if minetest.get_modpath("mobs") then
 	dofile(MP.."/blocks/spawn_mob.lua")
