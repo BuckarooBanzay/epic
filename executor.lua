@@ -105,6 +105,7 @@ function epic.execute_player_state(playername, state)
 
   if abort_flag then
 	  epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag })
+    epic.state[playername] = nil
     return
   end
 
