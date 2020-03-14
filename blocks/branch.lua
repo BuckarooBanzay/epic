@@ -99,7 +99,21 @@ minetest.register_node("epic:branch", {
 				}
 
 				if nodedef.epic and nodedef.epic.on_enter then
+					if epic.log_executor then
+						minetest.log("action", "[epic::branch] on_before_node_enter player=" ..
+							player:get_player_name() ..
+							" pos=" .. minetest.pos_to_string(target_pos) ..
+							" node=" .. minetest.get_node(target_pos).name)
+					end
+
 					nodedef.epic.on_enter(target_pos, minetest.get_meta(target_pos), player, sub_ctx)
+
+					if epic.log_executor then
+						minetest.log("action", "[epic::branch] on_before_node_exit player=" ..
+				      player:get_player_name() ..
+				      " pos=" .. minetest.pos_to_string(target_pos) ..
+				      " node=" .. minetest.get_node(target_pos).name)
+					end
 				end
 			end
     end,
@@ -122,6 +136,13 @@ minetest.register_node("epic:branch", {
 				}
 
 				if nodedef.epic and nodedef.epic.on_check then
+					if epic.log_executor then
+						minetest.log("action", "[epic::branch] on_before_node_check player=" ..
+				      player:get_player_name() ..
+				      " pos=" .. minetest.pos_to_string(target_pos) ..
+				      " node=" .. minetest.get_node(target_pos).name)
+					end
+
 					nodedef.epic.on_check(target_pos, minetest.get_meta(target_pos), player, sub_ctx)
 				end
 			end
