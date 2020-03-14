@@ -14,7 +14,7 @@ minetest.register_node("epic:nop", {
 	on_rotate = screwdriver.rotate_simple,
 
   epic = {
-    on_enter = function(_, _, _, ctx)
+    on_check = function(_, _, _, ctx)
 			ctx.next()
     end
   }
