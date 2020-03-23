@@ -52,7 +52,7 @@ minetest.register_node("epic:waypoint", {
 
 		local meta = minetest.get_meta(pos);
 
-    if fields.save then
+    if fields.save or fields.setpos then
 			local radius = tonumber(fields.radius) or 3
 			if radius < 0 then
 				radius = 1
