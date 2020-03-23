@@ -116,6 +116,7 @@ minetest.register_on_punchnode(function(pos, _, puncher, _)
 		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
 		meta:set_string("pos", pos_str)
 		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+		update_formspec(meta, cfg_pos)
 		punch_handler[playername] = nil
 	end
 end)
