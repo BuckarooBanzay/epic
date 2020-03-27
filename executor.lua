@@ -6,9 +6,12 @@ function epic.execute_player_state(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
 
+	epic.debug("[executor] execute_player_state(" .. playername .. "))")
+
   if not pos then
     -- invalid state
     epic.state[playername] = nil
+		minetest.log("warn", "[epic][executor] invalid opcode encountered, state-dump: " .. dump(state))
     return
   end
 
@@ -104,8 +107,8 @@ function epic.execute_player_state(playername, state)
   end
 
   if abort_flag then
-	  epic.run_hook("on_epic_abort", { playername, epic.state[playername], abort_flag })
-    epic.state[playername] = nil
+		epic.state[playername] = nil
+	  epic.run_hook("on_epic_abort", { playername, state, abort_flag })
     return
   end
 
@@ -155,8 +158,9 @@ minetest.register_on_leaveplayer(function(player, timed_out)
     if epic.log_executor then
       minetest.log("action", "[epic] player left the game: " .. playername)
     end
-    epic.run_hook("on_epic_abort", { playername, state, reason })
+
 		epic.state[playername] = nil
+    epic.run_hook("on_epic_abort", { playername, state, reason })
   end
 end)
 
@@ -167,7 +171,7 @@ minetest.register_on_dieplayer(function(player)
     if epic.log_executor then
       minetest.log("action", "[epic] player died: " .. playername)
     end
-    epic.run_hook("on_epic_abort", { playername, state, "died" })
 		epic.state[playername] = nil
+    epic.run_hook("on_epic_abort", { playername, state, "died" })
   end
 end)

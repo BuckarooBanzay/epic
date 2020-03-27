@@ -116,8 +116,8 @@ epic.register_hook({
 				-- modify instruction pointer on state, flush stack
 				local new_state = epic.new_state()
 				new_state.ip = state.data.abort_callback_pos
-				epic.state[playername] = nil
-				epic.execute_player_state(playername, new_state)
+				-- replace global state
+				epic.state[playername] = new_state
 			end
 		end
 	end,
