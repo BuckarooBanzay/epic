@@ -6,6 +6,11 @@ function epic.execute_player_state(playername, state)
   local pos = state.ip
   local player = minetest.get_player_by_name(playername)
 
+	if not player then
+		minetest.log("warn", "[epic][executor] player not found, aborting: " .. playername)
+		return
+	end
+
 	epic.debug("[executor] execute_player_state(" .. playername .. "))")
 
   if not pos then
