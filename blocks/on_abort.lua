@@ -53,7 +53,7 @@ minetest.register_node("epic:on_abort", {
 								sender:get_player_name(),
 								epic.to_absolute_pos(pos, target_pos),
 								"Target position",
-								2
+								10
 							)
 			end
 		end
