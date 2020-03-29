@@ -5,7 +5,7 @@ local function find_nearest(pos, list, visited, allowed_axes)
 		return
 	end
 
-	local node = minetest.get_node(pos)
+	local node = epic.get_node(pos)
 	if epic.is_epic(node) then
 		table.insert(list, pos)
 	end
@@ -30,6 +30,8 @@ local function find_nearest(pos, list, visited, allowed_axes)
 		pos2.z = pos.z + 1
 	end
 
+	-- load area with vmanip
+	minetest.get_voxel_manip(pos1, pos2)
 	local nodes = minetest.find_nodes_in_area(pos1, pos2, {"group:epic"})
 
 	for _, node_pos in ipairs(nodes) do
@@ -73,7 +75,7 @@ minetest.register_node("epic:branch", {
   epic = {
     on_enter = function(pos, _, player, ctx)
 
-			local node = minetest.get_node(pos)
+			local node = epic.get_node(pos)
 			local direction = epic.get_direction(node.param2)
 			local pos_list = find_epic_blocks_in_plane(pos, direction)
 			local next_called = false
