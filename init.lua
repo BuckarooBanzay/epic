@@ -22,6 +22,7 @@ dofile(MP.."/executor.lua")
 dofile(MP.."/executor_hooks.lua")
 dofile(MP.."/executor_hud.lua")
 dofile(MP.."/trace.lua")
+dofile(MP.."/effects/skybox.lua")
 dofile(MP.."/util/savegame.lua")
 
 -- forms
@@ -97,7 +98,8 @@ end
 
 if minetest.get_modpath("areas") then
 	-- load area mod extensions
-	dofile(MP.."/areas/service.lua")
+	dofile(MP.."/data_area/service.lua")
+	dofile(MP.."/data_area/skybox.lua")
 end
 
 if minetest.settings:get_bool("epic.build_restrictions") then

@@ -55,6 +55,7 @@ For a demo visit the [Damocles](https://damocles.minetest.land) server.
 * [Privilieges](doc/privs.md)
 * [Chat commands](doc/chatcommands.md)
 * [Best practices](doc/best-practices.md)
+* [Area commands](doc/area-commands.md)
 
 # Dependencies
 
