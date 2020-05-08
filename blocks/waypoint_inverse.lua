@@ -22,7 +22,7 @@ local update_formspec = function(meta)
 		"")
 end
 
-minetest.register_node("epic:waypoint", {
+minetest.register_node("epic:waypoint_inverse", {
 	description = "Epic inverse waypoint block: checks if the player is outside of the defined radius",
 	tiles = {
 		"epic_node_bg.png",
