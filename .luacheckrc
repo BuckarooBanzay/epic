@@ -20,5 +20,6 @@ read_globals = {
 	"player_monoids",
 	"soundblock",
 	"monitoring",
-	"mobs"
+	"mobs",
+	"areas"
 }

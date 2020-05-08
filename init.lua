@@ -95,6 +95,11 @@ if minetest.get_modpath("monitoring") then
 	dofile(MP.."/monitoring.lua")
 end
 
+if minetest.get_modpath("areas") then
+	-- load area mod extensions
+	dofile(MP.."/areas/service.lua")
+end
+
 if minetest.settings:get_bool("epic.build_restrictions") then
 	dofile(MP.."/build_restriction.lua")
 end
