@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:message", {
-	description = "Epic message block",
+	description = "Epic message block: displays a chat message to the player",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

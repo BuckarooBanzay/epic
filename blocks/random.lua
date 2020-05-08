@@ -1,6 +1,6 @@
 
 minetest.register_node("epic:random", {
-	description = "Epic random block",
+	description = "Epic random block: succeeds randomly (for randomized branches in quests)",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

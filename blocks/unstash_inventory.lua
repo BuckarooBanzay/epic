@@ -1,7 +1,7 @@
 
 
 minetest.register_node("epic:unstash_inv", {
-	description = "Epic unstash inventory block",
+	description = "Epic unstash inventory block: moves the player inventory to the player again",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

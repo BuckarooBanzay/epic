@@ -25,7 +25,8 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:teleport_relative", {
-	description = "Epic Teleport relative block",
+	description = "Epic Teleport relative block: teleports the player to the target coordinates " ..
+		"with respect to the source-coordinates (smooth teleport)",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

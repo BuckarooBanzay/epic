@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:stash_inv", {
-	description = "Epic stash inventory block",
+	description = "Epic stash inventory block: moves the player inventory temporarily away from the player",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

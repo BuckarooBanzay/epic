@@ -27,7 +27,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:setskybox", {
-	description = "Epic set skybox block",
+	description = "Epic set skybox block: sets the skybox for the player",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -65,7 +65,7 @@ local function do_spawn(pos, meta)
 end
 
 minetest.register_node("epic:spawn_mob", {
-	description = "Epic Spawn mob block",
+	description = "Epic Spawn mob block: spawns a mob at the given position",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -32,7 +32,7 @@ local execute = function(str, playername)
 end
 
 minetest.register_node("epic:command", {
-	description = "Epic command block",
+	description = "Epic command block: executes a chat-command",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

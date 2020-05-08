@@ -15,7 +15,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:call", {
-	description = "Epic Call block",
+	description = "Epic Call block: executes another function",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

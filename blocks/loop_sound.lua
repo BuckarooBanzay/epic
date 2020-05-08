@@ -33,7 +33,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:loop_sound", {
-	description = "Epic loop sound block",
+	description = "Epic loop sound block: loops a sound for the player",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:mesecon_emit", {
-	description = "Epic mesecon emit block",
+	description = "Epic mesecon emit block: emits a mesecons signal for 1 second",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

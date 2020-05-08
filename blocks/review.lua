@@ -95,7 +95,7 @@ local form_visited = {}
 
 -- review block
 minetest.register_node("epic:review", {
-	description = "Epic review block",
+	description = "Epic review block: lets the player rate the quest",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -1,6 +1,6 @@
 
 minetest.register_node("epic:lock", {
-	description = "Epic lock block",
+	description = "Epic lock block: locks the current execution-path (mutual exclusive execution)",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -20,7 +20,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:setclouds", {
-	description = "Epic set clouds block",
+	description = "Epic set clouds block: sets the clouds with the defined properties",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

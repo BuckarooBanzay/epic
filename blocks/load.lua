@@ -1,7 +1,7 @@
 
 
 minetest.register_node("epic:load", {
-	description = "Epic load block",
+	description = "Epic load block: loads a previously saved game",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

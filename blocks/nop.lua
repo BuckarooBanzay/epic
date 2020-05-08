@@ -1,6 +1,6 @@
 
 minetest.register_node("epic:nop", {
-	description = "Epic no-op block",
+	description = "Epic no-op block: placeholder-node, does nothing",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

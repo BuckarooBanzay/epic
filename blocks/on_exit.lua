@@ -15,7 +15,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:on_exit", {
-	description = "Epic on_exit callback block",
+	description = "Epic on_exit callback block: stores an exit-function to execute in the exit case",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

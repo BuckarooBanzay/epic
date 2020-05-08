@@ -21,7 +21,7 @@ local function do_unlock(pos, meta)
 end
 
 minetest.register_node("epic:unlock", {
-	description = "Epic unlock block",
+	description = "Epic unlock block: unlocks a previously locked path (mutex)",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

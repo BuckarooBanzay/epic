@@ -34,7 +34,7 @@ local function do_remove(pos, meta)
 end
 
 minetest.register_node("epic:removeitem", {
-	description = "Epic remove item block",
+	description = "Epic remove item block: removes objects within the given radius",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

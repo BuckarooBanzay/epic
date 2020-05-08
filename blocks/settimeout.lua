@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:settimeout", {
-	description = "Epic set timeout block",
+	description = "Epic set timeout block: configures the current quest timeout",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

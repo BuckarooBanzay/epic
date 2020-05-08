@@ -40,7 +40,7 @@ local function do_add_item(pos, meta)
 end
 
 minetest.register_node("epic:additem", {
-	description = "Epic add item block",
+	description = "Epic add item block: Adds an item at the defined position",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

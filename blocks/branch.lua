@@ -59,7 +59,7 @@ end
 
 
 minetest.register_node("epic:branch", {
-	description = "Epic branch block",
+	description = "Epic branch block: selects the first successful conditional block",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

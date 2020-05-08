@@ -27,7 +27,7 @@ local function do_strike(pos, meta)
 end
 
 minetest.register_node("epic:lightning", {
-	description = "Epic Lightning block",
+	description = "Epic Lightning block: strikes lightning at the defined position",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

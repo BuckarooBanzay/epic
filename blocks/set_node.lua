@@ -37,7 +37,7 @@ local function do_set(pos, meta)
 end
 
 minetest.register_node("epic:setnode", {
-	description = "Epic set node block",
+	description = "Epic set node block: sets a single node at the defined position",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

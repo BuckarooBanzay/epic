@@ -21,7 +21,7 @@ local function filter_inventory(inv, listname, filter_names)
 end
 
 minetest.register_node("epic:filter_inv", {
-	description = "Epic filter inventory block",
+	description = "Epic filter inventory block: filters the inventory from the given items",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -23,7 +23,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:waypoint", {
-	description = "Epic waypoint block",
+	description = "Epic waypoint block: checks if the player is inside the defined radius",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

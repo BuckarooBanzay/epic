@@ -11,7 +11,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:stats", {
-	description = "Epic stats block",
+	description = "Epic stats block: keeps track of the visited players",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

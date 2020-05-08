@@ -1,6 +1,6 @@
 
 minetest.register_node("epic:check_empty_inv", {
-	description = "Epic check empty inventory block",
+	description = "Epic check empty inventory block: checks if the craft- and main-inventories are empty",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

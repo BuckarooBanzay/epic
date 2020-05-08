@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:deduct_inv", {
-	description = "Epic deduct from inventory block",
+	description = "Epic deduct from inventory block: removes items from the inventory",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

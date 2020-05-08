@@ -15,7 +15,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:teleport", {
-	description = "Epic Teleport block",
+	description = "Epic Teleport block: teleports the player to the given coordinates",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

@@ -15,7 +15,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:on_abort", {
-	description = "Epic on_abort callback block",
+	description = "Epic on_abort callback block: stores an abort-function to execute in the abort case",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

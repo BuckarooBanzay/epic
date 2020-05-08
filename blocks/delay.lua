@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:delay", {
-	description = "Epic delay block",
+	description = "Epic delay block: delays the execution of the next block",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

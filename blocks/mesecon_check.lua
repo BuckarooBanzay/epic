@@ -15,7 +15,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:mesecon_check", {
-	description = "Epic mesecon check block",
+	description = "Epic mesecon check block: checks if the target mesecons-block is on",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

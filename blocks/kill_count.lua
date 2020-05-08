@@ -19,7 +19,8 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:kill_count", {
-	description = "Epic kill count block",
+	description = "Epic kill count block: enables the kill counter on the hud and " ..
+		"continues if the count matches the configured value",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

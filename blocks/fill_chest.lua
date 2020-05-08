@@ -28,7 +28,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:fill_chest", {
-	description = "Epic fill chest block",
+	description = "Epic fill chest block: fills a chest with the defined contents",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

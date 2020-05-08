@@ -12,7 +12,7 @@ local update_formspec = function(meta)
 end
 
 minetest.register_node("epic:daynightratio", {
-	description = "Epic day night ratio block",
+	description = "Epic day night ratio block: sets the day-night-ratio for the player",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

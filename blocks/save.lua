@@ -21,7 +21,8 @@ end
 
 
 minetest.register_node("epic:save", {
-	description = "Epic save block",
+	description = "Epic save block: stores a savegame for the player, the target can be an epic-block " ..
+		"to continue the quest at that point",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",

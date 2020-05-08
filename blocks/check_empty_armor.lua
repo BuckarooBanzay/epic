@@ -1,6 +1,6 @@
 
 minetest.register_node("epic:check_empty_armor", {
-	description = "Epic check empty armor block",
+	description = "Epic check empty armor block: checks if the armor-inventory is empty",
 	tiles = {
 		"epic_node_bg.png",
 		"epic_node_bg.png",
