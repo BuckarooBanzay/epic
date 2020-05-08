@@ -12,23 +12,24 @@ local function check()
 
     local list = epic.data_area.get_all_by_pos(ppos)
     for _, entry in pairs(list) do
-      if entry.skybox then
+      local skybox = entry.value.skybox
+      if skybox then
         skybox_found = true
-        if active[playername] and active[playername] ~= entry.skybox.name then
+        if active[playername] and active[playername] ~= skybox.name then
           -- replace existing skybox
           for _, skyboxdef in ipairs(epic.skyboxes) do
-            if skyboxdef.name == entry.skybox.name then
+            if skyboxdef.name == skybox.name then
               epic.set_skybox(player, skyboxdef)
-              active[playername] = entry.skybox.name
+              active[playername] = skybox.name
             end
           end
 
         elseif not active[playername] then
           -- new skybox
           for _, skyboxdef in ipairs(epic.skyboxes) do
-            if skyboxdef.name == entry.skybox.name then
+            if skyboxdef.name == skybox.name then
               epic.set_skybox(player, skyboxdef)
-              active[playername] = entry.skybox.name
+              active[playername] = skybox.name
             end
           end
 
@@ -55,7 +56,7 @@ minetest.register_chatcommand("area_skybox_set", {
     params = "<ID> <name>",
     description = "Set the skybox for the area",
     func = function(playername, param)
-      local _, _, id_str, skyboxname = string.find(param, "^([^%s]+)%s+([^%s]+)%s*$")
+      local _, _, id_str, skyboxname = string.find(param, "^([^%s]+)%s+([^.]+)$")
       if id_str == nil then
         return true, "Invalid syntax!"
       end
