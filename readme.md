@@ -51,7 +51,6 @@ For a demo visit the [Damocles](https://damocles.minetest.land) server.
 * [Basic concept](doc/basic-concept.md)
 * Available [blocks](doc/blocks.md)
 * Simple Quest [example](doc/example.md)
-* [Exit-Functions](doc/exit-functions.md)
 * [Privilieges](doc/privs.md)
 * [Chat commands](doc/chatcommands.md)
 * [Best practices](doc/best-practices.md)

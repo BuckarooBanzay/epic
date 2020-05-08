@@ -12,20 +12,32 @@ Functions can be called with a [call](./blocks/call.md) or an [epic](./blocks/ep
 It can be on the other side of the world if needed...
 Functions can also call each other or themselfes (but be cautious with that!)
 
-The [epic](./blocks/epic.md) block acts as a starting point for players and executes a *main* and an optional *exit* / *abort* function.
+The [epic](./blocks/epic.md) block acts as a starting point for players and executes a function
+at the specified position.
 
-## Main function
+# Abort/Exit hooks
 
-This function gets called on the start of the epic.
+Hooks are placeable blocks that point to a function that gets executed
+in certain cases:
 
-## Exit function
+The *abort* hook is called if the player aborts or dies:
+* On death
+* On disconnect
+* On `/epic_abort`
 
-This function gets called if the epic exits (for whatever reason).
-Cleanup stuff should be done in here (remove nodes, teleport out of the arena, etc)
+The *exit* hook runs on every abort/exit condition:
 
-## Abort function
+* Main epic finished
+* Player death
+* Player logout
+* Manual abort with `/epic_abort`
 
-This function gets called if the player dies/disconnects/timeouts or executes `/epic_abort`
+The *exit* hook is intended for cleanup or revert operations, such as:
+
+* Reset skybox
+* Reset position of player
+* etc.
+
 
 # Function composition
 
