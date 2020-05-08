@@ -1,7 +1,4 @@
 
--- playername => pos
-local punch_handler = {}
-
 local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 
@@ -64,7 +61,8 @@ minetest.register_node("epic:additem", {
   end,
 
   on_receive_fields = function(pos, _, fields, sender)
-		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
+		local playername = sender:get_player_name()
+		if not sender or minetest.is_protected(pos, playername) then
 			-- not allowed
 			return
 		end
@@ -72,35 +70,32 @@ minetest.register_node("epic:additem", {
 		local meta = minetest.get_meta(pos);
 
 		if fields.setpos then
-			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target position")
-			punch_handler[sender:get_player_name()] = pos
+			minetest.chat_send_player(playername, "[epic] Please punch the desired target position")
+			epic.punchnode_callback({
+			  timeout = 300,
+			  callback = function(punch_pos)
+					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, vector.add(punch_pos, {x=0, y=0.5, z=0})))
+					meta:set_string("pos", pos_str)
+					minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+					update_formspec(meta)
+				end
+			})
 		end
 
 		if fields.showpos then
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
+				epic.show_waypoint(
+					sender:get_player_name(),
+					epic.to_absolute_pos(pos, target_pos),
+					"Target position", 2
+				)
 			end
 		end
   end,
 
-	allow_metadata_inventory_put = function(pos, _, _, stack, player)
-
-		if minetest.is_protected(pos, player:get_player_name()) then
-			return 0
-		end
-
-		return stack:get_count()
-	end,
-
-	allow_metadata_inventory_take = function(pos, _, _, stack, player)
-
-		if minetest.is_protected(pos, player:get_player_name()) then
-			return 0
-		end
-
-		return stack:get_count()
-	end,
+	allow_metadata_inventory_put = epic.allow_metadata_inventory_put,
+	allow_metadata_inventory_take = epic.allow_metadata_inventory_take,
 
 	-- allow mesecons triggering
 	mesecons = {
@@ -119,22 +114,3 @@ minetest.register_node("epic:additem", {
     end
   }
 })
-
-minetest.register_on_punchnode(function(pos, _, puncher, _)
-	local playername = puncher:get_player_name()
-	local cfg_pos = punch_handler[playername]
-	if cfg_pos then
-		local meta = minetest.get_meta(cfg_pos)
-		local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, vector.add(pos, {x=0, y=0.5, z=0})))
-		meta:set_string("pos", pos_str)
-		minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
-		update_formspec(meta)
-		punch_handler[playername] = nil
-	end
-end)
-
-minetest.register_on_leaveplayer(function(player)
-	local playername = player:get_player_name()
-	punch_handler[playername] = nil
-
-end)

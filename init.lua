@@ -23,7 +23,10 @@ dofile(MP.."/executor/executor_hooks.lua")
 dofile(MP.."/executor/executor_hud.lua")
 dofile(MP.."/trace.lua")
 dofile(MP.."/effects/skybox.lua")
+
+-- utilities
 dofile(MP.."/util/savegame.lua")
+dofile(MP.."/util/punchnode_callback.lua")
 
 -- forms
 epic.form = {}
