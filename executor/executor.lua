@@ -8,6 +8,7 @@ function epic.execute_player_state(playername, state)
 
 	if not player then
 		minetest.log("warn", "[epic][executor] player not found, aborting: " .. playername)
+    epic.state[playername] = nil
 		return
 	end
 
@@ -128,8 +129,7 @@ function epic.execute_player_state(playername, state)
 end
 
 
-local executor
-executor = function()
+local function executor()
   local t0 = minetest.get_us_time()
   for playername, state in pairs(epic.state) do
     epic.execute_player_state(playername, state)
