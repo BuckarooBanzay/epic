@@ -129,7 +129,7 @@ minetest.register_node("epic:branch", {
 				local sub_ctx = {
 					next = function()
 						if not next_called then
-							ctx.next(target_pos)
+							ctx.next(epic.get_next_pos(target_pos))
 						end
 						next_called = true
 					end,
