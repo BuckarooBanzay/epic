@@ -22,7 +22,6 @@ dofile(MP.."/executor/executor.lua")
 dofile(MP.."/executor/executor_hooks.lua")
 dofile(MP.."/executor/executor_hud.lua")
 dofile(MP.."/trace.lua")
-dofile(MP.."/effects/skybox.lua")
 
 -- utilities
 dofile(MP.."/util/savegame.lua")
