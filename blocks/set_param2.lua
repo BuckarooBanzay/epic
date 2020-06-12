@@ -23,7 +23,7 @@ local function do_set_param2(pos, meta)
 	local param2 = meta:get_string("param2")
 
 	node.param2 = tonumber(param2) or 0
-	minetest.set_node(abs_pos, node)
+	minetest.swap_node(abs_pos, node)
 end
 
 minetest.register_node("epic:set_param2", {
