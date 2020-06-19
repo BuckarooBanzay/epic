@@ -1,4 +1,9 @@
 
+local function is_chest(meta)
+	local inv = meta:get_inventory()
+	return inv:get_size("main") == 8*4
+end
+
 local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 
@@ -72,7 +77,7 @@ minetest.register_node("epic:fill_chest", {
 
 					if not is_chest(meta) then
 						-- not a chest with apropiate size
-						minetest.chat_send_player(playername, "[epic] target inventory not of appropriate size (4*8)")
+						minetest.chat_send_player(playername, "[epic] target inventory not of appropriate size (8*4)")
 						return
 					end
 
