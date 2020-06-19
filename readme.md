@@ -65,6 +65,7 @@ Mandatory:
 Optional:
 * mobs
 * mesecons
+* digilines
 * player_monoids
 * soundblock
 * monitoring
