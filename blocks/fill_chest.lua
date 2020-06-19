@@ -1,9 +1,4 @@
 
-local chest_names = {
-	"default:chest",
-	"more_chests:cobble"
-}
-
 local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
 
@@ -70,11 +65,17 @@ minetest.register_node("epic:fill_chest", {
 			local playername = sender:get_player_name()
 			minetest.chat_send_player(playername, "[epic] Please punch the target chest")
 			epic.punchnode_callback(sender, {
-				nodes = chest_names,
 			  timeout = 300,
 				check_protection = true,
 			  callback = function(punch_pos)
 					local meta = minetest.get_meta(pos)
+
+					if not is_chest(meta) then
+						-- not a chest with apropiate size
+						minetest.chat_send_player(playername, "[epic] target inventory not of appropriate size (4*8)")
+						return
+					end
+
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					meta:set_string("pos", pos_str)
 					minetest.chat_send_player(playername, "[epic] target chest successfully set to " .. pos_str)
@@ -103,16 +104,8 @@ minetest.register_node("epic:fill_chest", {
 			local target_pos_str = meta:get_string("pos")
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 
-			local node = epic.get_node(target_pos)
-			local found = false
-			for _, name in ipairs(chest_names) do
-				if node.name == name then
-					found = true
-					break
-				end
-			end
-			if not found then
-				-- not a chest
+			if not is_chest(meta) then
+				-- not a chest with appropriate size
 				return
 			end
 
