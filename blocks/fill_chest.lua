@@ -1,15 +1,8 @@
 
--- playername => pos
-local punch_handler = {}
-
-local chest_names = {}
-chest_names["default:chest"] = true
-chest_names["more_chests:cobble"] = true
-
-local function is_chest_on_pos(pos)
-	local node = epic.get_node(pos)
-	return chest_names[node.name]
-end
+local chest_names = {
+	"default:chest",
+	"more_chests:cobble"
+}
 
 local update_formspec = function(meta)
 	local pos = meta:get_string("pos")
@@ -74,8 +67,21 @@ minetest.register_node("epic:fill_chest", {
 		end
 
 		if fields.setfn then
-			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired chest")
-			punch_handler[sender:get_player_name()] = pos
+			local playername = sender:get_player_name()
+			minetest.chat_send_player(playername, "[epic] Please punch the target chest")
+			epic.punchnode_callback(sender, {
+				nodes = chest_names,
+			  timeout = 300,
+				check_protection = true,
+			  callback = function(punch_pos)
+					local meta = minetest.get_meta(pos)
+					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
+					meta:set_string("pos", pos_str)
+					minetest.chat_send_player(playername, "[epic] target chest successfully set to " .. pos_str)
+					update_formspec(meta)
+				end
+			})
+
 		end
 
 		if fields.showpos then
@@ -97,7 +103,15 @@ minetest.register_node("epic:fill_chest", {
 			local target_pos_str = meta:get_string("pos")
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 
-			if not is_chest_on_pos(target_pos) then
+			local node = epic.get_node(target_pos)
+			local found = false
+			for _, name in ipairs(chest_names) do
+				if node.name == name then
+					found = true
+					break
+				end
+			end
+			if not found then
 				-- not a chest
 				return
 			end
@@ -113,26 +127,3 @@ minetest.register_node("epic:fill_chest", {
     end
   }
 })
-
-minetest.register_on_punchnode(function(pos, _, puncher)
-	local playername = puncher:get_player_name()
-	local cfg_pos = punch_handler[playername]
-	if cfg_pos then
-		if is_chest_on_pos(pos) then
-			local meta = minetest.get_meta(cfg_pos)
-			local pos_str = minetest.pos_to_string(epic.to_relative_pos(cfg_pos, pos))
-			meta:set_string("pos", pos_str)
-			minetest.chat_send_player(playername, "[epic] target chest successfully set to " .. pos_str)
-			update_formspec(meta)
-		else
-			minetest.chat_send_player(playername, "[epic] target is not a default chest! aborting selection.")
-		end
-		punch_handler[playername] = nil
-	end
-end)
-
-minetest.register_on_leaveplayer(function(player)
-	local playername = player:get_player_name()
-	punch_handler[playername] = nil
-
-end)

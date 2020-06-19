@@ -9,6 +9,7 @@ Registers a punch-configuration callback:
 epic.punchnode_callback({
   nodes = {"default:dirt"},
   timeout = 300,
+  check_protection = true,
   callback = function(pos, node) end
 })
 --]]
@@ -31,6 +32,14 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 
   -- clear callback
   punch_handler[playername] = nil
+
+  if punchDef.check_protection then
+    if minetest.is_protected(pos, playername) and
+      not minetest.check_player_privs(playername, {epic_admin=true}) then
+        minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+      return
+    end
+  end
 
   -- check valid nodes
   local valid_node = false
