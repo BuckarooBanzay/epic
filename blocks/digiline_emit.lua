@@ -18,8 +18,9 @@ minetest.register_node("epic:digiline_emit", {
 	},
 
   epic = {
-    on_enter = function(pos, _, player)
+    on_enter = function(pos, _, player, ctx)
 			digilines.receptor_send(pos, digilines.rules.default, "epic", player:get_player_name())
+			ctx.next()
     end
   }
 })
