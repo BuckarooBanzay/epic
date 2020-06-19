@@ -17,6 +17,7 @@ read_globals = {
 
 	-- deps
 	"mesecon",
+	"digilines",
 	"player_monoids",
 	"soundblock",
 	"monitoring",
