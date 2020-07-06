@@ -20,6 +20,23 @@ local update_formspec = function(meta)
 		"")
 end
 
+local function do_fill(pos, meta)
+	local target_pos_str = meta:get_string("pos")
+	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
+
+	if not is_chest(meta) then
+		-- not a chest with appropriate size
+		return
+	end
+
+	local inv = meta:get_inventory()
+	local items = inv:get_list("main")
+
+	local target_meta = minetest.get_meta(target_pos)
+	local target_inv = target_meta:get_inventory()
+	target_inv:set_list("main", items)
+end
+
 minetest.register_node("epic:fill_chest", {
 	description = "Epic fill chest block: fills a chest with the defined contents",
 	tiles = {
@@ -104,23 +121,19 @@ minetest.register_node("epic:fill_chest", {
 		end
   end,
 
+	-- allow mesecons triggering
+	mesecons = {
+		effector = {
+	    action_on = function (pos)
+				local meta = minetest.get_meta(pos)
+				do_fill(pos, meta)
+			end
+	  }
+	},
+
 	epic = {
     on_enter = function(pos, meta, _, ctx)
-			local target_pos_str = meta:get_string("pos")
-			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
-
-			if not is_chest(meta) then
-				-- not a chest with appropriate size
-				return
-			end
-
-			local inv = meta:get_inventory()
-      local items = inv:get_list("main")
-
-			local target_meta = minetest.get_meta(target_pos)
-			local target_inv = target_meta:get_inventory()
-			target_inv:set_list("main", items)
-
+			do_fill(pos, meta)
 			ctx.next()
     end
   }
