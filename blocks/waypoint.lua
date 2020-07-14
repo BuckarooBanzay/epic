@@ -83,6 +83,8 @@ minetest.register_node("epic:waypoint", {
 			ctx.step_data.pos = target_pos
 			ctx.step_data.radius = meta:get_int("radius")
 			local waypoint_name = meta:get_string("name")
+			epic.debug("[waypoint] Setting waypoint with name " .. waypoint_name ..
+				" to target: " .. minetest.pos_to_string(target_pos))
 
 			if waypoint_name ~= "" then
 				ctx.step_data.waypoint_hud_id = player:hud_add({
