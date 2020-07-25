@@ -89,12 +89,11 @@ function epic.execute_player_state(playername, state)
 		if epicdef.on_enter then
 			epicdef.on_enter(pos, meta, player, ctx)
 		end
+	end
 
-	else
-		epic.run_hook("on_before_node_check", { pos, player, ctx })
-		if epicdef.on_check then
-			epicdef.on_check(pos, meta, player, ctx)
-		end
+	epic.run_hook("on_before_node_check", { pos, player, ctx })
+	if epicdef.on_check then
+		epicdef.on_check(pos, meta, player, ctx)
 	end
 
 	if state.time then
