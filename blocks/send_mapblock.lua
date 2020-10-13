@@ -42,7 +42,7 @@ minetest.register_node("epic:send_mapblock", {
 
 		if fields.setpos then
 			minetest.chat_send_player(playername, "[epic] Please punch the desired target position")
-			epic.punchnode_callback({
+			epic.punchnode_callback(sender, {
 			  timeout = 300,
 			  callback = function(punch_pos)
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
