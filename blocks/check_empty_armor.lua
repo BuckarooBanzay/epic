@@ -15,12 +15,13 @@ minetest.register_node("epic:check_empty_armor", {
 
 	epic = {
     on_check = function(_, _, player, ctx)
-			local player_inv = player:get_inventory()
+			local player_name = player:get_player_name()
+			local player_armor_inv = minetest.get_inventory({type="detached", name=player_name.."_armor"})
 
-			if player_inv:is_empty("armor") then
+			if player_armor_inv:is_empty("armor") then
+
 				ctx.next()
 			end
-
     end
   }
 })
