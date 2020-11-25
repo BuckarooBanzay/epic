@@ -1,4 +1,9 @@
 
+-- local on_rotate function
+epic.on_rotate = function(...)
+	screwdriver.rotate_simple(...)
+end
+
 -- creates an empty state, ready for execution
 epic.new_state = function()
 	return {

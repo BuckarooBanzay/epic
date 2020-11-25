@@ -70,7 +70,7 @@ minetest.register_node("epic:branch", {
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
-	on_rotate = screwdriver.rotate_simple,
+	on_rotate = epic.on_rotate,
 
   epic = {
     on_enter = function(pos, _, player, ctx)

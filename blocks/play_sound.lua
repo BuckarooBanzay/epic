@@ -47,7 +47,7 @@ minetest.register_node("epic:play_sound", {
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
-	on_rotate = screwdriver.rotate_simple,
+	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
     local meta = minetest.get_meta(pos)

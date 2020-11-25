@@ -23,7 +23,7 @@ minetest.register_node("epic:mesecon_emit", {
 	},
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
-	on_rotate = screwdriver.rotate_simple,
+	on_rotate = epic.on_rotate,
 	mesecons = {receptor = {
 		state = mesecon.state.off,
 		rules = mesecon.rules.pplate
