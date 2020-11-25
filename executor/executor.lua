@@ -151,6 +151,19 @@ end
 -- initial delay
 minetest.after(1.0, executor)
 
+-- cleans up the remaining state, if any
+local function cleanup_state(player, state)
+	local pos = state.ip
+	if pos then
+		local node = epic.get_node(state.ip)
+		local nodedef = minetest.registered_nodes[node.name]
+		local epicdef = nodedef.epic
+		if type(epicdef.on_exit) == "function" then
+			local meta = minetest.get_meta(pos)
+			epicdef.on_exit(pos, meta, player, state)
+		end
+	end
+end
 
 -- abort epic on leave
 -- savepoints are not touched here
@@ -168,6 +181,7 @@ minetest.register_on_leaveplayer(function(player, timed_out)
 			minetest.log("action", "[epic] player left the game: " .. playername)
 		end
 
+		cleanup_state(player, state)
 		epic.state[playername] = nil
 		epic.run_hook("on_epic_abort", { playername, state, reason })
 	end
@@ -180,6 +194,8 @@ minetest.register_on_dieplayer(function(player)
 		if epic.log_executor then
 			minetest.log("action", "[epic] player died: " .. playername)
 		end
+
+		cleanup_state(player, state)
 		epic.state[playername] = nil
 		epic.run_hook("on_epic_abort", { playername, state, "died" })
 	end
