@@ -133,6 +133,7 @@ minetest.register_node("epic:branch", {
 						end
 						next_called = true
 					end,
+					abort = ctx.abort,
 					step_data = target_step_data,
 					data = ctx.data
 				}
