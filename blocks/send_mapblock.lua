@@ -66,11 +66,7 @@ minetest.register_node("epic:send_mapblock", {
     on_enter = function(pos, meta, player, ctx)
 			local rel_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local target_pos = epic.to_absolute_pos(pos, rel_pos)
-			local block_pos = {
-				x = math.floor(target_pos.x / 16),
-				y = math.floor(target_pos.y / 16),
-				z = math.floor(target_pos.z / 16)
-			}
+			local block_pos = epic.get_mapblock_pos(target_pos)
 			player:send_mapblock(block_pos)
 			ctx.next()
     end

@@ -48,19 +48,28 @@ local function do_spawn(pos, meta)
 	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
 	local mobname = meta:get_string("mobname")
 
-	local objs = minetest.get_objects_inside_radius(target_pos, 9)
-	local count = 0
-	for _ in ipairs(objs) do
-		count = count + 1
-	end
-
-	if count > 16 then
-		-- too many objects
-		return
-	end
-
 	if mobname and mobname ~= "" then
-		minetest.add_entity(target_pos, mobname)
+		local mapblock_pos = epic.get_mapblock_pos(target_pos)
+		-- start a transient forceload
+		-- entities can only operate in active mapblocks
+		minetest.forceload_block(mapblock_pos, true)
+
+		-- spawn mob and free forceload in the next server step
+		minetest.after(0.1, function()
+			local objs = minetest.get_objects_inside_radius(target_pos, 9)
+			local count = 0
+			for _ in ipairs(objs) do
+				count = count + 1
+			end
+
+			if count < 16 then
+				-- only spawn new entities if not too much objects in that area already
+				minetest.add_entity(target_pos, mobname)
+			end
+
+			-- release forceload
+			minetest.forceload_free_block(mapblock_pos, true)
+		end)
 	end
 end
 

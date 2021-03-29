@@ -196,3 +196,11 @@ epic.execute_epic = function(player, main_pos, name)
 	epic.run_hook("on_execute_epic", { player, main_pos, state })
 
 end
+
+function epic.get_mapblock_pos(pos)
+	return {
+		x = math.floor(pos.x / 16),
+		y = math.floor(pos.y / 16),
+		z = math.floor(pos.z / 16)
+	}
+end
