@@ -174,7 +174,7 @@ end
 -- returns true if the node has an "epic" definition
 epic.is_epic = function(node)
   local nodedef = minetest.registered_nodes[node.name]
-  return nodedef.epic ~= nil
+  return nodedef and nodedef.epic
 end
 
 -- executes an epic function
