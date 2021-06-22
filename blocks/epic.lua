@@ -40,4 +40,9 @@ minetest.register_node("epic:epic", {
 	  }
 	},
 
+	mtinfo = {
+		text = "# epic starter block\n" ..
+			"Main player entry point that calls other [epic:function] blocks"
+	}
+
 })
