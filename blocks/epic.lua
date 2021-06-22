@@ -2,8 +2,8 @@
 minetest.register_node("epic:epic", {
 	description = "Epic: Configurable starter block for quests",
 	groups = {cracky=3,oddly_breakable_by_hand=3},
-  tiles = {
-    "epic_node_bg.png^epic_epic.png"
+	tiles = {
+		"epic_node_bg.png^epic_epic.png"
 	},
 
 	after_place_node = function(pos, placer)
@@ -27,7 +27,7 @@ minetest.register_node("epic:epic", {
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+		action_on = function (pos)
 				for _, player in ipairs(minetest.get_connected_players()) do
 					local ppos = player:get_pos()
 

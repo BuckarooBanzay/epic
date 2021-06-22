@@ -16,14 +16,7 @@ end
 
 minetest.register_node("epic:on_exit", {
 	description = "Epic on_exit callback block: stores an exit-function to execute in the exit case",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_exit.png",
-	},
+	tiles = epic.create_texture("callback", "epic_exit.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

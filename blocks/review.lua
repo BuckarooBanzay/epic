@@ -96,14 +96,7 @@ local form_visited = {}
 -- review block
 minetest.register_node("epic:review", {
 	description = "Epic review block: lets the player rate the quest",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_star.png",
-	},
+	tiles = epic.create_texture("condition", "epic_star.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

@@ -13,14 +13,7 @@ end
 
 minetest.register_node("epic:deduct_inv", {
 	description = "Epic deduct from inventory block: removes items from the inventory",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_briefcase.png",
-	},
+	tiles = epic.create_texture("action", "epic_briefcase.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

@@ -60,14 +60,7 @@ end
 
 minetest.register_node("epic:branch", {
 	description = "Epic branch block: selects the first successful conditional block",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_branch.png",
-	},
+	tiles = epic.create_texture("branch", "epic_branch.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

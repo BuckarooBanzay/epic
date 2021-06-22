@@ -13,14 +13,7 @@ end
 
 minetest.register_node("epic:daynightratio", {
 	description = "Epic day night ratio block: sets the day-night-ratio for the player",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_sky.png",
-	},
+	tiles = epic.create_texture("action", "epic_sky.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

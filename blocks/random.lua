@@ -13,14 +13,7 @@ end
 
 minetest.register_node("epic:random", {
 	description = "Epic random block: succeeds randomly (for randomized branches in quests)",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_question_mark.png",
-	},
+	tiles = epic.create_texture("condition", "epic_question_mark.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

@@ -22,14 +22,7 @@ end
 
 minetest.register_node("epic:filter_inv", {
 	description = "Epic filter inventory block: filters the inventory from the given items",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_briefcase.png",
-	},
+	tiles = epic.create_texture("action", "epic_briefcase.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

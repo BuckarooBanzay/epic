@@ -24,14 +24,7 @@ end
 
 minetest.register_node("epic:waypoint_inverse", {
 	description = "Epic inverse waypoint block: checks if the player is outside of the defined radius",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_waypoint.png",
-	},
+	tiles = epic.create_texture("condition", "epic_waypoint.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

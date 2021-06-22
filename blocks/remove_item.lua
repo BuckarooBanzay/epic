@@ -35,14 +35,7 @@ end
 
 minetest.register_node("epic:removeitem", {
 	description = "Epic remove item block: removes objects within the given radius",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_remove.png",
-	},
+	tiles = epic.create_texture("action", "epic_remove.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

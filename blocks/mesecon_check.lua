@@ -16,14 +16,7 @@ end
 
 minetest.register_node("epic:mesecon_check", {
 	description = "Epic mesecon check block: checks if the target mesecons-block is on",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_mese_crystal.png^epic_question_mark.png",
-	},
+	tiles = epic.create_texture("condition", "epic_mese_crystal.png^epic_question_mark.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

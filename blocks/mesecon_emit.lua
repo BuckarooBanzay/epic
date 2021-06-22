@@ -13,14 +13,7 @@ end
 
 minetest.register_node("epic:mesecon_emit", {
 	description = "Epic mesecon emit block: emits a mesecons signal for 1 second",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_mese_crystal.png",
-	},
+	tiles = epic.create_texture("action", "epic_mese_crystal.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

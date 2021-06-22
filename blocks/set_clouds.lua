@@ -21,14 +21,7 @@ end
 
 minetest.register_node("epic:setclouds", {
 	description = "Epic set clouds block: sets the clouds with the defined properties",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_sky.png",
-	},
+	tiles = epic.create_texture("action", "epic_sky.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

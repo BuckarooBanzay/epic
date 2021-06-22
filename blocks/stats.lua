@@ -12,14 +12,7 @@ end
 
 minetest.register_node("epic:stats", {
 	description = "Epic stats block: keeps track of the visited players",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_stats.png",
-	},
+	tiles = epic.create_texture("action", "epic_stats.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

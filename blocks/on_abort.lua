@@ -16,14 +16,7 @@ end
 
 minetest.register_node("epic:on_abort", {
 	description = "Epic on_abort callback block: stores an abort-function to execute in the abort case",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_exit.png",
-	},
+	tiles = epic.create_texture("callback", "epic_exit.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

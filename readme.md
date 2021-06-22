@@ -103,7 +103,7 @@ This makes it possible to copy your creations in the same or across worlds with 
 
 ## Assets
 
-* default_steel_block.png / epic_node_bg.png / epic_mese_crystal.png
+* epic_node_action.png / epic_node_bg.png / epic_mese_crystal.png / epic_node_condition.png
   * CC BY-SA 3.0 https://github.com/minetest/minetest_game
 
 * 16x16 Icons in `textures/*`

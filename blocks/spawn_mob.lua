@@ -75,14 +75,7 @@ end
 
 minetest.register_node("epic:spawn_mob", {
 	description = "Epic Spawn mob block: spawns a mob at the given position",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_mob.png",
-	},
+	tiles = epic.create_texture("action", "epic_mob.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

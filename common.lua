@@ -1,4 +1,23 @@
 
+function epic.create_texture(type, overlay)
+	local texture = "epic_node_bg.png"
+
+	if type == "action" then
+		texture = "epic_node_action.png"
+	elseif type == "condition" then
+		texture = "epic_node_condition.png"
+	end
+
+	return {
+		texture,
+		texture,
+		texture .. "^epic_next_marker.png",
+		texture,
+		texture,
+		texture .. "^" .. overlay,
+	}
+end
+
 -- local on_rotate function
 epic.on_rotate = function(...)
 	screwdriver.rotate_simple(...)

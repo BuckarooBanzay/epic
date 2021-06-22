@@ -68,14 +68,7 @@ end)
 
 minetest.register_node("epic:dialogue", {
 	description = "Epic dialogue block: show one or more questions in a formspec",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_bubble.png",
-	},
+	tiles = epic.create_texture("condition", "epic_bubble.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

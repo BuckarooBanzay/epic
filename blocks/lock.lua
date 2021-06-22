@@ -1,14 +1,7 @@
 
 minetest.register_node("epic:lock", {
 	description = "Epic lock block: locks the current execution-path (mutual exclusive execution)",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_lock.png",
-	},
+	tiles = epic.create_texture("condition", "epic_lock.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

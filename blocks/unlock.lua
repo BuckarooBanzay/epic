@@ -22,14 +22,7 @@ end
 
 minetest.register_node("epic:unlock", {
 	description = "Epic unlock block: unlocks a previously locked path (mutex)",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_unlock.png",
-	},
+	tiles = epic.create_texture("action", "epic_unlock.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

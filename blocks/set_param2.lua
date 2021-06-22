@@ -28,14 +28,7 @@ end
 
 minetest.register_node("epic:set_param2", {
 	description = "Epic set param2 block: Sets the param2 value on doors or other blocks",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_filter.png",
-	},
+	tiles = epic.create_texture("action", "epic_filter.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

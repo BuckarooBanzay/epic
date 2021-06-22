@@ -16,14 +16,7 @@ end
 
 minetest.register_node("epic:teleport", {
 	description = "Epic Teleport block: teleports the player to the given coordinates",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_teleport.png",
-	},
+	tiles = epic.create_texture("action", "epic_teleport.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

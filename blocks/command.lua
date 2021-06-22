@@ -33,14 +33,7 @@ end
 
 minetest.register_node("epic:command", {
 	description = "Epic command block: executes a chat-command",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_command.png",
-	},
+	tiles = epic.create_texture("action", "epic_command.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

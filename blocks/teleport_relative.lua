@@ -27,14 +27,7 @@ end
 minetest.register_node("epic:teleport_relative", {
 	description = "Epic Teleport relative block: teleports the player to the target coordinates " ..
 		"with respect to the source-coordinates (smooth teleport)",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_teleport.png",
-	},
+	tiles = epic.create_texture("action", "epic_teleport.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

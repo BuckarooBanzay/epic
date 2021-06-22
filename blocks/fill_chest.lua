@@ -39,14 +39,7 @@ end
 
 minetest.register_node("epic:fill_chest", {
 	description = "Epic fill chest block: fills a chest with the defined contents",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_add_item.png",
-	},
+	tiles = epic.create_texture("action", "epic_add_item.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

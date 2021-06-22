@@ -21,14 +21,7 @@ end
 minetest.register_node("epic:kill_count", {
 	description = "Epic kill count block: enables the kill counter on the hud and " ..
 		"continues if the count matches the configured value",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_mob.png",
-	},
+	tiles = epic.create_texture("condition", "epic_mob.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

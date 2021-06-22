@@ -34,14 +34,7 @@ end
 
 minetest.register_node("epic:loop_sound", {
 	description = "Epic loop sound block: loops a sound for the player",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_music.png",
-	},
+	tiles = epic.create_texture("action", "epic_music.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

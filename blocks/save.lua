@@ -23,14 +23,7 @@ end
 minetest.register_node("epic:save", {
 	description = "Epic save block: stores a savegame for the player, the target can be an epic-block " ..
 		"to continue the quest at that point",
-	tiles = {
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png",
-		"epic_node_bg.png^epic_save.png",
-	},
+	tiles = epic.create_texture("action", "epic_save.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
