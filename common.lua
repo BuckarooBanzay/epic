@@ -18,9 +18,14 @@ function epic.create_texture(type, overlay)
 	}
 end
 
+local has_screwdriver = minetest.get_modpath("screwdriver")
+
 -- local on_rotate function
 epic.on_rotate = function(...)
-	screwdriver.rotate_simple(...)
+	if has_screwdriver then
+		-- call rotation function on screwdriver mod if available
+		screwdriver.rotate_simple(...)
+	end
 end
 
 -- creates an empty state, ready for execution
