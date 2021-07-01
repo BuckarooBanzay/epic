@@ -165,9 +165,9 @@ local function cleanup_state(player, state)
 	end
 end
 
--- abort epic on leave
--- savepoints are not touched here
-minetest.register_on_leaveplayer(function(player, timed_out)
+-- abort player helper function
+-- called on leave and shutdown
+local function abort_player(player, timed_out)
 	local playername = player:get_player_name()
 	local state = epic.state[playername]
 	if state then
@@ -184,6 +184,18 @@ minetest.register_on_leaveplayer(function(player, timed_out)
 		cleanup_state(player, state)
 		epic.state[playername] = nil
 		epic.run_hook("on_epic_abort", { playername, state, reason })
+	end
+end
+
+-- abort epic on leave
+-- savepoints are not touched here
+minetest.register_on_leaveplayer(abort_player)
+
+minetest.register_on_shutdown(function()
+	minetest.log("action", "[epic] shutdown detected, aborting all epics")
+	for _, player in ipairs(minetest.get_connected_players()) do
+		-- abort every players epics
+		abort_player(player, false)
 	end
 end)
 

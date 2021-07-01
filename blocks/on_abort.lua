@@ -101,16 +101,17 @@ end)
 
 
 epic.register_hook({
-  -- called on epic abort
-  on_epic_abort = function(playername, state)
+	-- called on epic abort
+	on_epic_abort = function(playername, state)
+		minetest.log("action", "[epic] Checking abort callbacks for player: " .. playername)
 		if state.data.abort_callback_pos then
 			local node = epic.get_node(state.data.abort_callback_pos)
 			if node.name == "epic:function" then
 				-- modify instruction pointer on state, flush stack
 				local new_state = epic.new_state()
 				new_state.ip = state.data.abort_callback_pos
-				-- replace global state
-				epic.state[playername] = new_state
+				epic.state[playername] = nil
+				epic.execute_player_state(playername, new_state)
 			end
 		end
 	end,

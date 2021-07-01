@@ -101,8 +101,9 @@ end)
 
 
 epic.register_hook({
-  -- called on epic exit
-  on_epic_exit = function(playername, state)
+	-- called on epic exit
+	on_epic_exit = function(playername, state)
+		minetest.log("action", "[epic] Checking exit callbacks for player: " .. playername)
 		if state.data.exit_callback_pos then
 			local node = epic.get_node(state.data.exit_callback_pos)
 			if node.name == "epic:function" then
