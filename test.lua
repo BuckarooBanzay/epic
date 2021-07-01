@@ -28,6 +28,7 @@ minetest = {
   register_on_dieplayer = function() end,
   register_privilege = function() end,
   register_chatcommand = function() end,
+  register_on_shutdown = function() end,
 
   get_connected_players = function()
     return {}
