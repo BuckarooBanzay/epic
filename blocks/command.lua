@@ -26,6 +26,7 @@ local execute = function(str, playername)
 
 	if command.privs and not minetest.check_player_privs(playername, command.privs) then
 		minetest.chat_send_player(playername, "Not enough privileges!")
+		return
 	end
 
 	command.func(playername, (params or ""))
