@@ -13,6 +13,7 @@ minetest.override_item("signs:paper_poster", {
 		old_on_receive_fields(pos, formname, fields, player)
 	end,
 
+	epic_anyone_can_place = true,
 	epic = {
 		on_enter = function(pos, _, player)
 			closed_forms[player:get_player_name()] = nil
