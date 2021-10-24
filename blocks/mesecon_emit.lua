@@ -22,50 +22,50 @@ minetest.register_node("epic:mesecon_emit", {
 		rules = mesecon.rules.pplate
 	}},
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("delay", 1)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local delay = tonumber(fields.delay) or 1
-	if delay < 0 then
-		delay = 1
-	end
+		if fields.save then
+			local delay = tonumber(fields.delay) or 1
+			if delay < 0 then
+				delay = 1
+			end
 
-	meta:set_int("delay", delay)
-	update_formspec(meta, pos)
-    end
+			meta:set_int("delay", delay)
+			update_formspec(meta, pos)
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(pos, _, _, ctx)
-      ctx.data.delay_start = minetest.get_us_time()
-      mesecon.receptor_on(pos)
+	epic = {
+		on_enter = function(pos, _, _, ctx)
+			ctx.data.delay_start = minetest.get_us_time()
+			mesecon.receptor_on(pos)
 
-    end,
-    on_check = function(_, meta, _, ctx)
-      local now = minetest.get_us_time()
-      local start = ctx.data.delay_start
-      local delay_micros = meta:get_int("delay")*1000*1000
+		end,
+		on_check = function(_, meta, _, ctx)
+			local now = minetest.get_us_time()
+			local start = ctx.data.delay_start
+			local delay_micros = meta:get_int("delay")*1000*1000
 
-      local diff = now - start
-      if diff > delay_micros then
-        ctx.next()
-      end
-    end,
-    on_exit = function(pos)
-      mesecon.receptor_off(pos)
-    end
-  }
+			local diff = now - start
+			if diff > delay_micros then
+				ctx.next()
+			end
+		end,
+		on_exit = function(pos)
+			mesecon.receptor_off(pos)
+		end
+	}
 })

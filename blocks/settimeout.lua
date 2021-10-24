@@ -18,37 +18,37 @@ minetest.register_node("epic:settimeout", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("timeout", 300)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local timeout = tonumber(fields.timeout) or 5
+		if fields.save then
+			local timeout = tonumber(fields.timeout) or 5
 			if timeout < 0 then
 				timeout = 1
 			end
 
 			meta:set_int("timeout", timeout)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(_, meta, _, ctx)
+	epic = {
+		on_enter = function(_, meta, _, ctx)
 			local timeout = meta:get_int("timeout") or 300
 			ctx.settimeout(timeout)
 			ctx.next()
-    end
-  }
+		end
+	}
 })

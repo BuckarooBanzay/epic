@@ -2,10 +2,10 @@ local FORMNAME = "epic_review"
 
 -- review hook to override
 -- parameters:
---  pos = position of review block
---  player = player object
---  stars = star rating: 1-5, 0 if aborted
---  counter = number of reviews
+--	pos = position of review block
+--	player = player object
+--	stars = star rating: 1-5, 0 if aborted
+--	counter = number of reviews
 epic.on_review = function() end
 
 -- rate formspec for quest player
@@ -64,12 +64,12 @@ local update_formspec = function(meta)
 	meta:set_string("rating", tostring(rating))
 
 	meta:set_string("formspec", "size[8,8;]" ..
-		"label[0,0.5;Visits:  " .. counter .. ", Rating: " .. rating .. "]" ..
-		"label[0,1.5;1-Star:  " .. one .. "]" ..
-		"label[0,2.5;2-Star:  " .. two .. "]" ..
-		"label[0,3.5;3-Star:  " .. three .. "]" ..
-		"label[0,4.5;4-Star:  " .. four .. "]" ..
-		"label[0,5.5;5-Star:  " .. five .. "]" ..
+		"label[0,0.5;Visits:	" .. counter .. ", Rating: " .. rating .. "]" ..
+		"label[0,1.5;1-Star:	" .. one .. "]" ..
+		"label[0,2.5;2-Star:	" .. two .. "]" ..
+		"label[0,3.5;3-Star:	" .. three .. "]" ..
+		"label[0,4.5;4-Star:	" .. four .. "]" ..
+		"label[0,5.5;5-Star:	" .. five .. "]" ..
 		"button_exit[0.1,6.5;8,1;reset;Reset]" ..
 		"")
 end
@@ -102,10 +102,10 @@ minetest.register_node("epic:review", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		initialize_reviews(meta)
-    update_formspec(meta)
-  end,
+		update_formspec(meta)
+	end,
 
 	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -122,13 +122,13 @@ minetest.register_node("epic:review", {
 
 	end,
 
-  epic = {
-    on_enter = function(pos, meta, player)
+	epic = {
+		on_enter = function(pos, meta, player)
 			local name = player:get_player_name()
 			form_visited[name] = nil
 			meta:set_string("lastplayer", name)
 			show_formspec(pos, name)
-    end,
+		end,
 		on_check = function(_, _, player, ctx)
 			local name = player:get_player_name()
 			if form_visited[name] then
@@ -140,7 +140,7 @@ minetest.register_node("epic:review", {
 			local name = player:get_player_name()
 			form_visited[name] = nil
 		end
-  }
+	}
 })
 
 -- callback from rate-form

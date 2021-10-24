@@ -114,5 +114,5 @@ if epic.log_executor then
 end
 
 if minetest.settings:get_bool("enable_epic_integration_test") then
-        dofile(MP.."/integration_test.lua")
+				dofile(MP.."/integration_test.lua")
 end

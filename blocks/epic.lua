@@ -27,7 +27,7 @@ minetest.register_node("epic:epic", {
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-		action_on = function (pos)
+			action_on = function (pos)
 				for _, player in ipairs(minetest.get_connected_players()) do
 					local ppos = player:get_pos()
 
@@ -37,7 +37,7 @@ minetest.register_node("epic:epic", {
 					end
 				end
 			end
-	  }
+		}
 	},
 
 	mtinfo = {

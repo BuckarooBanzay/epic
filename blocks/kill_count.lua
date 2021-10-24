@@ -26,70 +26,70 @@ minetest.register_node("epic:kill_count", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("kills", 5)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local kills = tonumber(fields.kills) or 5
+		if fields.save then
+			local kills = tonumber(fields.kills) or 5
 			if kills < 0 then
 				kills = 1
 			end
 
 			meta:set_int("kills", kills)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(_, meta, player, ctx)
-      kill_counter[player:get_player_name()] = 0
-      ctx.step_data.kills = meta:get_int("kills")
+	epic = {
+		on_enter = function(_, meta, player, ctx)
+			kill_counter[player:get_player_name()] = 0
+			ctx.step_data.kills = meta:get_int("kills")
 
-      ctx.step_data.hud_kills = player:hud_add({
-        hud_elem_type = "text",
-        position = HUD_POSITION,
-        offset = {x = 0,   y = 40},
-        text = "",
-        alignment = HUD_ALIGNMENT,
-        scale = {x = 100, y = 100},
-        number = 0x0000FF
-      })
+			ctx.step_data.hud_kills = player:hud_add({
+				hud_elem_type = "text",
+				position = HUD_POSITION,
+				offset = {x = 0,	 y = 40},
+				text = "",
+				alignment = HUD_ALIGNMENT,
+				scale = {x = 100, y = 100},
+				number = 0x0000FF
+			})
 
-    end,
-    on_check = function(_, _, player, ctx)
-      local count = kill_counter[player:get_player_name()]
-      local txt = "Kills: " .. count .. "/" .. ctx.step_data.kills
+		end,
+		on_check = function(_, _, player, ctx)
+			local count = kill_counter[player:get_player_name()]
+			local txt = "Kills: " .. count .. "/" .. ctx.step_data.kills
 
-      player:hud_change(ctx.step_data.hud_kills, "text", txt)
-      if count >= ctx.step_data.kills then
-        ctx.next()
-      end
-    end,
-    on_exit = function(_, _, player, ctx)
-      player:hud_remove(ctx.step_data.hud_kills)
-    end
-  }
+			player:hud_change(ctx.step_data.hud_kills, "text", txt)
+			if count >= ctx.step_data.kills then
+				ctx.next()
+			end
+		end,
+		on_exit = function(_, _, player, ctx)
+			player:hud_remove(ctx.step_data.hud_kills)
+		end
+	}
 })
 
 -- players
 minetest.register_on_punchplayer(function(player, hitter, _, _, _, damage)
-  -- player got hit by another player
+	-- player got hit by another player
 
 	if not hitter or not hitter:is_player() then
-    return
-  end
+		return
+	end
 
 	local name = hitter:get_player_name()
 
@@ -97,9 +97,9 @@ minetest.register_on_punchplayer(function(player, hitter, _, _, _, damage)
 		return
 	end
 
-  if damage >= player:get_hp() and player:get_hp() > 0 then
-    kill_counter[name] = kill_counter[name] + 1
-  end
+	if damage >= player:get_hp() and player:get_hp() > 0 then
+		kill_counter[name] = kill_counter[name] + 1
+	end
 end)
 -- mobs
 minetest.register_on_mods_loaded(function()

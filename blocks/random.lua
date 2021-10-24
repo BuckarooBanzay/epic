@@ -19,33 +19,33 @@ minetest.register_node("epic:random", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("chance", 10)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
 	on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local chance = tonumber(fields.chance) or 10
+		if fields.save then
+			local chance = tonumber(fields.chance) or 10
 			if chance <= 0 then
 				chance = 10
 			end
 
 			meta:set_int("chance", chance)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_check = function(_, meta, _, ctx)
+	epic = {
+		on_check = function(_, meta, _, ctx)
 			local chance = meta:get_int("chance")
 			if chance <= 0 then
 				chance = 10
@@ -55,5 +55,5 @@ minetest.register_node("epic:random", {
 				ctx.next()
 			end
 		end
-  }
+	}
 })

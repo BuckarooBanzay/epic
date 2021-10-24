@@ -40,13 +40,13 @@ minetest.register_node("epic:loop_sound", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("soundname", "")
 		meta:set_string("gain", "1.0")
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -78,10 +78,10 @@ minetest.register_node("epic:loop_sound", {
 
 		update_formspec(meta, pos)
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(_, meta, player, ctx)
+		on_enter = function(_, meta, player, ctx)
 
 			if ctx.data.loop_sound_handle then
 				minetest.sound_stop(ctx.data.loop_sound_handle)
@@ -107,8 +107,8 @@ minetest.register_node("epic:loop_sound", {
 				end
 			end
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 local function cleanup(_, state)
@@ -119,6 +119,6 @@ local function cleanup(_, state)
 end
 
 epic.register_hook({
-  on_epic_exit = cleanup,
+	on_epic_exit = cleanup,
 	on_epic_abort = cleanup
 })

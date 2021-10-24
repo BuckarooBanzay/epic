@@ -7,7 +7,7 @@ minetest.register_node("epic:check_empty_armor", {
 	on_rotate = epic.on_rotate,
 
 	epic = {
-    on_check = function(_, _, player, ctx)
+		on_check = function(_, _, player, ctx)
 			local player_name = player:get_player_name()
 			local player_armor_inv = minetest.get_inventory({type="detached", name=player_name.."_armor"})
 
@@ -15,6 +15,6 @@ minetest.register_node("epic:check_empty_armor", {
 
 				ctx.next()
 			end
-    end
-  }
+		end
+	}
 })

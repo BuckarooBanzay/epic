@@ -74,7 +74,7 @@ end)
 
 minetest.register_chatcommand("epic_trace", {
 	description = "Enables or disables epic tracing",
-  privs = { epic_debug = true },
+	privs = { epic_debug = true },
 	func = function(name, params)
 		local player = minetest.get_player_by_name(name)
 		local meta = player:get_meta()
@@ -93,6 +93,6 @@ minetest.register_chatcommand("epic_trace", {
 			end
 		else
 			return true, "Usage: /epic_trace on|off"
-    end
+		end
 	end
 })

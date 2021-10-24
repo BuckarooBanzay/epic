@@ -18,22 +18,22 @@ minetest.register_node("epic:daynightratio", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("ratio", "")
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local ratio = tonumber(fields.ratio)
+		if fields.save then
+			local ratio = tonumber(fields.ratio)
 			if not ratio then
 				meta:set_string("ratio", "")
 			elseif ratio < 0 then
@@ -45,12 +45,12 @@ minetest.register_node("epic:daynightratio", {
 			end
 
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(_, meta, player, ctx)
+	epic = {
+		on_enter = function(_, meta, player, ctx)
 			local ratio = meta:get_string("ratio")
 			if ratio == "" then
 				player:override_day_night_ratio(nil)
@@ -59,6 +59,6 @@ minetest.register_node("epic:daynightratio", {
 			end
 
 			ctx.next()
-    end,
-  }
+		end,
+	}
 })
