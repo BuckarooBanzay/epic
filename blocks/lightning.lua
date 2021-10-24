@@ -16,7 +16,7 @@ local update_formspec = function(meta)
 	meta:set_string("formspec", "size[8,1;]" ..
 		-- col 2
 		"button_exit[0.1,0.5;4,1;setpos;Set pos]" ..
-								"button_exit[4.1,0.5;4,1;showpos;Show]" ..
+		"button_exit[4.1,0.5;4,1;showpos;Show]" ..
 		"")
 end
 
