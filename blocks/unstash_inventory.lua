@@ -8,8 +8,8 @@ minetest.register_node("epic:unstash_inv", {
 	on_rotate = epic.on_rotate,
 
 	epic = {
-    on_enter = function(_, _, player, ctx)
-      ctx.data.stashed_items = ctx.data.stashed_items or {}
+		on_enter = function(_, _, player, ctx)
+			ctx.data.stashed_items = ctx.data.stashed_items or {}
 			local player_inv = player:get_inventory()
 
 			for _, itemstr in ipairs(ctx.data.stashed_items) do
@@ -20,6 +20,6 @@ minetest.register_node("epic:unstash_inv", {
 			end
 
 			ctx.next()
-    end
-  }
+		end
+	}
 })

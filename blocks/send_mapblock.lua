@@ -36,8 +36,8 @@ minetest.register_node("epic:send_mapblock", {
 		if fields.setpos then
 			minetest.chat_send_player(playername, "[epic] Please punch the desired target position")
 			epic.punchnode_callback(sender, {
-			  timeout = 300,
-			  callback = function(punch_pos)
+				timeout = 300,
+				callback = function(punch_pos)
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					meta:set_string("pos", pos_str)
 					minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
@@ -53,15 +53,15 @@ minetest.register_node("epic:send_mapblock", {
 			end
 		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local rel_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local target_pos = epic.to_absolute_pos(pos, rel_pos)
 			local block_pos = epic.get_mapblock_pos(target_pos)
 			player:send_mapblock(block_pos)
 			ctx.next()
-    end
-  }
+		end
+	}
 })

@@ -29,15 +29,15 @@ minetest.register_node("epic:save", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=1, z=0}))
 		meta:set_string("topic", "My maze")
 		meta:set_string("name", "Level 1")
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
@@ -56,16 +56,16 @@ minetest.register_node("epic:save", {
 			end
 		end
 
-    if fields.save then
+		if fields.save then
 			meta:set_string("topic", fields.topic or "My maze")
 			meta:set_string("name", fields.name or "Level 1")
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(pos, meta, player, ctx)
+	epic = {
+		on_enter = function(pos, meta, player, ctx)
 			local playername = player:get_player_name()
 			local topic = meta:get_string("topic")
 			local name = meta:get_string("name")
@@ -78,8 +78,8 @@ minetest.register_node("epic:save", {
 
 			minetest.chat_send_player(playername, "[epic] Game state '" .. topic .. "/" .. name .. "' saved!")
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)

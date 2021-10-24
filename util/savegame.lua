@@ -10,7 +10,7 @@ local getStateFile = function(playername)
 end
 
 epic.savegame.save = function(playername, savegame)
-  local file = io.open(getStateFile(playername),"w")
+	local file = io.open(getStateFile(playername),"w")
 	local json = minetest.write_json(savegame)
 	if file and file:write(json) and file:close() then
 		return

@@ -65,8 +65,8 @@ minetest.register_node("epic:branch", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
 
-  epic = {
-    on_enter = function(pos, _, player, ctx)
+	epic = {
+		on_enter = function(pos, _, player, ctx)
 
 			local node = epic.get_node(pos)
 			local direction = epic.get_direction(node.param2)
@@ -105,13 +105,13 @@ minetest.register_node("epic:branch", {
 
 					if epic.log_executor then
 						minetest.log("action", "[epic::branch] on_before_node_exit player=" ..
-				      player:get_player_name() ..
-				      " pos=" .. minetest.pos_to_string(target_pos) ..
-				      " node=" .. minetest.get_node(target_pos).name)
+							player:get_player_name() ..
+							" pos=" .. minetest.pos_to_string(target_pos) ..
+							" node=" .. minetest.get_node(target_pos).name)
 					end
 				end
 			end
-    end,
+		end,
 		on_check = function(_, _, player, ctx)
 			local next_called = false
 
@@ -134,9 +134,9 @@ minetest.register_node("epic:branch", {
 				if nodedef.epic and nodedef.epic.on_check then
 					if epic.log_executor then
 						minetest.log("action", "[epic::branch] on_before_node_check player=" ..
-				      player:get_player_name() ..
-				      " pos=" .. minetest.pos_to_string(target_pos) ..
-				      " node=" .. minetest.get_node(target_pos).name)
+							player:get_player_name() ..
+							" pos=" .. minetest.pos_to_string(target_pos) ..
+							" node=" .. minetest.get_node(target_pos).name)
 					end
 
 					nodedef.epic.on_check(target_pos, minetest.get_meta(target_pos), player, sub_ctx)
@@ -159,5 +159,5 @@ minetest.register_node("epic:branch", {
 				end
 			end
 		end
-  }
+	}
 })

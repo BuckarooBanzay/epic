@@ -33,13 +33,13 @@ minetest.register_node("epic:teleport_relative", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("source", minetest.pos_to_string({x=0, y=0, z=0}))
 		meta:set_string("target", minetest.pos_to_string({x=0, y=0, z=0}))
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -71,10 +71,10 @@ minetest.register_node("epic:teleport_relative", {
 			end
 		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local source_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("source")))
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("target")))
 			local player_pos = player:get_pos()
@@ -86,8 +86,8 @@ minetest.register_node("epic:teleport_relative", {
 				player:set_pos(new_pos)
 			end
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)

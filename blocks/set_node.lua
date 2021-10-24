@@ -94,20 +94,20 @@ minetest.register_node("epic:setnode", {
 	end,
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+		on_enter = function(pos, meta, _, ctx)
 			do_set(pos, meta)
 			ctx.next()
-    end
-  },
+		end
+	},
 
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				do_set(pos, meta)
 			end
-	  }
+		}
 	}
 })
 

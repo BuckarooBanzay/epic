@@ -43,33 +43,33 @@ minetest.register_node("epic:command", {
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name())
 		meta:set_string("cmd", "status")
-    update_formspec(meta, pos)
+		update_formspec(meta, pos)
 	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or sender:get_player_name() ~= meta:get_string("owner") then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local cmd = fields.cmd or "status"
+		if fields.save then
+			local cmd = fields.cmd or "status"
 			meta:set_string("cmd", cmd)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(_, meta, player, ctx)
-      local cmd = meta:get_string("cmd")
+		on_enter = function(_, meta, player, ctx)
+			local cmd = meta:get_string("cmd")
 			local owner = meta:get_string("owner")
 			cmd = cmd:gsub("@player", player:get_player_name())
 			cmd = cmd:gsub("@owner", owner)
 			execute(cmd, owner)
-      ctx.next()
-    end
-  }
+			ctx.next()
+		end
+	}
 })

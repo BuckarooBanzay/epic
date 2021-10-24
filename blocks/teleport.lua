@@ -22,12 +22,12 @@ minetest.register_node("epic:teleport", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -47,16 +47,16 @@ minetest.register_node("epic:teleport", {
 			end
 		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local rel_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local target_pos = epic.to_absolute_pos(pos, rel_pos)
 			player:set_pos(target_pos)
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)

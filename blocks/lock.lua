@@ -7,19 +7,19 @@ minetest.register_node("epic:lock", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("lock", 0)
-  end,
+	end,
 
-  epic = {
-    on_enter = function(_, meta, player, ctx)
+	epic = {
+		on_enter = function(_, meta, player, ctx)
 			if meta:get_int("lock") == 0 then
 				meta:set_int("lock", 1)
 				ctx.next()
 			else
 				minetest.chat_send_player(player:get_player_name(), "[epic] the section is currently occupied, please stand by...")
 			end
-    end,
+		end,
 
 		on_check = function(_, meta, player, ctx)
 			if meta:get_int("lock") == 0 then
@@ -28,5 +28,5 @@ minetest.register_node("epic:lock", {
 				ctx.next()
 			end
 		end
-  }
+	}
 })

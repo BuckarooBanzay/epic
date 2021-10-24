@@ -44,27 +44,27 @@ minetest.register_node("epic:deduct_inv", {
 	end,
 
 	epic = {
-    on_check = function(_, meta, player, ctx)
+		on_check = function(_, meta, player, ctx)
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
 			local success = true
-      local deduct_items = inv:get_list("main")
-      for _, deduct_item in ipairs(deduct_items) do
+			local deduct_items = inv:get_list("main")
+			for _, deduct_item in ipairs(deduct_items) do
 				if not player_inv:contains_item("main", deduct_item) then
 					success = false
 					break
 				end
-      end
+			end
 
 			if success then
 				for _, deduct_item in ipairs(deduct_items) do
 					player_inv:remove_item("main", deduct_item)
-	      end
+				end
 
 				ctx.next()
 			end
 
-    end
-  }
+		end
+	}
 })

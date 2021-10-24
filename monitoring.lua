@@ -13,37 +13,37 @@ local exited_normally = monitoring.counter("epic_exited", "count of normally exi
 local exited_abort = monitoring.counter("epic_aborted", "count of aborted epics")
 
 epic.register_hook({
-  on_execute_epic = function()
-    epic_starts.inc()
-    current_epics = current_epics + 1
-    current_epics_metric.set(current_epics)
-  end,
+	on_execute_epic = function()
+		epic_starts.inc()
+		current_epics = current_epics + 1
+		current_epics_metric.set(current_epics)
+	end,
 
-  on_before_node_enter = function()
-    executed_blocks_enter.inc()
-  end,
+	on_before_node_enter = function()
+		executed_blocks_enter.inc()
+	end,
 
-  on_before_node_check = function()
-    executed_blocks_check.inc()
-  end,
+	on_before_node_check = function()
+		executed_blocks_check.inc()
+	end,
 
-  on_before_node_exit = function()
-    executed_blocks_exit.inc()
-  end,
+	on_before_node_exit = function()
+		executed_blocks_exit.inc()
+	end,
 
-  on_epic_exit = function()
-    exited_normally.inc()
-    current_epics = current_epics - 1
-    current_epics_metric.set(current_epics)
-  end,
+	on_epic_exit = function()
+		exited_normally.inc()
+		current_epics = current_epics - 1
+		current_epics_metric.set(current_epics)
+	end,
 
-  on_epic_abort = function()
-    exited_abort.inc()
-    current_epics = current_epics - 1
-    current_epics_metric.set(current_epics)
-  end,
+	on_epic_abort = function()
+		exited_abort.inc()
+		current_epics = current_epics - 1
+		current_epics_metric.set(current_epics)
+	end,
 
-  globalstep_stats = function(stats)
-    time_budget.inc(stats.time)
-  end
+	globalstep_stats = function(stats)
+		time_budget.inc(stats.time)
+	end
 })
