@@ -50,6 +50,7 @@ minetest.register_node("epic:set_gravity", {
 	else
 		player:set_physics_override({ gravity = gravity })
 	end
+	minetest.log("action", ("%s's gravity set to %f"):format(player:get_player_name(), gravity))
 	ctx.next()
     end
   }

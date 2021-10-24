@@ -34,6 +34,20 @@ local function do_fill(pos, meta)
 
 	local target_meta = minetest.get_meta(target_pos)
 	local target_inv = target_meta:get_inventory()
+	local existing_items = target_inv:get_list("main")
+	local existing_items_string = ""
+	for _,stack in pairs(existing_items) do
+		if not stack:is_empty() then
+			existing_items_string = existing_items_string .. stack:to_string() .. ", "
+		end
+	end
+	local new_items_string = ""
+	for _,stack in pairs(items) do
+		if not stack:is_empty() then
+			new_items_string = new_items_string .. stack:to_string() .. ", "
+		end
+	end
+	minetest.log("action", ("Inventory at %s replaced { %s } with { %s }"):format(minetest.pos_to_string(target_pos), existing_items_string:sub(1, -3),  new_items_string:sub(1, -3)))
 	target_inv:set_list("main", items)
 end
 
