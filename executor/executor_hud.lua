@@ -19,7 +19,7 @@ local function setup(playername, name)
 	data.name = player:hud_add({
 		hud_elem_type = "text",
 		position = HUD_POSITION,
-		offset = {x = 0,	 y = 0},
+		offset = {x = 0,  y = 0},
 		text = name or "",
 		alignment = HUD_ALIGNMENT,
 		scale = {x = 100, y = 100},
@@ -29,7 +29,7 @@ local function setup(playername, name)
 	data.time = player:hud_add({
 		hud_elem_type = "text",
 		position = HUD_POSITION,
-		offset = {x = 0,	 y = 20},
+		offset = {x = 0,  y = 20},
 		text = "",
 		alignment = HUD_ALIGNMENT,
 		scale = {x = 100, y = 100},

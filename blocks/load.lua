@@ -8,7 +8,7 @@ minetest.register_node("epic:load", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-	local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("infotext", "Load game")
 		meta:set_string("topic", "My maze")
 	end,
