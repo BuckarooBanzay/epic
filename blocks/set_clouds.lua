@@ -88,7 +88,11 @@ minetest.register_node("epic:setclouds", {
 				}
 			}
 			minetest.log("action", ("%s's clouds changed from %s to %s")
-				:format(player:get_player_name(), minetest.serialize(existing_clouds):sub(8), minetest.serialize(new_clouds):sub(8)))
+				:format(
+					player:get_player_name(),
+					minetest.serialize(existing_clouds):sub(8),
+					minetest.serialize(new_clouds):sub(8)
+				))
 
 			player:set_clouds(new_clouds)
 			ctx.next()

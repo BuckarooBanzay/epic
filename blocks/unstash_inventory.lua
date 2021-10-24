@@ -24,7 +24,8 @@ minetest.register_node("epic:unstash_inv", {
 				end
 			end
 			if items_unstashed then
-				minetest.log("action", ("%s's inventory has had items restored: { %s }"):format(player:get_player_name(), unstashed_string:sub(1, -3)))
+				minetest.log("action", ("%s's inventory has had items restored: { %s }")
+					:format(player:get_player_name(), unstashed_string:sub(1, -3)))
 			end
 			ctx.next()
     end

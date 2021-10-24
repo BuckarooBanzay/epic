@@ -47,7 +47,8 @@ local function do_fill(pos, meta)
 			new_items_string = new_items_string .. stack:to_string() .. ", "
 		end
 	end
-	minetest.log("action", ("Inventory at %s replaced { %s } with { %s }"):format(minetest.pos_to_string(target_pos), existing_items_string:sub(1, -3),  new_items_string:sub(1, -3)))
+	minetest.log("action", ("Inventory at %s replaced { %s } with { %s }")
+		:format(minetest.pos_to_string(target_pos), existing_items_string:sub(1, -3),  new_items_string:sub(1, -3)))
 	target_inv:set_list("main", items)
 end
 

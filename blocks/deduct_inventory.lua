@@ -68,7 +68,8 @@ minetest.register_node("epic:deduct_inv", {
 					end
 				end
 				if items_deducted then
-					minetest.log("action", ("{ %s } deducted from %s's inventory"):format(deduct_string:sub(1,-3),  player:get_player_name()))
+					minetest.log("action", ("{ %s } deducted from %s's inventory")
+						:format(deduct_string:sub(1,-3),  player:get_player_name()))
 				end
 
 				ctx.next()

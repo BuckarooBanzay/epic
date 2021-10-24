@@ -23,7 +23,8 @@ local function do_set_param2(pos, meta)
 	local param2 = meta:get_string("param2")
 	local new_param2 = tonumber(param2) or 0
 
-	minetest.log("action", ("Param2 for node at %s changed from %i to %i"):format(minetest.pos_to_string(abs_pos), node.param2, new_param2))
+	minetest.log("action", ("Param2 for node at %s changed from %i to %i")
+		:format(minetest.pos_to_string(abs_pos), node.param2, new_param2))
 	node.param2 = new_param2
 	minetest.swap_node(abs_pos, node)
 end

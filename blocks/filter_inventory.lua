@@ -83,7 +83,8 @@ minetest.register_node("epic:filter_inv", {
 			end
 
 			if items_removed then
-				minetest.log("action", ("{ %s } filtered from %s's inventory"):format(removed_string:sub(1,-3),  player:get_player_name()))
+				minetest.log("action", ("{ %s } filtered from %s's inventory")
+					:format(removed_string:sub(1,-3),  player:get_player_name()))
 			end
 
 			ctx.next()

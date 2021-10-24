@@ -77,7 +77,8 @@ minetest.register_node("epic:stash_inv", {
       end
 
       if items_stashed then
-			minetest.log("action", ("%s's inventory has had items stashed: { %s }"):format(player:get_player_name(), stashed_string:sub(1, -3)))
+			minetest.log("action", ("%s's inventory has had items stashed: { %s }")
+				:format(player:get_player_name(), stashed_string:sub(1, -3)))
       end
 
 			ctx.next()
