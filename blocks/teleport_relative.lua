@@ -83,7 +83,8 @@ minetest.register_node("epic:teleport_relative", {
 				local delta = vector.subtract(player_pos, source_pos)
 				local new_pos = vector.add(target_pos, delta)
 				-- TODO: account for player:get_velocity()
-				minetest.log("action", ("teleported %s to %s"):format(player:get_player_name(), minetest.pos_to_string(new_pos)))
+				minetest.log("action", ("[epic::teleport_relative@%s] teleported %s to %s")
+					:format(minetest.pos_to_string(pos), player:get_player_name(), minetest.pos_to_string(new_pos)))
 				player:set_pos(new_pos)
 			end
 			ctx.next()

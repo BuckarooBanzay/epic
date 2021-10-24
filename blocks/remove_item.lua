@@ -43,7 +43,8 @@ local function do_remove(pos, meta)
 		end
 	end
 	if objects_removed then
-		minetest.log("action", ("Items removed { %s }"):format(objects_string:sub(1,-3)))
+		minetest.log("action", ("[epic::remove_item@%s] Items removed { %s }")
+			:format(minetest.pos_to_string(pos), objects_string:sub(1,-3)))
 	end
 end
 

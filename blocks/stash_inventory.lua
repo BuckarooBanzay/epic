@@ -44,7 +44,7 @@ minetest.register_node("epic:stash_inv", {
 	end,
 
 	epic = {
-    on_enter = function(_, meta, player, ctx)
+    on_enter = function(pos, meta, player, ctx)
       ctx.data.stashed_items = ctx.data.stashed_items or {}
       local filter_map = {}
 			local inv = meta:get_inventory()
@@ -77,8 +77,8 @@ minetest.register_node("epic:stash_inv", {
       end
 
       if items_stashed then
-			minetest.log("action", ("%s's inventory has had items stashed: { %s }")
-				:format(player:get_player_name(), stashed_string:sub(1, -3)))
+			minetest.log("action", ("[epic::stash_inventory@%s] %s's inventory has had items stashed: { %s }")
+				:format(minetest.pos_to_string(pos), player:get_player_name(), stashed_string:sub(1, -3)))
       end
 
 			ctx.next()

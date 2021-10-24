@@ -56,7 +56,7 @@ minetest.register_node("epic:filter_inv", {
 	end,
 
 	epic = {
-    on_check = function(_, meta, player, ctx)
+    on_check = function(pos, meta, player, ctx)
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
@@ -83,8 +83,8 @@ minetest.register_node("epic:filter_inv", {
 			end
 
 			if items_removed then
-				minetest.log("action", ("{ %s } filtered from %s's inventory")
-					:format(removed_string:sub(1,-3),  player:get_player_name()))
+				minetest.log("action", ("[epic::filter_inventory@%s] { %s } filtered from %s's inventory")
+					:format(minetest.pos_to_string(pos), removed_string:sub(1,-3),  player:get_player_name()))
 			end
 
 			ctx.next()

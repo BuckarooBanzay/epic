@@ -53,7 +53,8 @@ minetest.register_node("epic:teleport", {
     on_enter = function(pos, meta, player, ctx)
 			local rel_pos = minetest.string_to_pos(meta:get_string("pos"))
 			local target_pos = epic.to_absolute_pos(pos, rel_pos)
-			minetest.log("action", ("teleported %s to %s"):format(player:get_player_name(), minetest.pos_to_string(target_pos)))
+			minetest.log("action", ("[epic::teleport@%s] teleported %s to %s")
+				:format(minetest.pos_to_string(pos), player:get_player_name(), minetest.pos_to_string(target_pos)))
 			player:set_pos(target_pos)
 			ctx.next()
     end

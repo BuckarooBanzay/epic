@@ -34,8 +34,9 @@ local function do_set(pos, meta)
 		node_name = "air"
 	end
 	local previous_node = minetest.get_node_or_nil(target_pos)
-	minetest.log("action", ("%s node placed at %s, replacing %s")
+	minetest.log("action", ("[epic::set_node@%s] %s node placed at %s, replacing %s")
 		:format(
+			minetest.pos_to_string(pos),
 			node_name,
 			minetest.pos_to_string(target_pos),
 			previous_node
