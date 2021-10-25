@@ -56,14 +56,14 @@ minetest.register_node("epic:removeitem", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
 		meta:set_string("radius", "5")
 
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -79,7 +79,7 @@ minetest.register_node("epic:removeitem", {
 		if fields.save then
 			meta:set_string("radius", fields.radius or "5")
 			update_formspec(meta, pos)
-    end
+		end
 
 		if fields.showpos then
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
@@ -87,23 +87,23 @@ minetest.register_node("epic:removeitem", {
 				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
 			end
 		end
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+		on_enter = function(pos, meta, _, ctx)
 			do_remove(pos, meta)
 			ctx.next()
-    end
-  },
+		end
+	},
 
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				do_remove(pos, meta)
 			end
-	  }
+		}
 	}
 })
 

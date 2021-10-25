@@ -16,7 +16,7 @@ local update_formspec = function(meta)
 	meta:set_string("formspec", "size[8,1;]" ..
 		-- col 2
 		"button_exit[0.1,0.5;4,1;setpos;Set pos]" ..
-                "button_exit[4.1,0.5;4,1;showpos;Show]" ..
+		"button_exit[4.1,0.5;4,1;showpos;Show]" ..
 		"")
 end
 
@@ -34,12 +34,12 @@ minetest.register_node("epic:lightning", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -54,32 +54,32 @@ minetest.register_node("epic:lightning", {
 			local meta = minetest.get_meta(pos)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-			        epic.show_waypoint(
-								sender:get_player_name(),
-								epic.to_absolute_pos(pos, target_pos),
-								"Target position",
-								2
-							)
+				epic.show_waypoint(
+					sender:get_player_name(),
+					epic.to_absolute_pos(pos, target_pos),
+					"Target position",
+					2
+				)
 			end
 		end
-  end,
+	end,
 
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				do_strike(pos, meta)
 			end
-	  }
+		}
 	},
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+		on_enter = function(pos, meta, _, ctx)
 			do_strike(pos, meta)
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher)

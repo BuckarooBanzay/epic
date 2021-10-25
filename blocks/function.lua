@@ -12,17 +12,17 @@ minetest.register_node("epic:function", {
 	on_rotate = epic.on_rotate,
 
 	epic = {
-    on_enter = function(_, _, _, ctx)
-      ctx.next()
-    end
-  },
+		on_enter = function(_, _, _, ctx)
+			ctx.next()
+		end
+	},
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
-    update_formspec(meta, pos)
-  end,
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender then
 			return
 		end
@@ -37,11 +37,11 @@ minetest.register_node("epic:function", {
 			return
 		end
 
-    if fields.execute then
+		if fields.execute then
 			local name = "function@" .. minetest.pos_to_string(pos)
-      epic.execute_epic(sender, pos, name)
-    end
+			epic.execute_epic(sender, pos, name)
+		end
 
-  end
+	end
 
 })

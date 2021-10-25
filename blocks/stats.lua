@@ -18,11 +18,11 @@ minetest.register_node("epic:stats", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("counter", 0)
 		meta:set_string("lastplayer", "")
-    update_formspec(meta)
-  end,
+		update_formspec(meta)
+	end,
 
 	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -39,12 +39,12 @@ minetest.register_node("epic:stats", {
 
 	end,
 
-  epic = {
-    on_enter = function(_, meta, player, ctx)
+	epic = {
+		on_enter = function(_, meta, player, ctx)
 			meta:set_int("counter", meta:get_int("counter") + 1)
 			meta:set_string("lastplayer", player:get_player_name())
 			update_formspec(meta)
 			ctx.next()
-    end
-  }
+		end
+	}
 })

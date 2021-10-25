@@ -157,32 +157,32 @@ end
 
 -- converts the direction from a param2
 epic.get_direction = function(param2)
-  local direction = minetest.facedir_to_dir(param2)
-  if direction.x == -1 and direction.z == 0 then
-    return { x=0, y=0, z=1 }
-  elseif direction.x == 0 and direction.z == 1 then
-    return { x=1, y=0, z=0 }
-  elseif direction.x == 1 and direction.z == 0 then
-    return { x=0, y=0, z=-1 }
-  elseif direction.x == 0 and direction.z == -1 then
-    return { x=-1, y=0, z=0 }
-  else
-    return nil
-  end
+	local direction = minetest.facedir_to_dir(param2)
+	if direction.x == -1 and direction.z == 0 then
+		return { x=0, y=0, z=1 }
+	elseif direction.x == 0 and direction.z == 1 then
+		return { x=1, y=0, z=0 }
+	elseif direction.x == 1 and direction.z == 0 then
+		return { x=0, y=0, z=-1 }
+	elseif direction.x == 0 and direction.z == -1 then
+		return { x=-1, y=0, z=0 }
+	else
+		return nil
+	end
 end
 
 -- returns the position of the next epic block
 epic.get_next_pos = function(pos)
-  local node = minetest.get_node(pos)
-  local direction = epic.get_direction(node.param2)
+	local node = minetest.get_node(pos)
+	local direction = epic.get_direction(node.param2)
 
-  if direction == nil then
-    return
-  end
+	if direction == nil then
+		return
+	end
 
-  local next_pos = vector.add(pos, direction)
+	local next_pos = vector.add(pos, direction)
 
-  return next_pos
+	return next_pos
 end
 
 -- returns a node and loads the area if needed
@@ -197,19 +197,19 @@ end
 
 -- returns true if the node has an "epic" definition
 epic.is_epic = function(node)
-  local nodedef = minetest.registered_nodes[node.name]
-  return nodedef and nodedef.epic
+	local nodedef = minetest.registered_nodes[node.name]
+	return nodedef and nodedef.epic
 end
 
 -- executes an epic function
 epic.execute_epic = function(player, main_pos, name)
-  if epic.state[player:get_player_name()] then
-    -- already running a function
-    return
-  end
+	if epic.state[player:get_player_name()] then
+		-- already running a function
+		return
+	end
 
-  minetest.log("action", "[epic] player " .. player:get_player_name() ..
-    " executes function at " .. minetest.pos_to_string(main_pos))
+	minetest.log("action", "[epic] player " .. player:get_player_name() ..
+		" executes function at " .. minetest.pos_to_string(main_pos))
 
 	local state = epic.new_state()
 

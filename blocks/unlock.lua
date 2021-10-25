@@ -28,10 +28,10 @@ minetest.register_node("epic:unlock", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string(pos))
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
 	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
@@ -53,7 +53,7 @@ minetest.register_node("epic:unlock", {
 			end
 		end
 
-  end,
+	end,
 
 	-- allow mesecons triggering
 	mesecons = {
@@ -65,12 +65,12 @@ minetest.register_node("epic:unlock", {
 		}
 	},
 
-  epic = {
-    on_enter = function(pos, meta, _, ctx)
+	epic = {
+		on_enter = function(pos, meta, _, ctx)
 			do_unlock(pos, meta)
 			ctx.next()
-    end
-  }
+		end
+	}
 })
 
 

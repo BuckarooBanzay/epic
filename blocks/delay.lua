@@ -18,46 +18,46 @@ minetest.register_node("epic:delay", {
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,
 
-  on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("delay", 5)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local delay = tonumber(fields.delay) or 5
+		if fields.save then
+			local delay = tonumber(fields.delay) or 5
 			if delay < 0 then
 				delay = 1
 			end
 
 			meta:set_int("delay", delay)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(_, _, _, ctx)
+	epic = {
+		on_enter = function(_, _, _, ctx)
 			ctx.step_data.delay_start = minetest.get_us_time()
-    end,
-    on_check = function(_, meta, _, ctx)
-      local now = minetest.get_us_time()
-      local start = ctx.step_data.delay_start
+		end,
+		on_check = function(_, meta, _, ctx)
+			local now = minetest.get_us_time()
+			local start = ctx.step_data.delay_start
 
 			local delay_micros = meta:get_int("delay")*1000*1000
 
-      local diff = now - start
-      if diff > delay_micros then
-        ctx.next()
-      end
-    end
-  }
+			local diff = now - start
+			if diff > delay_micros then
+				ctx.next()
+			end
+		end
+	}
 })

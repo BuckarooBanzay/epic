@@ -13,7 +13,7 @@ local update_formspec = function(meta)
 		"list[context;main;0,0.5;8,4;]" ..
 
 		"button_exit[0.1,5.5;4,1;setfn;Set target chest]" ..
-    "button_exit[4.1,5.5;4,1;showpos;Show]" ..
+		"button_exit[4.1,5.5;4,1;showpos;Show]" ..
 
 		"list[current_player;main;0,7;8,4;]" ..
 		"listring[]" ..
@@ -100,9 +100,9 @@ minetest.register_node("epic:fill_chest", {
 			local playername = sender:get_player_name()
 			minetest.chat_send_player(playername, "[epic] Please punch the target chest")
 			epic.punchnode_callback(sender, {
-			  timeout = 300,
+				timeout = 300,
 				check_protection = true,
-			  callback = function(punch_pos)
+				callback = function(punch_pos)
 					local meta = minetest.get_meta(pos)
 
 					if not is_chest(meta) then
@@ -124,30 +124,30 @@ minetest.register_node("epic:fill_chest", {
 			local meta = minetest.get_meta(pos)
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-			        epic.show_waypoint(
-								sender:get_player_name(),
-								epic.to_absolute_pos(pos, target_pos),
-								"Target position",
-								2
-							)
+				epic.show_waypoint(
+					sender:get_player_name(),
+					epic.to_absolute_pos(pos, target_pos),
+					"Target position",
+					2
+				)
 			end
 		end
-  end,
+	end,
 
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				do_fill(pos, meta)
 			end
-	  }
+		}
 	},
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+		on_enter = function(pos, meta, _, ctx)
 			do_fill(pos, meta)
 			ctx.next()
-    end
-  }
+		end
+	}
 })

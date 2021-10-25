@@ -10,7 +10,7 @@ local update_formspec = function(meta)
 	meta:set_string("formspec", "size[8,1;]" ..
 		-- col 2
 		"button_exit[0.1,0.5;4,1;setpos;Set]" ..
-                "button_exit[4.1,0.5;4,1;showpos;Show]" ..
+		"button_exit[4.1,0.5;4,1;showpos;Show]" ..
 		"")
 end
 
@@ -22,12 +22,12 @@ minetest.register_node("epic:mesecon_check", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -45,18 +45,18 @@ minetest.register_node("epic:mesecon_check", {
 				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
 			end
 		end
-  end,
+	end,
 
 	epic = {
-    on_check = function(pos, meta, _, ctx)
+		on_check = function(pos, meta, _, ctx)
 			local target_pos_str = meta:get_string("pos")
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 			local node = epic.get_node(target_pos)
 			if node.name == "mesecons_extrawires:mese_powered" then
 				ctx.next()
 			end
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, node, puncher)

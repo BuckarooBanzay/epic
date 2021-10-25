@@ -19,31 +19,31 @@ minetest.register_node("epic:message", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("text", "Hello world")
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local text = fields.text or "Hello world"
+		if fields.save then
+			local text = fields.text or "Hello world"
 			meta:set_string("text", text)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(_, meta, player, ctx)
-      minetest.chat_send_player(player:get_player_name(), meta:get_string("text"))
-      ctx.next()
-    end
-  }
+		on_enter = function(_, meta, player, ctx)
+			minetest.chat_send_player(player:get_player_name(), meta:get_string("text"))
+			ctx.next()
+		end
+	}
 })

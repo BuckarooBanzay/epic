@@ -74,29 +74,29 @@ minetest.register_node("epic:dialogue", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("text", "Example text")
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-      local text = fields.text or "<no text>"
+		if fields.save then
+			local text = fields.text or "<no text>"
 			meta:set_string("text", text)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player)
+		on_enter = function(pos, meta, player)
 			local player_name = player:get_player_name()
 			local player_dialogue = active_dialogues[player_name]
 			if not player_dialogue then
@@ -114,7 +114,7 @@ minetest.register_node("epic:dialogue", {
 
 			-- mark dialogue as not selected yet
 			player_dialogue.targets[minetest.pos_to_string(pos)] = meta:get_string("text")
-    end,
+		end,
 		on_check = function(pos, _, player, ctx)
 			local player_name = player:get_player_name()
 			local player_dialogue = active_dialogues[player_name]
@@ -144,5 +144,5 @@ minetest.register_node("epic:dialogue", {
 			local player_name = player:get_player_name()
 			active_dialogues[player_name] = nil
 		end
-  }
+	}
 })

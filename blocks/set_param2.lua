@@ -37,14 +37,14 @@ minetest.register_node("epic:set_param2", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
 		meta:set_string("param2", "0")
 
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		local playername = sender:get_player_name()
 		if not sender or minetest.is_protected(pos, playername) then
 			-- not allowed
@@ -66,8 +66,8 @@ minetest.register_node("epic:set_param2", {
 		if fields.setpos then
 			minetest.chat_send_player(playername, "[epic] Please punch the desired target position")
 			epic.punchnode_callback(sender, {
-			  timeout = 300,
-			  callback = function(punch_pos)
+				timeout = 300,
+				callback = function(punch_pos)
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					meta:set_string("pos", pos_str)
 					minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
@@ -91,22 +91,22 @@ minetest.register_node("epic:set_param2", {
 				)
 			end
 		end
-  end,
+	end,
 
 	-- allow mesecons triggering
 	mesecons = {
 		effector = {
-	    action_on = function (pos)
+			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				do_set_param2(pos, meta)
 			end
-	  }
+		}
 	},
 
 	epic = {
-    on_enter = function(pos, meta, _, ctx)
+		on_enter = function(pos, meta, _, ctx)
 			do_set_param2(pos, meta)
 			ctx.next()
-    end
-  }
+		end
+	}
 })

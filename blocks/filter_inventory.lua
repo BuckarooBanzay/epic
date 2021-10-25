@@ -56,17 +56,17 @@ minetest.register_node("epic:filter_inv", {
 	end,
 
 	epic = {
-    on_check = function(pos, meta, player, ctx)
+		on_check = function(pos, meta, player, ctx)
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
 			local filter_names = {}
-      local filter_items = inv:get_list("main")
-      for _, filter_item in ipairs(filter_items) do
+			local filter_items = inv:get_list("main")
+			for _, filter_item in ipairs(filter_items) do
 				if not filter_item:is_empty() then
 					filter_names[filter_item:get_name()] = true
 				end
-      end
+			end
 
 
 			local removed_main = filter_inventory(player_inv, "main", filter_names)
@@ -89,6 +89,6 @@ minetest.register_node("epic:filter_inv", {
 
 			ctx.next()
 
-    end
-  }
+		end
+	}
 })

@@ -8,8 +8,8 @@ minetest.register_node("epic:unstash_inv", {
 	on_rotate = epic.on_rotate,
 
 	epic = {
-    on_enter = function(pos, _, player, ctx)
-      ctx.data.stashed_items = ctx.data.stashed_items or {}
+		on_enter = function(pos, _, player, ctx)
+			ctx.data.stashed_items = ctx.data.stashed_items or {}
 			local player_inv = player:get_inventory()
 			local unstashed_string = ""
 			local items_unstashed = false
@@ -28,6 +28,6 @@ minetest.register_node("epic:unstash_inv", {
 					:format(minetest.pos_to_string(pos), player:get_player_name(), unstashed_string:sub(1, -3)))
 			end
 			ctx.next()
-    end
-  }
+		end
+	}
 })

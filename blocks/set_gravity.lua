@@ -27,32 +27,32 @@ minetest.register_node("epic:set_gravity", {
 		update_formspec(meta, pos)
 	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
-	meta:set_string("gravity", fields.gravity or "9.81")
-	update_formspec(meta, pos)
-    end
+		if fields.save then
+			meta:set_string("gravity", fields.gravity or "9.81")
+			update_formspec(meta, pos)
+		end
 
-  end,
+	end,
 
-  epic = {
-    on_enter = function(pos, meta, player, ctx)
-	local gravity = tonumber(meta:get_string("gravity")) or 1
-	if use_player_monoids then
-		player_monoids.gravity:add_change(player, gravity, "epic:set_gravity")
-	else
-		player:set_physics_override({ gravity = gravity })
-	end
-	minetest.log("action", ("[epic::set_gravity@%s] %s's gravity set to %f")
-		:format(minetest.pos_to_string(pos), player:get_player_name(), gravity))
-	ctx.next()
-    end
-  }
+	epic = {
+		on_enter = function(pos, meta, player, ctx)
+			local gravity = tonumber(meta:get_string("gravity")) or 1
+			if use_player_monoids then
+				player_monoids.gravity:add_change(player, gravity, "epic:set_gravity")
+			else
+				player:set_physics_override({ gravity = gravity })
+			end
+			minetest.log("action", ("[epic::set_gravity@%s] %s's gravity set to %f")
+				:format(minetest.pos_to_string(pos), player:get_player_name(), gravity))
+			ctx.next()
+		end
+	}
 })

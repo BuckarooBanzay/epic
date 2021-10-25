@@ -30,14 +30,14 @@ minetest.register_node("epic:waypoint_inverse", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("name", "Waypoint")
 		meta:set_string("pos", minetest.pos_to_string({x=0, y=0, z=0}))
 		meta:set_int("radius", 3)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
+	on_receive_fields = function(pos, _, fields, sender)
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
@@ -45,7 +45,7 @@ minetest.register_node("epic:waypoint_inverse", {
 
 		local meta = minetest.get_meta(pos);
 
-    if fields.save or fields.setpos then
+		if fields.save or fields.setpos then
 			local radius = tonumber(fields.radius) or 3
 			if radius < 0 then
 				radius = 1
@@ -54,7 +54,7 @@ minetest.register_node("epic:waypoint_inverse", {
 			meta:set_int("radius", radius)
 			meta:set_string("name", fields.name or "")
 			update_formspec(meta, pos)
-    end
+		end
 
 		if fields.setpos then
 			minetest.chat_send_player(sender:get_player_name(), "[epic] Please punch the desired target position")
@@ -68,10 +68,10 @@ minetest.register_node("epic:waypoint_inverse", {
 			end
 		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
 			ctx.step_data.pos = target_pos
 			ctx.step_data.radius = meta:get_int("radius")
@@ -86,19 +86,19 @@ minetest.register_node("epic:waypoint_inverse", {
 					world_pos = target_pos
 				})
 			end
-    end,
-    on_check = function(_, _, player, ctx)
+		end,
+		on_check = function(_, _, player, ctx)
 			local pos = player:get_pos()
 			if vector.distance(pos, ctx.step_data.pos) > ctx.step_data.radius then
 				ctx.next()
 			end
-    end,
-    on_exit = function(_, _, player, ctx)
+		end,
+		on_exit = function(_, _, player, ctx)
 			if ctx.step_data.waypoint_hud_id then
 				player:hud_remove(ctx.step_data.waypoint_hud_id)
 			end
-    end
-  }
+		end
+	}
 })
 
 minetest.register_on_punchnode(function(pos, _, puncher, _)

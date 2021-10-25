@@ -27,7 +27,7 @@ minetest.register_node("epic:setclouds", {
 	on_rotate = epic.on_rotate,
 
 	on_construct = function(pos)
-    local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_int("thickness", 16)
 		meta:set_int("height", 120)
 		meta:set_string("density", "0.4")
@@ -37,18 +37,18 @@ minetest.register_node("epic:setclouds", {
 		meta:set_int("alpha", 229)
 		meta:set_int("speedx", 1)
 		meta:set_int("speedy", 2)
-    update_formspec(meta, pos)
-  end,
+		update_formspec(meta, pos)
+	end,
 
-  on_receive_fields = function(pos, _, fields, sender)
-    local meta = minetest.get_meta(pos);
+	on_receive_fields = function(pos, _, fields, sender)
+		local meta = minetest.get_meta(pos);
 
 		if not sender or minetest.is_protected(pos, sender:get_player_name()) then
 			-- not allowed
 			return
 		end
 
-    if fields.save then
+		if fields.save then
 			meta:set_int("thickness", tonumber(fields.thickness) or 16)
 			meta:set_int("height", tonumber(fields.height) or 120)
 			meta:set_string("density", tonumber(fields.density) or 0.4)
@@ -59,12 +59,12 @@ minetest.register_node("epic:setclouds", {
 			meta:set_int("speedx", tonumber(fields.speedx) or 1)
 			meta:set_int("speedy", tonumber(fields.speedy) or 2)
 			update_formspec(meta, pos)
-    end
+		end
 
-  end,
+	end,
 
 	epic = {
-    on_enter = function(pos, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local existing_clouds = player:get_clouds()
 			local new_clouds = {
 				thickness = meta:get_int("thickness"),
@@ -97,6 +97,6 @@ minetest.register_node("epic:setclouds", {
 
 			player:set_clouds(new_clouds)
 			ctx.next()
-    end
-  }
+		end
+	}
 })
