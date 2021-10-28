@@ -44,7 +44,7 @@ minetest.register_node("epic:stash_inv", {
 	end,
 
 	epic = {
-		on_enter = function(_, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			ctx.data.stashed_items = ctx.data.stashed_items or {}
 			local filter_map = {}
 			local inv = meta:get_inventory()
@@ -61,14 +61,24 @@ minetest.register_node("epic:stash_inv", {
 			local player_inv = player:get_inventory()
 			local filter_all = filter_items_count == 0 -- no filter means stash EVERYTHING!
 			local i = 1
+			local stashed_string = ""
+			local items_stashed = false
 			while i <= player_inv:get_size("main") do
 				local stack = player_inv:get_stack("main", i)
-				if filter_all or filter_map[stack:get_name()] then
+				if not stack:is_empty() and filter_all or filter_map[stack:get_name()] then
 					player_inv:set_stack("main", i, ItemStack(nil))
-					table.insert(ctx.data.stashed_items, stack:to_string())
+					local stack_str = stack:to_string()
+					stashed_string = stashed_string .. stack_str .. ", "
+					items_stashed = true
+					table.insert(ctx.data.stashed_items, stack_str)
 				end
 
 				i = i + 1
+			end
+
+			if items_stashed then
+				minetest.log("action", ("[epic::stash_inventory@%s] %s's inventory has had items stashed: { %s }")
+					:format(minetest.pos_to_string(pos), player:get_player_name(), stashed_string:sub(1, -3)))
 			end
 
 			ctx.next()

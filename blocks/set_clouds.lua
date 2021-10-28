@@ -64,8 +64,9 @@ minetest.register_node("epic:setclouds", {
 	end,
 
 	epic = {
-		on_enter = function(_, meta, player, ctx)
-			player:set_clouds({
+		on_enter = function(pos, meta, player, ctx)
+			local existing_clouds = player:get_clouds()
+			local new_clouds = {
 				thickness = meta:get_int("thickness"),
 				color = {
 					r=meta:get_int("red"),
@@ -85,7 +86,16 @@ minetest.register_node("epic:setclouds", {
 					y=meta:get_int("speedy"),
 					x=meta:get_int("speedx")
 				}
-			})
+			}
+			minetest.log("action", ("[epic::set_clouds@%s] %s's clouds changed from %s to %s")
+				:format(
+					minetest.pos_to_string(pos),
+					player:get_player_name(),
+					minetest.serialize(existing_clouds):sub(8),
+					minetest.serialize(new_clouds):sub(8)
+				))
+
+			player:set_clouds(new_clouds)
 			ctx.next()
 		end
 	}

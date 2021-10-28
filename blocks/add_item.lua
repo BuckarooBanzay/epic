@@ -33,7 +33,12 @@ local function do_add_item(pos, meta)
 
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("main", 1)
-	minetest.add_item(epic.to_absolute_pos(pos, target_pos), stack)
+	if stack:is_empty() then return end
+
+	local absolute_pos = epic.to_absolute_pos(pos, target_pos)
+	minetest.log("action", ("[epic::add_item@%s] %s item added at %s")
+		:format(minetest.pos_to_string(pos), stack:to_string(),  minetest.pos_to_string(absolute_pos)))
+	minetest.add_item(absolute_pos, stack)
 end
 
 minetest.register_node("epic:additem", {

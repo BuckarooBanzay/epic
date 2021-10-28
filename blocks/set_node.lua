@@ -33,6 +33,16 @@ local function do_set(pos, meta)
 	if node_name == "ignore" or node_name == "" then
 		node_name = "air"
 	end
+	local previous_node = minetest.get_node_or_nil(target_pos)
+	minetest.log("action", ("[epic::set_node@%s] %s node placed at %s, replacing %s")
+		:format(
+			minetest.pos_to_string(pos),
+			node_name,
+			minetest.pos_to_string(target_pos),
+			previous_node
+				and ("%s:%i:%i"):format(previous_node.name, previous_node.param1, previous_node.param2)
+				or 'unloaded'
+		))
 	minetest.set_node(target_pos, { name = node_name })
 end
 

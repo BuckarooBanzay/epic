@@ -43,13 +43,15 @@ minetest.register_node("epic:set_gravity", {
 	end,
 
 	epic = {
-		on_enter = function(_, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local gravity = tonumber(meta:get_string("gravity")) or 1
 			if use_player_monoids then
 				player_monoids.gravity:add_change(player, gravity, "epic:set_gravity")
 			else
 				player:set_physics_override({ gravity = gravity })
 			end
+			minetest.log("action", ("[epic::set_gravity@%s] %s's gravity set to %f")
+				:format(minetest.pos_to_string(pos), player:get_player_name(), gravity))
 			ctx.next()
 		end
 	}

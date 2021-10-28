@@ -44,7 +44,7 @@ minetest.register_node("epic:deduct_inv", {
 	end,
 
 	epic = {
-		on_check = function(_, meta, player, ctx)
+		on_check = function(pos, meta, player, ctx)
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
@@ -58,8 +58,18 @@ minetest.register_node("epic:deduct_inv", {
 			end
 
 			if success then
+				local deduct_string = ""
+				local items_deducted = false
 				for _, deduct_item in ipairs(deduct_items) do
-					player_inv:remove_item("main", deduct_item)
+					if not deduct_item:is_empty() then
+						deduct_string = deduct_string .. deduct_item:to_string() .. ", "
+						items_deducted = true
+						player_inv:remove_item("main", deduct_item)
+					end
+				end
+				if items_deducted then
+					minetest.log("action", ("[epic::deduct_inventory@%s] { %s } deducted from %s's inventory")
+						:format(minetest.pos_to_string(pos), deduct_string:sub(1,-3),  player:get_player_name()))
 				end
 
 				ctx.next()

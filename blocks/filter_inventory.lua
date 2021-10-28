@@ -13,11 +13,14 @@ end
 
 local function filter_inventory(inv, listname, filter_names)
 	local list = inv:get_list(listname)
+	local removed = {}
 	for i, stack in ipairs(list) do
 		if filter_names[stack:get_name()] then
 			inv:set_stack(listname, i, ItemStack(""))
+			table.insert(removed, stack)
 		end
 	end
+	return removed
 end
 
 minetest.register_node("epic:filter_inv", {
@@ -53,7 +56,7 @@ minetest.register_node("epic:filter_inv", {
 	end,
 
 	epic = {
-		on_check = function(_, meta, player, ctx)
+		on_check = function(pos, meta, player, ctx)
 			local inv = meta:get_inventory()
 			local player_inv = player:get_inventory()
 
@@ -65,8 +68,24 @@ minetest.register_node("epic:filter_inv", {
 				end
 			end
 
-			filter_inventory(player_inv, "main", filter_names)
-			filter_inventory(player_inv, "craft", filter_names)
+
+			local removed_main = filter_inventory(player_inv, "main", filter_names)
+			local removed_craft = filter_inventory(player_inv, "craft", filter_names)
+			local removed_string = ""
+			local items_removed = false
+			for _,list in pairs({removed_main,removed_craft}) do
+				for _,stack in pairs(list) do
+					if not stack:is_empty() then
+						removed_string = removed_string .. stack:to_string() .. ", "
+						items_removed = true
+					end
+				end
+			end
+
+			if items_removed then
+				minetest.log("action", ("[epic::filter_inventory@%s] { %s } filtered from %s's inventory")
+					:format(minetest.pos_to_string(pos), removed_string:sub(1,-3),  player:get_player_name()))
+			end
 
 			ctx.next()
 

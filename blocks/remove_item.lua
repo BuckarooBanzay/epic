@@ -27,10 +27,25 @@ local function do_remove(pos, meta)
 	end
 
 	local objects = minetest.get_objects_inside_radius(target_pos, radius)
-	for _, object in ipairs(objects) do
-		object:remove()
-	end
 
+	local objects_string = ""
+	local objects_removed = false
+	for _, object in ipairs(objects) do
+		if not object:is_player() then
+			local lua_entity = object:get_luaentity()
+			objects_string = objects_string ..
+				(lua_entity.itemstring or lua_entity.name) ..
+				(lua_entity.dropped_by and (" (dropped by " .. lua_entity.dropped_by .. ")") or "") ..
+				", "
+			objects_removed = true
+
+			object:remove()
+		end
+	end
+	if objects_removed then
+		minetest.log("action", ("[epic::remove_item@%s] Items removed { %s }")
+			:format(minetest.pos_to_string(pos), objects_string:sub(1,-3)))
+	end
 end
 
 minetest.register_node("epic:removeitem", {

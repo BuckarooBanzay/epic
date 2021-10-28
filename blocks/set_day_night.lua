@@ -50,8 +50,10 @@ minetest.register_node("epic:daynightratio", {
 	end,
 
 	epic = {
-		on_enter = function(_, meta, player, ctx)
+		on_enter = function(pos, meta, player, ctx)
 			local ratio = meta:get_string("ratio")
+			minetest.log("action", ("[epic::set_day_night@%s] %s's day-night ratio set to %s")
+				:format(minetest.pos_to_string(pos), player:get_player_name(), ratio))
 			if ratio == "" then
 				player:override_day_night_ratio(nil)
 			else
