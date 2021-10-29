@@ -9,18 +9,24 @@ minetest.register_node("epic:unstash_inv", {
 
 	epic = {
 		on_enter = function(pos, _, player, ctx)
-			ctx.data.stashed_items = ctx.data.stashed_items or {}
+			-- restore stash from player meta
+			local player_meta = player:get_meta()
+			local serialized_stash = player_meta:get_string("epic_stash")
+			local stashed_items = {}
+			if serialized_stash and serialized_stash ~= "" then
+				stashed_items = minetest.deserialize(serialized_stash)
+				player_meta:set_string("epic_stash", "")
+			end
 			local player_inv = player:get_inventory()
 			local unstashed_string = ""
 			local items_unstashed = false
 
-			for i, itemstr in ipairs(ctx.data.stashed_items) do
+			for _, itemstr in ipairs(stashed_items) do
 				local stack = ItemStack(itemstr)
 				if player_inv:room_for_item("main", stack) then
 					unstashed_string = unstashed_string..itemstr..", "
 					items_unstashed = true
 					player_inv:add_item("main", stack)
-					ctx.data.stashed_items[i] = nil
 				end
 			end
 			if items_unstashed then
