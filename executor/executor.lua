@@ -2,9 +2,16 @@
 -- time in seconds between executor calls
 local executor_dtime = 0.1
 
-function epic.execute_player_state(playername, state)
+function epic.execute_player_state(playername, state, recursion_depth)
 	local pos = state.ip
 	local player = minetest.get_player_by_name(playername)
+
+	if recursion_depth and recursion_depth > 100 then
+		-- abort execution if the recursion limit is reached
+		epic.state[playername] = nil
+		minetest.log("warn", "[epic][executor] max recursion depth exceeded at: " .. minetest.pos_to_string(pos))
+		return
+	end
 
 	if not player then
 		minetest.log("warn", "[epic][executor] player not found, aborting: " .. playername)
@@ -121,7 +128,10 @@ function epic.execute_player_state(playername, state)
 		state.ip = next_pos
 		state.initialized = false
 		state.step_data = {}
-		epic.execute_player_state(playername, state)
+
+		-- set the recursion depth if not set
+		recursion_depth = recursion_depth or 1
+		epic.execute_player_state(playername, state, recursion_depth + 1)
 	end
 
 end
