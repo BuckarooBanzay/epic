@@ -21,7 +21,7 @@ end
 local has_screwdriver = minetest.get_modpath("screwdriver")
 
 -- local on_rotate function
-epic.on_rotate = function(...)
+function epic.on_rotate(...)
 	if has_screwdriver then
 		-- call rotation function on screwdriver mod if available
 		screwdriver.rotate_simple(...)
@@ -29,7 +29,7 @@ epic.on_rotate = function(...)
 end
 
 -- creates an empty state, ready for execution
-epic.new_state = function()
+function epic.new_state()
 	return {
 		stack = {},
 		data = {},
@@ -39,7 +39,7 @@ epic.new_state = function()
 end
 
 -- starts the configured epic node at position
-epic.start = function(playername, pos)
+function epic.start(playername, pos)
 
 	local player = minetest.get_player_by_name(playername)
 
@@ -64,7 +64,7 @@ epic.start = function(playername, pos)
 end
 
 -- abort epic if running
-epic.abort = function(playername)
+function epic.abort(playername)
 	local state = epic.state[playername]
 	if state then
 		if epic.log_executor then
@@ -75,14 +75,14 @@ epic.abort = function(playername)
 end
 
 -- debug log
-epic.debug = function(msg)
+function epic.debug(msg)
 	if epic.log_executor then
 		minetest.log("action", "[epic] " .. msg)
 	end
 end
 
 -- converts a pos to a relative one in respect to the node_pos
-epic.to_relative_pos = function(node_pos, remote_abs_pos)
+function epic.to_relative_pos(node_pos, remote_abs_pos)
 	if not node_pos or not remote_abs_pos then
 		return
 	end
@@ -90,7 +90,7 @@ epic.to_relative_pos = function(node_pos, remote_abs_pos)
 end
 
 -- converts the relative pos to an absolute one
-epic.to_absolute_pos = function(node_pos, remote_rel_pos)
+function epic.to_absolute_pos(node_pos, remote_rel_pos)
 	if not node_pos or not remote_rel_pos then
 		return
 	end
@@ -99,7 +99,7 @@ end
 
 
 -- shows a waypoint for given seconds
-epic.show_waypoint = function(playername, pos, name, seconds)
+function epic.show_waypoint(playername, pos, name, seconds)
 	local player = minetest.get_player_by_name(playername)
 	if not player then
 		return
@@ -128,7 +128,7 @@ local SECONDS_IN_DAY = 3600*24
 local SECONDS_IN_HOUR = 3600
 local SECONDS_IN_MINUTE = 60
 
-epic.format_time = function(seconds)
+function epic.format_time(seconds)
 	local str = ""
 
 
@@ -156,7 +156,7 @@ epic.format_time = function(seconds)
 end
 
 -- converts the direction from a param2
-epic.get_direction = function(param2)
+function epic.get_direction(param2)
 	local direction = minetest.facedir_to_dir(param2)
 	if direction.x == -1 and direction.z == 0 then
 		return { x=0, y=0, z=1 }
@@ -172,7 +172,7 @@ epic.get_direction = function(param2)
 end
 
 -- returns the position of the next epic block
-epic.get_next_pos = function(pos)
+function epic.get_next_pos(pos)
 	local node = minetest.get_node(pos)
 	local direction = epic.get_direction(node.param2)
 
@@ -186,7 +186,7 @@ epic.get_next_pos = function(pos)
 end
 
 -- returns a node and loads the area if needed
-epic.get_node = function(pos)
+function epic.get_node(pos)
 	local node = minetest.get_node_or_nil(pos)
 	if node == nil then
 		minetest.get_voxel_manip(pos, pos)
@@ -196,13 +196,13 @@ epic.get_node = function(pos)
 end
 
 -- returns true if the node has an "epic" definition
-epic.is_epic = function(node)
+function epic.is_epic(node)
 	local nodedef = minetest.registered_nodes[node.name]
 	return nodedef and nodedef.epic
 end
 
 -- executes an epic function
-epic.execute_epic = function(player, main_pos, name)
+function epic.execute_epic(player, main_pos, name)
 	if epic.state[player:get_player_name()] then
 		-- already running a function
 		return

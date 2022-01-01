@@ -67,8 +67,7 @@ epic.register_hook({
 	on_epic_abort = exit_cleanup
 })
 
-local update
-update = function()
+local function update()
 	for playername, state in pairs(epic.state) do
 		local data = hud[playername]
 		local player = minetest.get_player_by_name(playername)
