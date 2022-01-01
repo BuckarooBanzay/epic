@@ -58,11 +58,9 @@ For a demo visit the [Damocles](https://damocles.minetest.land) server.
 
 # Dependencies
 
-Mandatory:
+Optional:
 * default
 * screwdriver
-
-Optional:
 * mobs
 * mesecons
 * digilines
