@@ -57,16 +57,16 @@ function epic.execute_player_state(playername, state, recursion_depth)
 
 	local ctx = {
 		-- next step
-		next = function(_pos)
+		next = function(cpos)
 			result_next = true
-			result_next_pos = _pos
+			result_next_pos = cpos
 		end,
 		-- abort epic with given reason
 		abort = function(reason)
 			abort_flag = reason or "ctx.abort"
 		end,
 		-- call another epic block
-		call = function(_pos)
+		call = function(cpos)
 			-- push next ip
 			local next_pos = epic.get_next_pos(pos)
 			local next_node = epic.get_node(next_pos)
@@ -75,7 +75,7 @@ function epic.execute_player_state(playername, state, recursion_depth)
 				table.insert(state.stack, next_pos)
 			end
 			result_next = true
-			result_next_pos = _pos
+			result_next_pos = cpos
 		end,
 		-- set the new timeout
 		settimeout = function(seconds)

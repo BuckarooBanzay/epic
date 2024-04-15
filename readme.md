@@ -5,7 +5,6 @@ epic -- Enhanced Programmer for Ingame Control
 A mod for [minetest](http://www.minetest.net)
 
 ![](https://github.com/damocles-minetest/epic/workflows/luacheck/badge.svg)
-![](https://github.com/damocles-minetest/epic/workflows/unit-test/badge.svg)
 ![](https://github.com/damocles-minetest/epic/workflows/integration-test/badge.svg)
 
 # Overview
