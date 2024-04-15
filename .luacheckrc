@@ -16,6 +16,7 @@ read_globals = {
 	"dump", "VoxelArea",
 
 	-- deps
+	"mtt",
 	"mesecon",
 	"digilines",
 	"player_monoids",

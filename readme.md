@@ -4,8 +4,8 @@ epic -- Enhanced Programmer for Ingame Control
 
 A mod for [minetest](http://www.minetest.net)
 
-![](https://github.com/damocles-minetest/epic/workflows/luacheck/badge.svg)
-![](https://github.com/damocles-minetest/epic/workflows/integration-test/badge.svg)
+![](https://github.com/buckaroobanzay/epic/workflows/luacheck/badge.svg)
+![](https://github.com/buckaroobanzay/epic/workflows/test/badge.svg)
 
 # Overview
 
@@ -17,8 +17,8 @@ Successor of the [missions](https://github.com/thomasrudin-mt/missions) mod.
 
 # Links
 
-* Github: https://github.com/damocles-minetest/epic
-* Issues: https://github.com/damocles-minetest/epic/issues
+* Github: https://github.com/buckaroobanzay/epic
+* Issues: https://github.com/buckaroobanzay/epic/issues
 * ContentDB: https://content.minetest.net/packages/BuckarooBanzay/epic/
 * Forums: https://forum.minetest.net/viewtopic.php?f=9&t=23558
 

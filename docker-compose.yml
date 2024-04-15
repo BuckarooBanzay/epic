@@ -1,0 +1,14 @@
+version: "3.6"
+
+services:
+ test:
+  build: ./test
+  user: root
+  volumes:
+    - "./:/root/.minetest/worlds/world/worldmods/epic/"
+    - "./test/minetest.conf:/minetest.conf"
+    - "world:/root/.minetest/worlds/world"
+  entrypoint: ["minetestserver", "--config", "/minetest.conf"]
+
+volumes:
+  world: {}

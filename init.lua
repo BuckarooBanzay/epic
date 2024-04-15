@@ -113,6 +113,6 @@ if epic.log_executor then
 	dofile(MP.."/log_executor.lua")
 end
 
-if minetest.settings:get_bool("enable_epic_integration_test") then
-	dofile(MP.."/integration_test.lua")
+if minetest.get_modpath("mtt") then
+    dofile(MP .. "/mtt.lua")
 end
