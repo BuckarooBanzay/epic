@@ -32,7 +32,7 @@ minetest.register_node("epic:message", {
 			return
 		end
 
-		if fields.save then
+		if fields.text then
 			local text = fields.text or "Hello world"
 			meta:set_string("text", text)
 			update_formspec(meta, pos)

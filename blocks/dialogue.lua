@@ -87,7 +87,7 @@ minetest.register_node("epic:dialogue", {
 			return
 		end
 
-		if fields.save then
+		if fields.text then
 			local text = fields.text or "<no text>"
 			meta:set_string("text", text)
 			update_formspec(meta, pos)
