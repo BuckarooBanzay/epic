@@ -6,6 +6,7 @@ A mod for [minetest](http://www.minetest.net)
 
 ![](https://github.com/buckaroobanzay/epic/workflows/luacheck/badge.svg)
 ![](https://github.com/buckaroobanzay/epic/workflows/test/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/buckaroobanzay/epic/badge.svg?branch=master)](https://coveralls.io/github/buckaroobanzay/epic?branch=master)
 
 # Overview
 
