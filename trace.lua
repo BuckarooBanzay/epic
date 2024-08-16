@@ -28,7 +28,7 @@ local function update_hud(player)
 		elseif not hud_data[trace_player_name] and state then
 			-- add existing entry
 			hud_data[trace_player_name] = player:hud_add({
-				hud_elem_type = "waypoint",
+				[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "waypoint",
 				name = "EPIC:" .. name,
 				text = "m",
 				number = 0xFF0000,

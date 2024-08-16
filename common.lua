@@ -106,7 +106,7 @@ function epic.show_waypoint(playername, pos, name, seconds)
 	end
 
 	local id = player:hud_add({
-		hud_elem_type = "waypoint",
+		[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "waypoint",
 		name = name,
 		text = "m",
 		number = 0xFF0000,

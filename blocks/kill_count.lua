@@ -58,7 +58,7 @@ minetest.register_node("epic:kill_count", {
 			ctx.step_data.kills = meta:get_int("kills")
 
 			ctx.step_data.hud_kills = player:hud_add({
-				hud_elem_type = "text",
+				[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "text",
 				position = HUD_POSITION,
 				offset = {x = 0,  y = 40},
 				text = "",

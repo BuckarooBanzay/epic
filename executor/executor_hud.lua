@@ -17,7 +17,7 @@ local function setup(playername, name)
 	local data = {}
 
 	data.name = player:hud_add({
-		hud_elem_type = "text",
+		[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "text",
 		position = HUD_POSITION,
 		offset = {x = 0,  y = 0},
 		text = name or "",
@@ -27,7 +27,7 @@ local function setup(playername, name)
 	})
 
 	data.time = player:hud_add({
-		hud_elem_type = "text",
+		[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "text",
 		position = HUD_POSITION,
 		offset = {x = 0,  y = 20},
 		text = "",

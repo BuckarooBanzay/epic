@@ -81,7 +81,7 @@ minetest.register_node("epic:waypoint", {
 
 			if waypoint_name ~= "" then
 				ctx.step_data.waypoint_hud_id = player:hud_add({
-					hud_elem_type = "waypoint",
+					[minetest.features.hud_def_type_field and "type" or "hud_elem_type"] = "waypoint",
 					name = waypoint_name,
 					text = "m",
 					number = 0x00FF00,
