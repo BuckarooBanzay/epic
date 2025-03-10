@@ -98,7 +98,7 @@ minetest.register_node("epic:fill_chest", {
 
 		if fields.setfn then
 			local playername = sender:get_player_name()
-			minetest.chat_send_player(playername, "[epic] Please punch the target chest")
+			epic.chat_send_player(playername, "Please punch the target chest")
 			epic.punchnode_callback(sender, {
 				timeout = 300,
 				check_protection = true,
@@ -107,14 +107,14 @@ minetest.register_node("epic:fill_chest", {
 
 					if not is_chest(target_meta) then
 						-- not a chest with apropiate size
-						minetest.chat_send_player(playername, "[epic] target inventory not of appropriate size (8*4)")
+						epic.chat_send_player(playername, "target inventory not of appropriate size (8*4)")
 						return
 					end
 
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					local meta = minetest.get_meta(pos)
 					meta:set_string("pos", pos_str)
-					minetest.chat_send_player(playername, "[epic] target chest successfully set to " .. pos_str)
+					epic.chat_send_player(playername, "target chest successfully set to " .. pos_str)
 					update_formspec(meta)
 				end
 			})

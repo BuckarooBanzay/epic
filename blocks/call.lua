@@ -32,7 +32,7 @@ minetest.register_node("epic:call", {
 
 		if fields.setfn then
 			local playername = sender:get_player_name()
-			minetest.chat_send_player(playername, "[epic] Please punch the desired target function or epic")
+			epic.chat_send_player(playername, "Please punch the desired target function or epic")
 			epic.punchnode_callback(sender, {
 				nodes = {"epic:function", "epic:epic"},
 				timeout = 300,
@@ -41,7 +41,7 @@ minetest.register_node("epic:call", {
 					local meta = minetest.get_meta(pos)
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					meta:set_string("pos", pos_str)
-					minetest.chat_send_player(playername, "[epic] target function successfully set to " .. pos_str)
+					epic.chat_send_player(playername, "target function successfully set to " .. pos_str)
 					update_formspec(meta)
 				end
 			})

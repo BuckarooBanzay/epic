@@ -36,7 +36,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 	if punchDef.check_protection then
 		if minetest.is_protected(pos, playername) and
 			not minetest.check_player_privs(playername, {epic_admin=true}) then
-			minetest.chat_send_player(playername, "[epic] target is protected! aborting selection.")
+			epic.chat_send_player(playername, "target is protected! aborting selection.")
 			return
 		end
 	end
@@ -58,7 +58,7 @@ minetest.register_on_punchnode(function(pos, node, puncher)
 	end
 
 	if not valid_node then
-		minetest.chat_send_player(playername, "[epic] target node invalid! valid types: " .. dump(punchDef.nodes))
+		epic.chat_send_player(playername, "target node invalid! valid types: " .. dump(punchDef.nodes))
 		return
 	end
 

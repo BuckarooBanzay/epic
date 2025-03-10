@@ -64,13 +64,13 @@ minetest.register_node("epic:set_param2", {
 		end
 
 		if fields.setpos then
-			minetest.chat_send_player(playername, "[epic] Please punch the desired target position")
+			epic.chat_send_player(playername, "Please punch the desired target position")
 			epic.punchnode_callback(sender, {
 				timeout = 300,
 				callback = function(punch_pos)
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
 					meta:set_string("pos", pos_str)
-					minetest.chat_send_player(playername, "[epic] target position successfully set to " .. pos_str)
+					epic.chat_send_player(playername, "target position successfully set to " .. pos_str)
 
 					-- apply param2 from punched node
 					local node = epic.get_node(punch_pos)

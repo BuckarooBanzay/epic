@@ -25,6 +25,7 @@ dofile(MP.."/trace.lua")
 
 -- utilities
 dofile(MP.."/util/savegame.lua")
+dofile(MP.."/util/chat_send_player.lua")
 dofile(MP.."/util/punchnode_callback.lua")
 
 -- forms
