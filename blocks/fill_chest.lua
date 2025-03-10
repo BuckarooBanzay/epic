@@ -24,7 +24,8 @@ local function do_fill(pos, meta)
 	local target_pos_str = meta:get_string("pos")
 	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(target_pos_str))
 
-	if not is_chest(meta) then
+	local target_meta = minetest.get_meta(target_pos)
+	if not is_chest(target_meta) then
 		-- not a chest with appropriate size
 		return
 	end
@@ -32,7 +33,6 @@ local function do_fill(pos, meta)
 	local inv = meta:get_inventory()
 	local items = inv:get_list("main")
 
-	local target_meta = minetest.get_meta(target_pos)
 	local target_inv = target_meta:get_inventory()
 	local existing_items = target_inv:get_list("main")
 	local existing_items_string = ""
@@ -103,15 +103,16 @@ minetest.register_node("epic:fill_chest", {
 				timeout = 300,
 				check_protection = true,
 				callback = function(punch_pos)
-					local meta = minetest.get_meta(pos)
+					local target_meta = minetest.get_meta(punch_pos)
 
-					if not is_chest(meta) then
+					if not is_chest(target_meta) then
 						-- not a chest with apropiate size
 						minetest.chat_send_player(playername, "[epic] target inventory not of appropriate size (8*4)")
 						return
 					end
 
 					local pos_str = minetest.pos_to_string(epic.to_relative_pos(pos, punch_pos))
+					local meta = minetest.get_meta(pos)
 					meta:set_string("pos", pos_str)
 					minetest.chat_send_player(playername, "[epic] target chest successfully set to " .. pos_str)
 					update_formspec(meta)
