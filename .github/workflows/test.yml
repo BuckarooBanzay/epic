@@ -9,4 +9,5 @@ jobs:
       with:
         modname: epic
         enable_coverage: "true"
+        git_game_repo: "https://git.0x7be.net/dirk/void"
     - uses: coverallsapp/github-action@v1
