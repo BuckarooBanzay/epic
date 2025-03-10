@@ -24,6 +24,7 @@ local function update_hud(player)
 		elseif hud_data[trace_player_name] and not state then
 			-- remove entry
 			player:hud_remove(hud_data[trace_player_name])
+			hud_data[trace_player_name] = nil
 
 		elseif not hud_data[trace_player_name] and state then
 			-- add existing entry
@@ -51,10 +52,10 @@ local function update_huds()
 			update_hud(player)
 		end
 	end
-	minetest.after(1.0, update_huds)
+	minetest.after(0.5, update_huds)
 end
 
-minetest.after(1.0, update_huds)
+minetest.after(0.5, update_huds)
 
 minetest.register_on_leaveplayer(function(player)
 	trace_enabled[player:get_player_name()] = nil
@@ -84,12 +85,14 @@ minetest.register_chatcommand("epic_trace", {
 				trace_enabled[name] = true
 				meta:set_int("epic_trace", 1)
 				enable_hud(player)
+				return true, "Trace enabled"
 			end
 		elseif params == "off" then
 			if trace_enabled[name] then
 				trace_enabled[name] = nil
 				meta:set_int("epic_trace", 0)
 				disable_hud(player)
+				return true, "Trace disabled"
 			end
 		else
 			return true, "Usage: /epic_trace on|off"
