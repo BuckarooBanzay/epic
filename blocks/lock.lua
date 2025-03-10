@@ -1,4 +1,12 @@
 
+local function check_lock(_, meta, _, ctx)
+	if meta:get_int("lock") == 0 then
+		meta:set_string("infotext", "Locked")
+		meta:set_int("lock", 1)
+		ctx.next()
+	end
+end
+
 minetest.register_node("epic:lock", {
 	description = "Epic lock block: locks the current execution-path (mutual exclusive execution)",
 	tiles = epic.create_texture("condition", "epic_lock.png"),
@@ -8,25 +16,12 @@ minetest.register_node("epic:lock", {
 
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
+		meta:set_string("infotext", "Unlocked")
 		meta:set_int("lock", 0)
 	end,
 
 	epic = {
-		on_enter = function(_, meta, player, ctx)
-			if meta:get_int("lock") == 0 then
-				meta:set_int("lock", 1)
-				ctx.next()
-			else
-				minetest.chat_send_player(player:get_player_name(), "[epic] the section is currently occupied, please stand by...")
-			end
-		end,
-
-		on_check = function(_, meta, player, ctx)
-			if meta:get_int("lock") == 0 then
-				meta:set_int("lock", 1)
-				minetest.chat_send_player(player:get_player_name(), "[epic] advancing to the section...")
-				ctx.next()
-			end
-		end
+		on_enter = check_lock,
+		on_check = check_lock
 	}
 })

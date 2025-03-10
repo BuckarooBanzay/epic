@@ -18,6 +18,7 @@ local function do_unlock(pos, meta)
 	local target_pos = epic.to_absolute_pos(pos, minetest.string_to_pos(meta:get_string("pos")))
 	local target_meta = minetest.get_meta(target_pos)
 	target_meta:set_int("lock", 0)
+	target_meta:set_string("infotext", "Unlocked")
 end
 
 minetest.register_node("epic:unlock", {
