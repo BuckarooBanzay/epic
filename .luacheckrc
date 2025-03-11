@@ -1,3 +1,4 @@
+std = "minetest+min"
 
 globals = {
 	"epic",
@@ -7,14 +8,8 @@ globals = {
 }
 
 read_globals = {
-	-- Stdlib
-	string = {fields = {"split"}},
-	table = {fields = {"copy", "getn"}},
-
-	-- Minetest
-	"vector", "ItemStack",
-	"dump", "VoxelArea",
-
+	-- lua
+	"unpack",
 	-- deps
 	"mtt",
 	"mesecon",
