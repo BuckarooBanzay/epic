@@ -50,7 +50,7 @@ minetest.register_node("epic:unlock", {
 		if fields.showpos then
 			local target_pos = minetest.string_to_pos(meta:get_string("pos"))
 			if target_pos then
-				epic.show_waypoint(sender:get_player_name(), target_pos, "Target position", 2)
+				epic.show_waypoint(sender:get_player_name(), epic.to_absolute_pos(pos, target_pos), "Target position", 2)
 			end
 		end
 
