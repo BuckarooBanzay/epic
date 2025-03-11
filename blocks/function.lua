@@ -6,7 +6,7 @@ end
 
 minetest.register_node("epic:function", {
 	description = "Epic function block: start-block for further epic blocks",
-	tiles = epic.create_texture("function", "epic_go.png"),
+	tiles = epic.create_texture("control", "epic_go.png"),
 	paramtype2 = "facedir",
 	groups = {cracky=3,oddly_breakable_by_hand=3,epic=1},
 	on_rotate = epic.on_rotate,

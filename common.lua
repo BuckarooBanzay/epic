@@ -1,17 +1,27 @@
 
-function epic.create_texture(type, overlay)
-	local texture = "epic_node_bg.png"
+local textures = {
+	default = "epic_node_bg.png",
+	action = "epic_node_action.png",
+	condition = "epic_node_condition.png"
+}
 
-	if type == "action" then
-		texture = "epic_node_action.png"
-	elseif type == "condition" then
-		texture = "epic_node_condition.png"
-	end
+if minetest.get_modpath("scifi_nodes") then
+	textures = {
+		default = "scifi_nodes_grey_square.png",
+		action = "scifi_nodes_red_square.png",
+		condition = "scifi_nodes_blue_square.png",
+		control = "scifi_nodes_green_square.png"
+	}
+end
+
+function epic.create_texture(type, overlay, options)
+	local texture = textures[type] or textures.default
+	options = options or {}
 
 	return {
 		texture,
 		texture,
-		texture .. "^epic_next_marker.png",
+		texture .. (options.disable_marker and "" or "^epic_next_marker.png"),
 		texture,
 		texture,
 		texture .. "^" .. overlay,

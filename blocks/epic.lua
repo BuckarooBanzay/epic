@@ -2,10 +2,10 @@
 minetest.register_node("epic:epic", {
 	description = "Epic: Configurable starter block for quests",
 	groups = {cracky=3,oddly_breakable_by_hand=3},
-	tiles = {
-		"epic_node_bg.png^epic_epic.png"
-	},
+	paramtype2 = "facedir",
+	on_rotate = epic.on_rotate,
 
+	tiles = epic.create_texture("control", "epic_epic.png", { disable_marker = true }),
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name())
